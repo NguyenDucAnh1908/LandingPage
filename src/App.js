@@ -10,6 +10,7 @@ import {
   Footer,
 } from "./components";
 import HeroIntroduction from "./components/HeroIntroduction/HeroIntroduction";
+import Knls_v2 from "./components/Knls_v2/Knls_v2";
 import Knls from "./components/Knls/Knls";
 import { TeachingProcess } from "./components/TeachingProcess/TeachingProcess";
 
@@ -19,6 +20,7 @@ function App() {
       <Menu />
       <HeroIntroduction />
       <Hero />
+      {/* <Knls_v2 /> */}
       <Knls />
       <TeachingProcess />
       <Services />

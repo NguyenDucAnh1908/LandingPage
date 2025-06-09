@@ -1,0 +1,98 @@
+.slick-prev,
+.slick-next {
+  z-index: 1;
+  width: 80px !important; /* Tăng kích thước nút */
+  height: 35px !important; /* Chiều cao hình chữ nhật */
+  border-radius: 20px; /* Bo góc nhẹ */
+  background: rgba(255, 255, 255, 0.2) !important; /* Trong suốt */
+  backdrop-filter: blur(0px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  transform: scale(0.9); /* Mặc định nhỏ hơn một chút */
+}
+
+.slick-prev {
+  left: 25px !important;
+}
+
+.slick-next {
+  right: 25px !important;
+}
+
+/* Text "Next" trong nút */
+.slick-prev:before,
+.slick-next:before {
+  font-family: "Arial", sans-serif;
+  content: "Next" !important; /* Thay đổi text thành "Next" */
+  font-size: 14px;
+  color: #fff !important; /* Màu chữ trắng */
+  opacity: 0.8;
+  letter-spacing: 0.5px;
+}
+
+.slick-prev:before {
+  content: "Prev" !important;
+}
+
+/* Hiệu ứng hover */
+.slick-prev:hover,
+.slick-next:hover {
+  background: rgba(255, 255, 255, 0.9) !important; /* Thêm độ mờ khi hover */
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1); /* To ra khi hover */
+}
+
+.slick-prev:hover:before,
+.slick-next:hover:before {
+  color: #333 !important; /* Đổi màu chữ khi hover */
+  opacity: 1;
+}
+
+/* Thêm hiệu ứng mượt mà cho transition */
+.slick-prev,
+.slick-next,
+.slick-prev:hover,
+.slick-next:hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slick-prev.slick-disabled,
+.slick-next.slick-disabled {
+  opacity: 0.5;
+}
+
+.hero-section {
+  background-color: #f5f5f5; /* màu xám nhạt */
+  overflow: hidden;
+}
+
+.slick-slider {
+  position: relative;
+  width: 100%;
+  height: 600px;
+}
+
+.slick-list,
+.slick-track {
+  height: 100%;
+}
+
+.slider-item {
+  position: relative !important;
+  background: white;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.slick-slide {
+  height: 100%;
+}
+
+.slick-slide > div {
+  height: 100%;
+}
