@@ -1,7 +1,7 @@
 import { Col, Image, Row } from "react-bootstrap";
 
-import "./Logos.css";
 import { LOGOS } from "../../data";
+import "./Logos.css";
 
 export const Logos = () => {
   return (
@@ -14,7 +14,7 @@ export const Logos = () => {
               className='d-flex justify-content-center align-items-center rounded-4 py-3 px-4'
             >
               <Image
-                src={`${process.env.PUBLIC_URL}/${logo.logo}`}
+                src={`${import.meta.env.BASE_URL}${logo.logo}`}
                 className='object-fit-cover'
                 alt={logo.name || "Logo"}
                 fluid

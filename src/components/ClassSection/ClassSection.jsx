@@ -1,4 +1,4 @@
-import { Container, Row, Col, Card, Image } from "react-bootstrap";
+import { Card, Col, Container, Image, Row } from "react-bootstrap";
 import "./ClassSection.css";
 
 const CLASS_DATA = [
@@ -18,7 +18,6 @@ const CLASS_DATA = [
 
 const ClassSection = () => {
   return (
-    <section className="class-section py-5">
       <Container>
         <h2 className="text-center mb-4">Sổ tay</h2>
         <h3 className="text-center mb-5">
@@ -80,7 +79,6 @@ const ClassSection = () => {
           ))}
         </Row>
       </Container>
-    </section>
   );
 };
 

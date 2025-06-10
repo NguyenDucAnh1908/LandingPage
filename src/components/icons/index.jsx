@@ -1,21 +1,44 @@
-export { ReactComponent as PlayIcon } from "./play-icon.svg";
-export { ReactComponent as SatelitteIcon } from "./satelitte-icon.svg";
-export { ReactComponent as SettingsIcon } from "./settings-icon.svg";
-export { ReactComponent as MicrophoneIcon } from "./microphone-icon.svg";
-export { ReactComponent as PlaneIcon } from "./plane-icon.svg";
-export { ReactComponent as NavigationIcon } from "./navigation-icon.svg";
-export { ReactComponent as TaxiIcon } from "./taxi-icon.svg";
-export { ReactComponent as WaterSportIcon } from "./water-sport-icon.svg";
-export { ReactComponent as SelectionIcon } from "./selection-icon.svg";
-export { ReactComponent as LeafIcon } from "./leaf-icon.svg";
-export { ReactComponent as MapIcon } from "./map-icon.svg";
-export { ReactComponent as SendIcon } from "./send-icon.svg";
-export { ReactComponent as BuildingIcon } from "./building-icon.svg";
-export { ReactComponent as HeartIcon } from "./heart-icon.svg";
-export { ReactComponent as MailIcon } from "./mail-icon.svg";
-export { ReactComponent as RoundedSpiralIcon } from "./rounded-spiral-icon.svg";
-export { ReactComponent as SubmitIcon } from "./submit-icon.svg";
-export { ReactComponent as FacebookIcon } from "./facebook-icon.svg";
-export { ReactComponent as TwitterIcon } from "./twitter-icon.svg";
-export { ReactComponent as InstagramIcon } from "./instagram-icon.svg";
-export { ReactComponent as ArrowUpIcon } from "./arrow-up-icon.svg";
+import ArrowUpIcon from "./arrow-up-icon.svg?react";
+import BuildingIcon from "./building-icon.svg?react";
+import FacebookIcon from "./facebook-icon.svg?react";
+import HeartIcon from "./heart-icon.svg?react";
+import InstagramIcon from "./instagram-icon.svg?react";
+import LeafIcon from "./leaf-icon.svg?react";
+import MailIcon from "./mail-icon.svg?react";
+import MapIcon from "./map-icon.svg?react";
+import MicrophoneIcon from "./microphone-icon.svg?react";
+import NavigationIcon from "./navigation-icon.svg?react";
+import PlaneIcon from "./plane-icon.svg?react";
+import PlayIcon from "./play-icon.svg?react";
+import SatelliteIcon from "./satelitte-icon.svg?react";
+import SelectionIcon from "./selection-icon.svg?react";
+import SendIcon from "./send-icon.svg?react";
+import SettingsIcon from "./settings-icon.svg?react";
+import SubmitIcon from "./submit-icon.svg?react";
+import TaxiIcon from "./taxi-icon.svg?react";
+import TwitterIcon from "./twitter-icon.svg?react";
+import WaterSportIcon from "./water-sport-icon.svg?react";
+
+export {
+  ArrowUpIcon,
+  BuildingIcon,
+  FacebookIcon,
+  HeartIcon,
+  InstagramIcon,
+  LeafIcon,
+  MailIcon,
+  MapIcon,
+  MicrophoneIcon,
+  NavigationIcon,
+  PlaneIcon,
+  PlayIcon,
+  SatelliteIcon,
+  SelectionIcon,
+  SendIcon,
+  SettingsIcon,
+  SubmitIcon,
+  TaxiIcon,
+  TwitterIcon,
+  WaterSportIcon
+};
+

@@ -1,9 +1,8 @@
-import React from 'react';
 import { Col, Container, Image, Row } from 'react-bootstrap';
 import Carousel from 'react-bootstrap/Carousel';
 
-import './Testimonials.css';
 import { TESTIMONIALS } from '../../data';
+import './Testimonials.css';
 
 export const Testimonials = () => {
   return (
@@ -25,7 +24,7 @@ export const Testimonials = () => {
                   <Carousel.Item key={testimonial.id} className='h-100'>
                     <Image
                       roundedCircle
-                      src={`${process.env.PUBLIC_URL}/${testimonial.image}`}
+                      src={`${import.meta.env.BASE_URL}${testimonial.image}`}
                       className='object-fit-cover bg-white'
                       alt='Profile'
                       width={60}

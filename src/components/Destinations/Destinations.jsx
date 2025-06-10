@@ -1,8 +1,8 @@
 import { Card, Col, Container, Row } from 'react-bootstrap';
 
+import { DESTINATIONS } from '../../data';
 import { NavigationIcon } from '../icons';
 import './Destinations.css';
-import { DESTINATIONS } from '../../data';
 
 export const Destinations = () => {
   return (
@@ -25,7 +25,7 @@ export const Destinations = () => {
                   <div className='card-img overflow-hidden'>
                     <Card.Img
                       variant='top'
-                      src={`${process.env.PUBLIC_URL}/${destination.image}`}
+                      src={`${import.meta.env.BASE_URL}${destination.image}`}
                       alt={destination.name}
                       className='object-fit-cover'
                     />

@@ -1,18 +1,13 @@
 // import "./knls.css";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
-  Card,
   Col,
   Container,
-  // Image,
-  ListGroup,
   Row,
-  Button,
 } from "react-bootstrap";
-import { ChevronLeft, ChevronRight } from "react-bootstrap-icons";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 const images = [
   "https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/6112666.jpg?alt=media&token=71465b4a-aa75-48c8-95cb-e956cf93d8e7",
   "https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/c3bdfcba-d9ca-4fbf-b14d-b0eb4121f611.jpg?alt=media&token=97721798-9a39-4826-b70d-bdbace394b8b",

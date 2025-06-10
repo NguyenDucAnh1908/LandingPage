@@ -1,18 +1,15 @@
 import {
-  Card,
   Col,
   Container,
   Image,
   ListGroup,
-  OverlayTrigger,
   Popover,
   ProgressBar,
   Row,
 } from "react-bootstrap";
 
-import { BuildingIcon, HeartIcon, LeafIcon, MapIcon, SendIcon } from "../icons";
+import { DATA_PROCESSING } from "../../data";
 import "./TeachingProcess.css";
-import { BOOK_TRIP, DATA_PROCESSING } from "../../data";
 
 export const TeachingProcess = () => {
   // Trip to - Popover
@@ -22,7 +19,7 @@ export const TeachingProcess = () => {
         <div className="d-flex gap-3">
           <div>
             <Image
-              src={`${process.env.PUBLIC_URL}/images/rome.png`}
+              src={`${import.meta.env.BASE_URL}/images/rome.png`}
               roundedCircle
               className="object-fit-cover"
               alt="City"
@@ -46,9 +43,6 @@ export const TeachingProcess = () => {
   return (
     <section id="book-a-trip">
       <Container>
-        <Row className="">
-          {/* Left Column */}
-          <Col>
             <h3 className="fw-semibold font-poppins">Easy and Fast</h3>
             <h4 className="font-volkhov fw-bold text-capitalize text-center">
               Đề xuất quy trình xây dựng các hoạt động học tập phát triển năng
@@ -85,9 +79,6 @@ export const TeachingProcess = () => {
                   </ListGroup.Item>
                 ))}
             </ListGroup>
-          </Col>
-          {/* Right Column */}
-        </Row>
       </Container>
     </section>
   );

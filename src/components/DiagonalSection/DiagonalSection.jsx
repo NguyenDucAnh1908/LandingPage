@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Container, Row, Col, Card, Image } from "react-bootstrap";
+import { useState } from "react";
+import { Card, Image } from "react-bootstrap";
 import "./DiagonalSection.css";
 
 const LESSON_DATA = [
@@ -43,24 +43,22 @@ const DiagonalSection = () => {
         />
       </div>
       <div className="overlay-content">
-        <Container>
-          <div className="cards-container">
-            {LESSON_DATA.map((lesson, index) => (
-              <Card
-                key={index}
-                className={`lesson-card ${
-                  activeImage === lesson.image ? "active" : ""
-                }`}
-                onClick={() => setActiveImage(lesson.image)}
-              >
-                <Card.Body>
-                  <Card.Title>{lesson.title}</Card.Title>
-                  <Card.Subtitle>{lesson.subtitle}</Card.Subtitle>
-                </Card.Body>
-              </Card>
-            ))}
-          </div>
-        </Container>
+        <div className="cards-container">
+          {LESSON_DATA.map((lesson, index) => (
+            <Card
+              key={index}
+              className={`lesson-card ${
+                activeImage === lesson.image ? "active" : ""
+              }`}
+              onClick={() => setActiveImage(lesson.image)}
+            >
+              <Card.Body>
+                <Card.Title>{lesson.title}</Card.Title>
+                <Card.Subtitle>{lesson.subtitle}</Card.Subtitle>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
       </div>
     </section>
   );

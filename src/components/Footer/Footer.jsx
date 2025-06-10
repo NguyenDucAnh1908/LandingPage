@@ -1,8 +1,8 @@
 import { Col, Container, Image, ListGroup, Row, Stack } from "react-bootstrap";
 
+import { FOOTER } from "../../data";
 import { FacebookIcon, InstagramIcon, TwitterIcon } from "../icons";
 import "./Footer.css";
-import { FOOTER } from "../../data";
 
 export const Footer = () => {
   return (
@@ -56,12 +56,12 @@ export const Footer = () => {
             <p className='my-3'>Discover our app</p>
             <Stack direction='horizontal' gap={2}>
               <Image
-                src={`${process.env.PUBLIC_URL}/images/google-play.svg`}
+                src={`/images/google-play.svg`}
                 className='object-fit-cover'
                 alt='Google Play'
               />
               <Image
-                src={`${process.env.PUBLIC_URL}/images/play-store.svg`}
+                src={`/images/play-store.svg`}
                 className='object-fit-cover'
                 alt='Play Store'
               />

@@ -7,10 +7,11 @@ import {
   NavDropdown,
   Navbar,
 } from "react-bootstrap";
+import logoSvg from "/images/logo.svg"; // Add this import
 
+import { MENU } from "../../data";
 import { ArrowUpIcon } from "../icons";
 import "./Menu.css";
-import { MENU } from "../../data";
 
 export const Menu = () => {
   // #region Scroll To Top
@@ -45,7 +46,7 @@ export const Menu = () => {
           {/* Logo */}
           <Navbar.Brand href='#hero'>
             <Image
-              src={`${process.env.PUBLIC_URL}/images/logo.svg`}
+              src={logoSvg}
               className='d-inline-block align-top'
               alt='Jadoo Logo'
             />

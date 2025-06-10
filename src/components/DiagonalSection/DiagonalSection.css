@@ -10,7 +10,7 @@
 
 .full-image-container {
   position: absolute;
-  top: 50%;
+  top: 55%; /* Điều chỉnh từ 50% xuống 55% */
   left: 50%;
   transform: translate(-50%, -50%);
   width: 1200px; /* Chiều rộng cố định */
@@ -18,6 +18,7 @@
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem; /* Thêm margin-top để tạo khoảng cách */
 }
 
 .full-image {
@@ -30,7 +31,7 @@
 .overlay-content {
   position: absolute;
   top: 50%;
-  right: 50px;
+  right: 48px; /* Thay đổi từ 50px thành 0 */
   transform: translateY(-50%);
   height: auto;
   padding: 2rem;
@@ -41,27 +42,29 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  width: 280px;
+  width: 300px;
+  padding-right: 20px;
 }
 
 .lesson-card {
   background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   transition: all 0.3s ease;
   cursor: pointer;
+  border-left: 4px solid transparent;
 }
 
 .lesson-card:hover {
-  transform: translateX(-10px);
   background: rgba(255, 255, 255, 0.95);
+  border-left: 4px solid #4dabf7;
 }
 
 .lesson-card.active {
   background: rgba(255, 255, 255, 1);
   border-left: 4px solid #007bff;
-  transform: translateX(-10px);
 }
 
 .lesson-card .card-body {
@@ -81,15 +84,15 @@
 
 .section-title {
   position: absolute;
-  top: 40px;
+  top: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  text-align: center;
   z-index: 3;
-  background: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 1rem 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
 }
 
 .section-title h2 {
@@ -131,10 +134,11 @@
 
   .full-image-container {
     position: relative;
+    top: 0;
+    transform: none;
+    margin-top: 2rem;
     width: 90%;
     height: 300px;
-    transform: none;
-    top: 0;
     left: 5%;
     margin-bottom: 2rem;
   }
@@ -145,6 +149,12 @@
     right: 0;
     transform: none;
     padding: 1rem;
+    width: 100%;
+  }
+
+  .cards-container {
+    width: 100%;
+    padding-right: 0;
   }
 
   .section-title {

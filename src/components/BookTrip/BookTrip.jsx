@@ -10,15 +10,15 @@ import {
   Row,
 } from "react-bootstrap";
 
-import { 
-  BuildingIcon, 
-  HeartIcon, 
-  LeafIcon, 
-  MapIcon, 
-  SendIcon 
+import { BOOK_TRIP } from "../../data";
+import {
+  BuildingIcon,
+  HeartIcon,
+  LeafIcon,
+  MapIcon,
+  SendIcon
 } from "../icons";
 import "./BookTrip.css";
-import { BOOK_TRIP } from "../../data";
 
 export const BookTrip = () => {
   // Trip to - Popover
@@ -28,7 +28,7 @@ export const BookTrip = () => {
         <div className='d-flex gap-3'>
           <div>
             <Image
-              src={`${process.env.PUBLIC_URL}/images/rome.png`}
+              src={`/images/rome.png`}
               roundedCircle
               className='object-fit-cover'
               alt='City'
@@ -95,7 +95,7 @@ export const BookTrip = () => {
           >
             <Card className='rounded-4 font-poppins py-3 px-4 border-0'>
               <Card.Img
-                src={`${process.env.PUBLIC_URL}/images/greece.png`}
+                src={`/images/greece.png`}
                 className='w-100 object-fit-cover rounded-4'
                 alt='Trip to'
                 height={180}
@@ -130,7 +130,9 @@ export const BookTrip = () => {
                     placement='top'
                     overlay={popover}
                   >
-                    <HeartIcon className='heart-icon' />
+                    <div>
+                      <HeartIcon className='heart-icon' />
+                    </div>
                   </OverlayTrigger>
                 </div>
               </Card.Footer>

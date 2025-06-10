@@ -1,7 +1,7 @@
 import {
   MicrophoneIcon,
   PlaneIcon,
-  SatelitteIcon,
+  SatelliteIcon,
   SelectionIcon,
   SettingsIcon,
   TaxiIcon,
@@ -36,7 +36,7 @@ export const SERVICES = [
     id: 1,
     title: "Calculated Weather ",
     description: "Built Wicket longer admire do barton vanity itself do in it.",
-    icon: <SatelitteIcon />,
+    icon: <SatelliteIcon />,
   },
   {
     id: 2,

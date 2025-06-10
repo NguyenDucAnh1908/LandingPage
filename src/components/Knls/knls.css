@@ -159,6 +159,7 @@
   height: 35px !important;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.2) !important;
+  -webkit-backdrop-filter: blur(0px);
   backdrop-filter: blur(0px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
@@ -168,11 +169,12 @@
 .knls-section .slick-prev:hover,
 .knls-section .slick-next:hover {
   background: rgba(255, 255, 255, 0.9) !important;
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   transform: scale(1.1);
 }
 
-/* Responsive - Media Queries 
+/* Responsive - Media Queries
 ***************************************************************************************************/
 @media (max-width: 576px) {
   #book-a-trip {
