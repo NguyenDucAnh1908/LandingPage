@@ -50,3 +50,37 @@
 .slick-slide > div {
   height: 100%;
 }
+
+.hero-introduction-section .slick-prev,
+.hero-introduction-section .slick-next {
+  z-index: 1;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(0px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  transform: scale(0.9);
+}
+
+/* Ẩn text "prev"/"next" mặc định */
+.hero-introduction-section .slick-prev:before,
+.hero-introduction-section .slick-next:before {
+  font-size: 24px;
+  content: "→" !important;
+  font-family: "Arial", sans-serif;
+  color: #333;
+}
+
+.hero-introduction-section .slick-prev:before {
+  content: "←" !important;
+}
+
+/* Hiệu ứng hover */
+.hero-introduction-section .slick-prev:hover,
+.hero-introduction-section .slick-next:hover {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(8px);
+  transform: scale(1.1);
+}

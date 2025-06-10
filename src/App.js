@@ -13,6 +13,8 @@ import HeroIntroduction from "./components/HeroIntroduction/HeroIntroduction";
 import Knls_v2 from "./components/Knls_v2/Knls_v2";
 import Knls from "./components/Knls/Knls";
 import { TeachingProcess } from "./components/TeachingProcess/TeachingProcess";
+import ClassSection from "./components/ClassSection/ClassSection";
+import DiagonalSection from "./components/DiagonalSection/DiagonalSection";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
       {/* <Knls_v2 /> */}
       <Knls />
       <TeachingProcess />
+      <ClassSection />
+      <DiagonalSection />
       <Services />
       <Destinations />
       <BookTrip />

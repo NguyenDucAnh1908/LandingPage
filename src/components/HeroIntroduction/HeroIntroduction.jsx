@@ -16,13 +16,21 @@ const HeroIntroduction = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
+    prevArrow: <button className="slick-prev">←</button>,
+    nextArrow: <button className="slick-next">→</button>,
   };
   return (
     <>
-      <section className="hero-section">
-        <Slider {...settings}>
+      <section className="hero-introduction-section pt-2 mt-3">
+        {" "}
+        {/* Thêm class riêng */}
+        <Slider {...settings} className="hero-introduction-slider">
+          {" "}
+          {/* Thêm class riêng */}
           {images.map((image, index) => (
-            <div className="slider-item" key={index}>
+            <div className="hero-introduction-item" key={index}>
+              {" "}
+              {/* Thêm class riêng */}
               <img
                 src={image}
                 alt={`slide-${index + 1}`}

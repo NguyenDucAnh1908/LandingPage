@@ -124,52 +124,23 @@ const Knls = () => {
             </h4>
 
             <div className="position-relative mt-4">
-              <section className="hero-section">
-                <Slider {...settings}>
-                  {images.map((image, index) => (
-                    <div className="slider-item" key={index}>
-                      <img
-                        src={image}
-                        alt={`slide-${index + 1}`}
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                        }}
-                      />
-                    </div>
-                  ))}
-                </Slider>
-              </section>
-
-              {/* <ListGroup variant="flush" className="w-100">
-                <ListGroup.Item className="border-0 font-poppins w-100">
-                  <Row className="w-100">
-                    <Col xs={12}>
-                      <ul className="list-unstyled w-100">
-                        {currentItem.items.map((subItem, index) => (
-                          <li
-                            key={index}
-                            className="topic-item w-100"
-                            style={{
-                              fontSize: "16px",
-                              color: "#2F4F4F",
-                              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-                              padding: "15px 20px",
-                              marginBottom: "10px",
-                            }}
-                          >
-                            {subItem}
-                          </li>
-                        ))}
-                      </ul>
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
-              </ListGroup> */}
+              <Slider {...settings}>
+                {images.map((image, index) => (
+                  <div className="slider-item" key={index}>
+                    <img
+                      src={image}
+                      alt={`slide-${index + 1}`}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </div>
+                ))}
+              </Slider>
             </div>
           </Col>
-          {/* Right Column */}
         </Row>
       </Container>
     </section>
