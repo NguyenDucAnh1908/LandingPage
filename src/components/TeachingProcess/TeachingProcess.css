@@ -110,6 +110,12 @@
   margin-bottom: 8px;
 }
 
+/* Process Step Hover Effect */
+.process-step:hover {
+  background: #f0f4ff;
+  transition: background 0.2s;
+}
+
 /* Responsive - Media Queries
 ***************************************************************************************************/
 @media (max-width: 576px) {

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Container } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import './LessonDetail.css';
@@ -87,6 +88,9 @@ const LESSON_DATA = {
 };
 
 const LessonDetail = () => {
+ useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   const { lessonId } = useParams();
   const navigate = useNavigate();
   const lesson = LESSON_DATA[lessonId];

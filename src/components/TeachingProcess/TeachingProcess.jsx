@@ -7,11 +7,14 @@ import {
   ProgressBar,
   Row,
 } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 import { DATA_PROCESSING } from "../../data";
 import "./TeachingProcess.css";
 
 export const TeachingProcess = () => {
+  const navigate = useNavigate();
+
   // Trip to - Popover
   const popover = (
     <Popover id="popover-ongoing" className="rounded-4 border-0 shadow p-2">
@@ -43,41 +46,42 @@ export const TeachingProcess = () => {
   return (
     <section id="teaching-process">
       <Container>
-            <h4 className="font-volkhov fw-bold text-capitalize text-center">
-              Đề xuất quy trình xây dựng các hoạt động học tập phát triển năng
-              lực số cho học sinh thông qua môn Công nghệ ở tiểu hiểu
-            </h4>
-            <ListGroup variant="flush" className="mt-4">
-              {/* List Items */}
-              {DATA_PROCESSING &&
-                DATA_PROCESSING.map((trip) => (
-                  <ListGroup.Item
-                    key={trip.id}
-                    className="d-flex align-items-center border-bottom-0 font-poppins"
-                  >
-                    <Row className="w-100">
-                      {/* Icons */}
-                      <Col xs={1}>
-                        <div className="d-flex flex-column align-items-center">
-                          <div
-                            className="icon-box rounded-3 d-flex justify-content-center align-items-center "
-                            style={{ backgroundColor: trip.color }}
-                          >
-                            {trip.icon}
-                          </div>
-                          <span className="step-number text-center">
-                            Bước {trip.id}
-                          </span>
-                        </div>
-                      </Col>
-                      {/* Descriptions */}
-                      <Col xs={11} className="d-flex align-items-center">
-                        <h5 className="fw-semibold mb-0">{trip.title}</h5>
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
-                ))}
-            </ListGroup>
+        <h4 className="font-volkhov fw-bold text-capitalize text-center">
+          Đề xuất quy trình xây dựng các hoạt động học tập phát triển năng
+          lực số cho học sinh thông qua môn Công nghệ ở tiểu hiểu
+        </h4>
+        <ListGroup variant="flush" className="mt-4">
+          {DATA_PROCESSING &&
+            DATA_PROCESSING.map((trip) => (
+              <ListGroup.Item
+                key={trip.id}
+                className="d-flex align-items-center border-bottom-0 font-poppins process-step"
+                style={{ cursor: "pointer" }}
+                onClick={() => navigate(`/process/${trip.id}`)}
+              >
+                <Row className="w-100">
+                  {/* Icons */}
+                  <Col xs={1}>
+                    <div className="d-flex flex-column align-items-center">
+                      <div
+                        className="icon-box rounded-3 d-flex justify-content-center align-items-center "
+                        style={{ backgroundColor: trip.color }}
+                      >
+                        {trip.icon}
+                      </div>
+                      <span className="step-number text-center">
+                        Bước {trip.id}
+                      </span>
+                    </div>
+                  </Col>
+                  {/* Descriptions */}
+                  <Col xs={11} className="d-flex align-items-center">
+                    <h5 className="fw-semibold mb-0">{trip.title}</h5>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+            ))}
+        </ListGroup>
       </Container>
     </section>
   );

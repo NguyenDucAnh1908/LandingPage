@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import './LessonPlanDetail.css';
@@ -20,7 +21,9 @@ const LESSON_PDF_DATA = {
 const LessonPlanDetail = () => {
   const { lessonId } = useParams();
   const lesson = LESSON_PDF_DATA[lessonId];
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   if (!lesson) return <div>Không tìm thấy bài học</div>;
 
   return (

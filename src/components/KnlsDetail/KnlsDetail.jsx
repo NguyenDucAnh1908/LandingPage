@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./KnlsDetail.css";
@@ -16,6 +17,9 @@ const tempImages = [
 ];
 
 const KnlsDetail = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   return (
     <section className="knls-detail">
       <Container>

@@ -50,6 +50,12 @@ footer {
   }
 }
 
+#footer,
+section#footer {
+  height: auto !important;
+  min-height: unset !important;
+}
+
 /* Responsive - Media Queries
 ***************************************************************************************************/
 @media (max-width: 578px) {

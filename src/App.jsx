@@ -12,6 +12,7 @@ import KnlsDetail from "./components/KnlsDetail/KnlsDetail";
 import LessonDetail from "./components/LessonDetail/LessonDetail";
 import LessonPlan from "./components/LessonPlan/LessonPlan";
 import LessonPlanDetail from "./components/LessonPlanDetail/LessonPlanDetail";
+import ProcessDetail from "./components/ProcessDetail/ProcessDetail";
 import { TeachingProcess } from "./components/TeachingProcess/TeachingProcess";
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path="/knls-detail" element={<KnlsDetail className="main-content" />} />
           <Route path="/lesson/:lessonId" element={<LessonDetail className="main-content"/>} />
           <Route path="/lesson-plan/:lessonId" element={<LessonPlanDetail />} />
+          <Route path="/process/:id" element={<ProcessDetail />} />
         </Routes>
         <Footer/>
       </div>
