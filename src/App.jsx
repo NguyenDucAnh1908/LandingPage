@@ -1,10 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import {
-  Footer,
-  Hero,
-  Menu,
-  Survey
-} from "./components";
+import { Footer, Hero, Menu, Survey } from "./components";
 import ClassSection from "./components/ClassSection/ClassSection";
 import HeroIntroduction from "./components/HeroIntroduction/HeroIntroduction";
 import Knls from "./components/Knls/Knls";
@@ -14,6 +9,7 @@ import LessonPlan from "./components/LessonPlan/LessonPlan";
 import LessonPlanDetail from "./components/LessonPlanDetail/LessonPlanDetail";
 import ProcessDetail from "./components/ProcessDetail/ProcessDetail";
 import { TeachingProcess } from "./components/TeachingProcess/TeachingProcess";
+import { Subscribe } from "./components/Subscribe/Subscribe";
 
 function App() {
   return (
@@ -25,22 +21,29 @@ function App() {
             path="/"
             element={
               <main className="main-content">
-                <HeroIntroduction/>
-                <Hero/>
-                <Knls/>
-                <TeachingProcess/>
-                <ClassSection/>
-                <LessonPlan/>
-                <Survey/>
+                <HeroIntroduction />
+                <Hero />
+                <Knls />
+                <TeachingProcess />
+                <ClassSection />
+                <LessonPlan />
+                <Subscribe />
+                {/* <Survey /> */}
               </main>
             }
           />
-          <Route path="/knls-detail" element={<KnlsDetail className="main-content" />} />
-          <Route path="/lesson/:lessonId" element={<LessonDetail className="main-content"/>} />
+          <Route
+            path="/knls-detail"
+            element={<KnlsDetail className="main-content" />}
+          />
+          <Route
+            path="/lesson/:lessonId"
+            element={<LessonDetail className="main-content" />}
+          />
           <Route path="/lesson-plan/:lessonId" element={<LessonPlanDetail />} />
           <Route path="/process/:id" element={<ProcessDetail />} />
         </Routes>
-        <Footer/>
+        <Footer />
       </div>
     </Router>
   );
