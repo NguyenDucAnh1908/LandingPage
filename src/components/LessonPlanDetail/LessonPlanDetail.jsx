@@ -1,6 +1,3 @@
-import { Container } from "react-bootstrap";
-import { useParams } from "react-router-dom";
-import "./LessonPlanDetail.css";
 import { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
