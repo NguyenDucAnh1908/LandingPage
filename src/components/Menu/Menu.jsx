@@ -4,32 +4,48 @@ import {
   Container,
   Image,
   Nav,
-  NavDropdown,
   Navbar,
+  NavDropdown,
 } from "react-bootstrap";
-import logoSvg from "/images/logo.svg"; // Add this import
-
-import { MENU } from "../../data";
 import { ArrowUpIcon } from "../icons";
 import "./Menu.css";
+import logoSvg from "/images/logo.svg";
+
+const INTRO_ITEMS = [
+  { name: "Giới thiệu chung", link: "#hero-introduction" },
+  { name: "Video giới thiệu", link: "#hero" },
+  { name: "Khung năng lực số", link: "#knls" },
+  { name: "Quy trình dạy học", link: "#teaching-process" },
+  { name: "Lớp học", link: "#class-section" },
+  { name: "Giáo án", link: "#lesson-plan" },
+  { name: "Khảo sát", link: "#survey" },
+];
 
 export const Menu = () => {
   // #region Scroll To Top
   const [scrolling, setScrolling] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const handleScroll = () => {
-    const scrollPosition = window.scrollY;
-    setScrolling(scrollPosition > 50);
+    setScrolling(window.scrollY > 50);
   };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleScrollToTopButton = () => window.scrollTo({ top: 0 });
+
+  const handleMenuClick = (e, link) => {
+    e.preventDefault();
+    setShowDropdown(false); // Đóng dropdown trước khi scroll
+    setTimeout(() => {
+      const id = link.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
   // #endregion Scroll To Top
 
   return (
@@ -44,7 +60,7 @@ export const Menu = () => {
       >
         <Container>
           {/* Logo */}
-          <Navbar.Brand href='#hero'>
+          <Navbar.Brand href='/'>
             <Image
               src={logoSvg}
               className='d-inline-block align-top'
@@ -61,41 +77,48 @@ export const Menu = () => {
             className='justify-content-end font-open-sans mt-3'
           >
             <Nav className='gap-xl-5 gap-lg-4 gap-md-2'>
-              {/* Navbar Elements */}
-              {MENU &&
-                MENU.map((menu, index) => (
-                  <Nav.Link
-                    href={menu.link}
-                    key={index}
-                    className='text-black fw-medium'
-                  >
-                    {menu.name}
-                  </Nav.Link>
-                ))}
-              {/* Login and Sign up Buttons */}
-              <Button
-                variant='light'
-                className='bg-transparent border-0 fw-medium'
-              >
-                Login
-              </Button>
-              <Button variant='outline-dark fw-medium'>Sign up</Button>
-              {/* Languages - Dropdown */}
+              {/* Introduction Dropdown styled as Nav.Link */}
               <NavDropdown
-                title='EN'
+                title={
+                  <span className='text-black fw-medium'>Giới thiệu</span>
+                }
                 id='basic-nav-dropdown'
+                show={showDropdown}
+                onMouseEnter={() => setShowDropdown(true)}
+                onMouseLeave={() => setShowDropdown(false)}
+                onToggle={setShowDropdown}
                 className='fw-medium'
               >
-                <NavDropdown.Item href='#'>EN - (English)</NavDropdown.Item>
-                <NavDropdown.Item href='#'>TR - (Turkish)</NavDropdown.Item>
-                <NavDropdown.Item href='#'>ES - (Spanish)</NavDropdown.Item>
+                {INTRO_ITEMS.map((item, index) => (
+                  <NavDropdown.Item
+                    key={index}
+                    href={item.link}
+                    className='fw-medium'
+                    onClick={(e) => handleMenuClick(e, item.link)}
+                  >
+                    {item.name}
+                  </NavDropdown.Item>
+                ))}
               </NavDropdown>
+
+              {/* Contact Link */}
+              <Nav.Link
+                href='#footer'
+                className='text-black fw-medium'
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById("footer");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }}
+              >
+                Liên hệ
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
 
-      {/* Scroll To Top Button  */}
+      {/* Scroll To Top Button */}
       {scrolling && (
         <Button
           variant='light'

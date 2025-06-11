@@ -1,0 +1,82 @@
+.lesson-detail {
+  margin-top: 77px;
+  margin-bottom: 80px;
+  min-height: calc(100vh - 157px);
+  padding: 2rem;
+}
+
+.lesson-detail-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.lesson-header {
+  min-width: 260px;
+  max-width: 260px;
+  position: sticky;
+  top: 110px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  padding: 2rem 1rem;
+  height: fit-content;
+}
+
+.lesson-images-area {
+  flex: 1;
+}
+
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.lesson-image {
+  aspect-ratio: 16/9;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-select {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  font-size: 16px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.form-select:hover {
+  border-color: #2c6fb2;
+  box-shadow: 0 4px 8px rgba(44, 111, 178, 0.1);
+}
+
+@media (max-width: 992px) {
+  .lesson-detail-layout {
+    flex-direction: column;
+  }
+  .lesson-header {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  .images-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .images-grid {
+    grid-template-columns: 1fr;
+  }
+}

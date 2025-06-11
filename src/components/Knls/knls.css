@@ -1,4 +1,4 @@
-#book-a-trip {
+#knls {
   h3 {
     color: var(--dark);
     font-size: 1.125rem;
@@ -121,6 +121,12 @@
   transform: scale(1.1);
 }
 
+.btn-primary:hover {
+  background-color: #0056b3 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
 /* Topic Card */
 .topic-card {
   background: #98fb98;
@@ -172,6 +178,50 @@
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   transform: scale(1.1);
+}
+
+/* Slider Item */
+.slider-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.knls-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.detail-button {
+  position: absolute;
+  bottom: 30px;
+  left: 90%;
+  transform: translateX(-50%);
+  background: transparent;
+  color: #a41151;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.detail-button:hover {
+  background: #a41151;
+  color: white;
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+}
+
+.slider-item:hover .knls-image {
+  transform: scale(1.02);
 }
 
 /* Responsive - Media Queries

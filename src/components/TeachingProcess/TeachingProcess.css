@@ -1,9 +1,4 @@
-#book-a-trip {
-  h3 {
-    color: var(--dark);
-    font-size: 1.125rem;
-  }
-
+#teaching-process {
   h4 {
     font-size: 2.188rem;
   }
@@ -115,7 +110,7 @@
   margin-bottom: 8px;
 }
 
-/* Responsive - Media Queries 
+/* Responsive - Media Queries
 ***************************************************************************************************/
 @media (max-width: 576px) {
   #book-a-trip {

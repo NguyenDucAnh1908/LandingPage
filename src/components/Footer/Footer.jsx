@@ -7,6 +7,8 @@ import "./Footer.css";
 export const Footer = () => {
   return (
     <footer>
+      <section id="footer">
+
       <Container>
         <Row className='py-3 g-3' lg={5} md={4} sm={3} xs={2}>
           <Col>
@@ -73,6 +75,7 @@ export const Footer = () => {
           <small className='fw-medium'>All rights reserved@jadoo.co</small>
         </Row>
       </Container>
+      </section>
     </footer>
   );
 };

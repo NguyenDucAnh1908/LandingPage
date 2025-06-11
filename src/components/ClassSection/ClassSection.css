@@ -52,3 +52,101 @@
 .section-image:hover {
   transform: scale(1.02);
 }
+
+.class-accordion-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.horizontal-accordion-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.class-item {
+  width: 100%;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.accordion-item {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.accordion-button {
+  font-weight: 600;
+  color: #2c6fb2;
+  padding: 1rem 1.5rem;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #e7f1ff;
+  color: #0056b3;
+}
+
+.accordion-body {
+  padding: 1rem 1.5rem;
+  max-height: 180px; /* Height to show ~3 items */
+  overflow-y: auto;
+}
+
+/* Custom scrollbar styling */
+.accordion-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.accordion-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 2px;
+}
+
+.accordion-body::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 2px;
+}
+
+.lesson-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  transition: all 0.3s ease;
+  height: 50px; /* Fixed height for each lesson item */
+  display: flex;
+  align-items: center;
+}
+
+.lesson-item:last-child {
+  border-bottom: none;
+}
+
+.lesson-item:hover {
+  background-color: #f8f9fa;
+  padding-left: 24px;
+  color: #2c6fb2;
+}
+
+.lesson-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.lesson-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (max-width: 768px) {
+  .horizontal-accordion-wrapper {
+    grid-template-columns: 1fr;
+  }
+}

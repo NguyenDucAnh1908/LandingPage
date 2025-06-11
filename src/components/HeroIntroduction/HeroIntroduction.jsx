@@ -39,16 +39,10 @@ const HeroIntroduction = () => {
   };
   return (
     <>
-      <section className="hero-introduction-section pt-2 mt-3">
-        {" "}
-        {/* Thêm class riêng */}
+      <section className="hero-introduction-section pt-2 mt-5" id="hero-introduction">
         <Slider {...settings} className="hero-introduction-slider">
-          {" "}
-          {/* Thêm class riêng */}
           {images.map((image, index) => (
             <div className="hero-introduction-item" key={index}>
-              {" "}
-              {/* Thêm class riêng */}
               <img
                 src={image}
                 alt={`slide-${index + 1}`}

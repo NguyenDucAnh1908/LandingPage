@@ -1,84 +1,93 @@
-import { Card, Col, Container, Image, Row } from "react-bootstrap";
+import { Accordion, Container, Image } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "./ClassSection.css";
 
 const CLASS_DATA = [
   {
     grade: "Lớp 3",
-    items: ["1.ABC", "2.XYZ", "3.BTS", "..."],
+    items: [
+      { id: "3-1", title: "1. Bài 1: Giới thiệu về công nghệ" },
+      { id: "3-2", title: "2. Bài 2: Công nghệ trong cuộc sống" },
+      { id: "3-3", title: "3. Bài 3: Ứng dụng công nghệ" },
+      { id: "3-4", title: "4. Bài 4: Thực hành với công nghệ" },
+    ],
   },
   {
     grade: "Lớp 4",
-    items: ["1.ABC", "2.XYZ", "3.BTS", "..."],
+    items: [
+      { id: "4-1", title: "1. Bài 1: Giới thiệu về công nghệ" },
+      { id: "4-2", title: "2. Bài 2: Công nghệ trong cuộc sống" },
+      { id: "4-3", title: "3. Bài 3: Ứng dụng công nghệ" },
+      { id: "4-4", title: "4. Bài 4: Thực hành với công nghệ" },
+    ],
   },
   {
     grade: "Lớp 5",
-    items: ["1.ABC", "2.XYZ", "3.BTS", "..."],
+    items: [
+      { id: "5-1", title: "1. Bài 1: Giới thiệu về công nghệ" },
+      { id: "5-2", title: "2. Bài 2: Công nghệ trong cuộc sống" },
+      { id: "5-3", title: "3. Bài 3: Ứng dụng công nghệ" },
+      { id: "5-4", title: "4. Bài 4: Thực hành với công nghệ" },
+    ],
   },
 ];
 
 const ClassSection = () => {
   return (
-      <Container>
-        <h2 className="text-center mb-4">Sổ tay</h2>
-        <h3 className="text-center mb-5">
-          Bồi dưỡng năng lực số cho học sinh tiểu học thông qua môn Công nghệ
-        </h3>
+    <section id="class-section">
 
-        {/* Thêm ảnh ở giữa */}
-        <div className="text-center mb-5">
-          <Image
-            src="https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/Screenshot%202025-06-10%20141336.png?alt=media&token=819a0be1-9d9a-4462-a2cd-05c1bbf5f663"
-            alt="Class Section Image"
-            fluid
-            className="section-image"
-            style={{
-              width: "100%",
-              height: "500px", // Giảm chiều cao xuống
-              maxWidth: "900px", // Giới hạn chiều rộng tối đa
-              objectFit: "cover",
-              borderRadius: "10px",
-              boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-              margin: "0 auto", // Căn giữa ảnh
-            }}
-          />
-        </div>
+    <Container>
+      <div className="text-center mb-4 mt-5">
+      <h2>Sổ tay</h2>
+      <h3>
+        Bồi dưỡng năng lực số cho học sinh tiểu học thông qua môn Công nghệ
+      </h3>
+      </div>
 
-        <Row className="justify-content-center">
+      <div className="text-center mb-5">
+        <Image
+          src="https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/Screenshot%202025-06-10%20141336.png?alt=media&token=819a0be1-9d9a-4462-a2cd-05c1bbf5f663"
+          alt="Class Section Image"
+          fluid
+          className="section-image"
+          style={{
+            width: "100%",
+            height: "500px",
+            maxWidth: "900px",
+            objectFit: "cover",
+            borderRadius: "10px",
+            boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+            margin: "0 auto",
+          }}
+        />
+      </div>
+
+      <div className="class-accordion-container">
+        <div className="horizontal-accordion-wrapper">
           {CLASS_DATA.map((classData, index) => (
-            <Col md={2} sm={4} key={index}>
-              {" "}
-              {/* Giảm từ md={3} xuống md={2} và sm={6} xuống sm={4} */}
-              <Card
-                className="class-card mb-4"
-                style={{
-                  maxWidth: "180px", // Giảm từ 250px xuống 180px
-                  margin: "0 auto",
-                  fontSize: "0.9rem", // Giảm kích thước chữ
-                }}
-              >
-                <Card.Header className="text-center fw-bold py-1">
-                  {" "}
-                  {/* Giảm padding-y */}
-                  {classData.grade}
-                </Card.Header>
-                <Card.Body className="py-1">
-                  {" "}
-                  {/* Giảm padding-y */}
+            <Accordion key={index} className="class-item">
+              <Accordion.Item eventKey="0">
+                <Accordion.Header>{classData.grade}</Accordion.Header>
+                <Accordion.Body>
                   <ul className="list-unstyled mb-0">
-                    {classData.items.map((item, idx) => (
-                      <li key={idx} className="mb-1 small">
-                        {" "}
-                        {/* Giảm margin-bottom */}
-                        {item}
-                      </li>
+                    {classData.items.map((item) => (
+                      <Link
+                        to={`/lesson/${item.id}`}
+                        key={item.id}
+                        className="lesson-link"
+                      >
+                        <li className="lesson-item">{item.title}</li>
+                      </Link>
                     ))}
                   </ul>
-                </Card.Body>
-              </Card>
-            </Col>
+                </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
           ))}
-        </Row>
-      </Container>
+        </div>
+      </div>
+    </Container>
+    </section>
   );
 };
 

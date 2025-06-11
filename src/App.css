@@ -1,3 +1,4 @@
+
 .app-wrapper {
   min-height: 100vh;
   position: relative;
@@ -7,7 +8,7 @@
 .app-container {
   position: relative;
   width: 100%;
-  padding-top: 80px; /* Height of your menu */
+  padding-top: 80px;
 }
 
 .main-content {

@@ -1,0 +1,41 @@
+#feedback {
+  background-color: #f8f9fa;
+  padding: 4rem 0;
+  min-height: 400px;
+}
+
+.survey-button {
+  background-color: #2c6fb2;
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.survey-button:hover {
+  background-color: #255d96;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(44, 111, 178, 0.2);
+}
+
+h3 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 2rem !important;
+}
+
+@media (max-width: 768px) {
+  #feedback {
+    padding: 3rem 1rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  .survey-button {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+  }
+}

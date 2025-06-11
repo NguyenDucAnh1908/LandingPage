@@ -35,7 +35,7 @@
 
           .dropdown-item {
             color: var(--dark);
-            font-size: 0.875rem;
+            font-size: 0.938rem;
 
             &:hover {
               background-color: var(--light);

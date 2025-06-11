@@ -1,4 +1,5 @@
 footer {
+  margin-top: 100px;
   .list-group {
     .list-group-item {
       color: var(--gray);
@@ -49,7 +50,7 @@ footer {
   }
 }
 
-/* Responsive - Media Queries 
+/* Responsive - Media Queries
 ***************************************************************************************************/
 @media (max-width: 578px) {
   footer {
