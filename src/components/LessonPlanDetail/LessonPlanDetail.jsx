@@ -1,20 +1,23 @@
-import { Container } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
-import './LessonPlanDetail.css';
+import { Container } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import "./LessonPlanDetail.css";
 
 const LESSON_PDF_DATA = {
-  '3-1': {
-    title: 'Minh Họa Bài 1',
-    pdfUrl: 'https://example.com/path/to/lesson1.pdf'
+  "3-1": {
+    title: "Minh Họa Bài 1",
+    pdfUrl:
+      "https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/SDS%20Document.pdf?alt=media&token=2942c792-57eb-43e6-b441-8adaff091546",
   },
-  '3-2': {
-    title: 'Minh Họa Bài 2',
-    pdfUrl: 'https://example.com/path/to/lesson2.pdf'
+  "3-2": {
+    title: "Minh Họa Bài 2",
+    pdfUrl:
+      "https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/SDS%20Document.pdf?alt=media&token=2942c792-57eb-43e6-b441-8adaff091546",
   },
-  '3-3': {
-    title: 'Minh Họa Bài 3',
-    pdfUrl: 'https://example.com/path/to/lesson3.pdf'
-  }
+  "3-3": {
+    title: "Minh Họa Bài 3",
+    pdfUrl:
+      "https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/SDS%20Document.pdf?alt=media&token=2942c792-57eb-43e6-b441-8adaff091546",
+  },
 };
 
 const LessonPlanDetail = () => {
@@ -32,7 +35,7 @@ const LessonPlanDetail = () => {
             src={lesson.pdfUrl}
             title={lesson.title}
             className="pdf-viewer"
-            frameBorder="0"
+            // frameBorder="0"
           />
         </div>
       </Container>
