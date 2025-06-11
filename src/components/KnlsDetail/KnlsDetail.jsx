@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./KnlsDetail.css";
 
 const tempImages = [
@@ -17,15 +17,32 @@ const tempImages = [
 ];
 
 const KnlsDetail = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
+
+  const handleReturn = (e) => {
+    e.preventDefault();
+    navigate("/");
+    setTimeout(() => {
+      const element = document.getElementById("knls");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+  };
+
   return (
     <section className="knls-detail">
       <Container>
         <div className="header-section">
           <h2 className="font-volkhov fw-bold">Chi tiết Khung năng lực số</h2>
-          <Link to="/" className="return-button">
+          <Link
+            to="/"
+            onClick={handleReturn}
+            className="return-button"
+          >
             Quay lại
           </Link>
         </div>
