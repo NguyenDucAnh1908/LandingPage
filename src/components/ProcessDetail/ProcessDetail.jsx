@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Carousel, Col, Container, Image, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import { DATA_PROCESSING } from "../../data";
+import { COLOR_STEPS, DATA_PROCESSING } from "../../data";
 import "./ProcessDetail.css";
 
 const ProcessDetail = () => {
@@ -25,11 +25,11 @@ const ProcessDetail = () => {
     <section className="process-detail-section process-detail-compact">
       <Container>
         <div className="process-steps-bar">
-          {DATA_PROCESSING.map((step) => (
+          {DATA_PROCESSING.map((step, idx) => (
             <div key={step.id} className="process-step-bar-item">
               <div
                 className={`process-step-circle${activeStep === step.id ? " active" : ""}`}
-                style={{ background: step.backgroundColor }}
+                style={{ background: COLOR_STEPS[idx] }}
                 onClick={() => handleStepChange(step.id)}
               >
                 <Image
@@ -54,12 +54,12 @@ const ProcessDetail = () => {
               slide={false}
               className="process-detail-carousel"
             >
-              {DATA_PROCESSING.map((step) => (
+              {DATA_PROCESSING.map((step, idx) => (
                 <Carousel.Item key={step.id}>
                   <div
                     className="process-detail-content"
                     style={{
-                      backgroundColor: step.backgroundColor
+                      backgroundColor: COLOR_STEPS[idx]
                     }}
                   >
                     {step.title}

@@ -3,42 +3,39 @@ export const DATA_PROCESSING = [
     id: 1,
     label: "Bước 1",
     title: "Xác định yêu cầu cần đạt của bài học",
-    iconUrl: "step1.svg",
-    color: "#20c997",
-    backgroundColor: "#20c997"
+    iconUrl: "step1.svg"
   },
   {
     id: 2,
     label: "Bước 2",
     title: "Xác định các hoạt động tích hợp có thể bồi dưỡng năng lực số",
-    iconUrl: "step2.svg",
-    color: "#2c6fb2",
-    backgroundColor: "#2c6fb2"
+    iconUrl: "step2.svg"
   },
   {
     id: 3,
     label: "Bước 3",
     title: "Xác định tài nguyên dạy học",
-    iconUrl: "step3.svg",
-    color: "#f6c23e",
-    backgroundColor: "#f6c23e"
+    iconUrl: "step3.svg"
   },
   {
     id: 4,
     label: "Bước 4",
     title: "Lựa chọn phương pháp và kỹ thuật dạy học",
-    iconUrl: "step4.svg",
-    color: "#28a745",
-    backgroundColor: "#28a745"
+    iconUrl: "step4.svg"
   },
   {
     id: 5,
     label: "Bước 5",
     title: "Thiết kế các hoạt động học tập trong bài học môn Công nghệ theo hướng phát triển năng lực số cho HS",
-    iconUrl: "step5.svg",
-    color: "#fd7e14",
-    backgroundColor: "#fd7e14"
+    iconUrl: "step5.svg"
   }
+];
+export const COLOR_STEPS = [
+  "#20c997", // Step 1
+  "#2c6fb2", // Step 2
+  "#f6c23e", // Step 3
+  "#28a745", // Step 4
+  "#fd7e14"  // Step 5
 ];
 
 export const GRADES = [

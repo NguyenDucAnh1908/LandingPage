@@ -6,7 +6,7 @@ import {
   Row,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { DATA_PROCESSING } from "../../data";
+import { COLOR_STEPS, DATA_PROCESSING } from "../../data";
 import "./TeachingProcess.css";
 
 export const TeachingProcess = () => {
@@ -20,7 +20,7 @@ export const TeachingProcess = () => {
           lực số cho học sinh thông qua môn Công nghệ ở tiểu học
         </h4>
         <ListGroup variant="flush">
-          {DATA_PROCESSING.map((step) => (
+          {DATA_PROCESSING.map((step, idx) => (
             <ListGroup.Item
               key={step.id}
               className="process-step"
@@ -31,7 +31,7 @@ export const TeachingProcess = () => {
                   <div className="step-icon-wrapper">
                     <div
                       className="icon-box"
-                      style={{ backgroundColor: step.color }}
+                      style={{ backgroundColor: COLOR_STEPS[idx] }}
                     >
                       <Image
                         src={`${import.meta.env.BASE_URL}process-icons/${step.iconUrl}`}
