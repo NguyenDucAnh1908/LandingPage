@@ -37,14 +37,16 @@ const KnlsDetail = () => {
     <section className="knls-detail">
       <Container>
         <div className="header-section">
-          <h2 className="font-volkhov fw-bold">Chi tiết Khung năng lực số</h2>
-          <Link
-            to="/"
-            onClick={handleReturn}
-            className="return-button"
-          >
-            Quay lại
-          </Link>
+          <div className="header-content">
+            <Link
+              to="/"
+              onClick={handleReturn}
+              className="return-button"
+            >
+              Quay lại
+            </Link>
+            <h2 className="font-volkhov fw-bold text-center">Chi tiết Khung năng lực số</h2>
+          </div>
         </div>
         <div className="content-wrapper">
           <div className="images-grid">

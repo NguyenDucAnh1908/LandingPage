@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Container } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import './LessonDetail.css';
@@ -11,10 +11,6 @@ const LESSON_DATA = {
     images: [
       { id: 1, backgroundColor: '#2c6fb2' },
       { id: 2, backgroundColor: '#dc3545' },
-      { id: 3, backgroundColor: '#28a745' },
-      { id: 4, backgroundColor: '#ffc107' },
-      { id: 5, backgroundColor: '#6610f2' },
-      { id: 6, backgroundColor: '#fd7e14' }
     ]
   },
   '3-2': {
@@ -23,8 +19,7 @@ const LESSON_DATA = {
     images: [
       { id: 1, backgroundColor: '#20c997' },
       { id: 2, backgroundColor: '#e83e8c' },
-      { id: 3, backgroundColor: '#fd7e14' },
-      { id: 4, backgroundColor: '#6610f2' }
+      { id: 3, backgroundColor: '#fd7e14' }
     ]
   },
   '3-3': {
@@ -32,9 +27,7 @@ const LESSON_DATA = {
     grade: 'Lớp 3',
     images: [
       { id: 1, backgroundColor: '#2c6fb2' },
-      { id: 2, backgroundColor: '#28a745' },
-      { id: 3, backgroundColor: '#ffc107' },
-      { id: 4, backgroundColor: '#dc3545' }
+      { id: 2, backgroundColor: '#28a745' }
     ]
   },
   '3-4': {
@@ -42,9 +35,7 @@ const LESSON_DATA = {
     grade: 'Lớp 3',
     images: [
       { id: 1, backgroundColor: '#6610f2' },
-      { id: 2, backgroundColor: '#fd7e14' },
-      { id: 3, backgroundColor: '#20c997' },
-      { id: 4, backgroundColor: '#e83e8c' }
+      { id: 2, backgroundColor: '#fd7e14' }
     ]
   },
 
@@ -63,8 +54,7 @@ const LESSON_DATA = {
     grade: 'Lớp 4',
     images: [
       { id: 1, backgroundColor: '#ffc107' },
-      { id: 2, backgroundColor: '#6610f2' },
-      { id: 3, backgroundColor: '#fd7e14' }
+      { id: 2, backgroundColor: '#6610f2' }
     ]
   },
   '4-3': {
@@ -72,8 +62,7 @@ const LESSON_DATA = {
     grade: 'Lớp 4',
     images: [
       { id: 1, backgroundColor: '#20c997' },
-      { id: 2, backgroundColor: '#e83e8c' },
-      { id: 3, backgroundColor: '#2c6fb2' }
+      { id: 2, backgroundColor: '#e83e8c' }
     ]
   },
   '4-4': {
@@ -87,51 +76,87 @@ const LESSON_DATA = {
   }
 };
 
+const groupByGrade = (data) => {
+  const result = {};
+  Object.entries(data).forEach(([id, lesson]) => {
+    if (!result[lesson.grade]) result[lesson.grade] = [];
+    result[lesson.grade].push({ id, ...lesson });
+  });
+  return result;
+};
+
 const LessonDetail = () => {
- useEffect(() => {
+  useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
+
   const { lessonId } = useParams();
   const navigate = useNavigate();
-  const lesson = LESSON_DATA[lessonId];
+  const [expandedGrade, setExpandedGrade] = useState(null);
+  const [selectedLesson, setSelectedLesson] = useState(null);
 
-  const handleLessonChange = (e) => {
-    const selectedId = e.target.value;
-    navigate(`/lesson/${selectedId}`);
+  // Add new useEffect to handle initial lesson selection
+  useEffect(() => {
+    if (lessonId && LESSON_DATA[lessonId]) {
+      const lesson = { id: lessonId, ...LESSON_DATA[lessonId] };
+      setSelectedLesson(lesson);
+      setExpandedGrade(lesson.grade);
+    }
+  }, [lessonId]);
+
+  const groupedLessons = groupByGrade(LESSON_DATA);
+
+  const handleGradeToggle = (grade) => {
+    setExpandedGrade(expandedGrade === grade ? null : grade);
+  };
+
+  const handleLessonClick = (lessonData) => {
+    setSelectedLesson(lessonData);
+    navigate(`/lesson/${lessonData.id}`);
   };
 
   return (
     <section className="lesson-detail">
       <Container>
-        <div className="lesson-detail-layout">
-          <div className="lesson-header">
-            <select
-              className="form-select mb-4"
-              value={lessonId}
-              onChange={handleLessonChange}
-            >
-              <option value="">Chọn bài học</option>
-              {Object.entries(LESSON_DATA).map(([id, data]) => (
-                <option key={id} value={id}>
-                  {data.grade} - {data.title}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="lesson-images-area">
-            {lesson && (
-              <div className="images-grid">
-                {lesson.images.map((image) => (
-                  <div
-                    key={image.id}
-                    className="lesson-image"
-                    style={{ backgroundColor: image.backgroundColor }}
-                  >
-                    <span>Hình {image.id}</span>
-                  </div>
-                ))}
+        <div className="lesson-container">
+          <div className="lesson-tree">
+            {Object.entries(groupedLessons).map(([grade, lessons]) => (
+              <div key={grade} className="lesson-grade-group">
+                <div
+                  className="lesson-grade-title"
+                  onClick={() => handleGradeToggle(grade)}
+                >
+                  <button className="toggle-btn">
+                    {expandedGrade === grade ? "▼" : "►"}
+                  </button>
+                  <span>{grade}</span>
+                </div>
+                {expandedGrade === grade && (
+                  <ul className="lesson-list">
+                    {lessons.map((lesson) => (
+                      <li
+                        key={lesson.id}
+                        className={`lesson-item ${selectedLesson?.id === lesson.id ? 'active' : ''}`}
+                        onClick={() => handleLessonClick(lesson)}
+                      >
+                        {lesson.title}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
-            )}
+            ))}
+          </div>
+          <div className="lesson-images-grid">
+            {selectedLesson && selectedLesson.images.map((image) => (
+              <div
+                key={image.id}
+                className="lesson-image"
+                style={{ backgroundColor: image.backgroundColor }}
+              >
+                <span>Hình {image.id}</span>
+              </div>
+            ))}
           </div>
         </div>
       </Container>

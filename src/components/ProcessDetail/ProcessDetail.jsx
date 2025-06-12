@@ -9,30 +9,35 @@ const STEPS = [
     label: "Bước 1",
     title: "Xác định yêu cầu cần đạt của bài học",
     image: { background: "#20c997" },
+    icon: <img src="/process-icons/step1.svg" alt="Step 1" className="step-icon" />
   },
   {
     id: 2,
     label: "Bước 2",
     title: "Xác định các hoạt động tích hợp có thể bồi dưỡng năng lực số",
-    image: { background: "#2c6fb2" }
+    image: { background: "#2c6fb2" },
+    icon: <img src="/process-icons/step2.svg" alt="Step 2" className="step-icon" />
   },
   {
     id: 3,
     label: "Bước 3",
     title: "Xác định tài nguyên dạy học",
-    image: { background: "#f6c23e" }
+    image: { background: "#f6c23e" },
+    icon: <img src="/process-icons/step3.svg" alt="Step 3" className="step-icon" />
   },
   {
     id: 4,
     label: "Bước 4",
     title: "Lựa chọn phương pháp và kỹ thuật dạy học",
-    image: { background: "#28a745" }
+    image: { background: "#28a745" },
+    icon: <img src="/process-icons/step4.svg" alt="Step 4" className="step-icon" />
   },
   {
     id: 5,
     label: "Bước 5",
     title: "Thiết kế các hoạt động học tập trong bài học môn Công nghệ theo hướng phát triển năng lực số cho HS",
-    image: { background: "#fd7e14" }
+    image: { background: "#fd7e14" },
+    icon: <img src="/process-icons/step5.svg" alt="Step 5" className="step-icon" />
   }
 ];
 
@@ -67,8 +72,9 @@ const ProcessDetail = () => {
                 style={{ background: STEP_COLORS[idx] }}
                 onClick={() => setActiveStep(s.id)}
               >
-                {s.id}
+                {s.icon}
               </div>
+              <div className="process-step-label mt-2">{s.label}</div>
             </div>
           ))}
         </div>
@@ -99,11 +105,7 @@ const ProcessDetail = () => {
                       boxShadow: "0 4px 16px rgba(0,0,0,0.08)"
                     }}
                   >
-                    Hình chi tiết cho {step.label}
-                  </div>
-                  <div className="process-step-label-under mt-4">
-                    <div className="fw-bold mb-2">{step.label}</div>
-                    <div className="process-step-title-under">{step.title}</div>
+                    {step.title}
                   </div>
                 </Carousel.Item>
               ))}

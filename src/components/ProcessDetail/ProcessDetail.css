@@ -32,11 +32,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 8px;
 }
 
 .process-step-circle {
-  width: 48px;
-  height: 48px;
+  width: 64px;  /* Tăng kích thước để chứa icon */
+  height: 64px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -47,24 +48,30 @@
   margin: 0 auto;
   box-shadow: 0 2px 8px rgba(0,0,0,0.10);
   border: 3px solid #fff;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all 0.2s;
   cursor: pointer;
   position: relative;
   z-index: 1;
+  padding: 12px; /* Thêm padding cho icon */
 }
 
-.process-step-circle.active {
-  transform: scale(1.15);
-  box-shadow: 0 4px 16px rgba(44,111,178,0.18);
-  border: 3px solid #1b6ca8;
+.step-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* Chuyển icon thành màu trắng */
+  transition: filter 0.2s;
+}
+
+.process-step-circle.active .step-icon {
+  filter: none; /* Hiện màu gốc của icon khi active */
 }
 
 .process-step-label {
+  font-size: 14px;
+  color: #666;
   text-align: center;
-  font-weight: 600;
-  color: #1b6ca8;
-  margin-bottom: 4px;
-  font-size: 1rem;
+  margin-top: 8px;
 }
 
 .process-step-label-under {
@@ -97,8 +104,8 @@
     margin-bottom: 18px;
   }
   .process-step-circle {
-    width: 36px;
-    height: 36px;
-    font-size: 0.95rem;
+    width: 48px;
+    height: 48px;
+    padding: 8px;
   }
 }
