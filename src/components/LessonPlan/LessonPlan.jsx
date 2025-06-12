@@ -1,4 +1,4 @@
-import { Card } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { getLessonPlans } from "../../data";
 import "./LessonPlan.css";
@@ -13,6 +13,7 @@ const LessonPlan = () => {
 
   return (
     <section id="lesson-plan">
+    <Container>
       <div className="full-image-container">
         <div
           className="illustration-image"
@@ -39,6 +40,7 @@ const LessonPlan = () => {
           </div>
         </div>
       </div>
+    </Container>
     </section>
   );
 };

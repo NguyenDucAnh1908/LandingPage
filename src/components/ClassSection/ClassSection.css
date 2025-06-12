@@ -56,7 +56,6 @@
 .class-accordion-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
 }
 
 .horizontal-accordion-wrapper {
@@ -149,4 +148,9 @@
   .horizontal-accordion-wrapper {
     grid-template-columns: 1fr;
   }
+}
+
+.accordion-header {
+  padding: 0;
+  font-size: 1rem;
 }

@@ -1,5 +1,4 @@
 #hero {
-  background: url("/public/images/hero-bg-shape.svg") no-repeat right -20px top -160px;
   padding: 0;
   margin-top: 77px; /* Match header height */
 }
@@ -12,6 +11,8 @@
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .video-container video {

@@ -1,27 +1,28 @@
 import { Button, Col, Container, Row } from 'react-bootstrap';
-
 import './Survey.css';
-
 export const Survey = () => {
   return (
-    <section id='feedback' className='vh-100'>
-      <Container className='position-relative'>
-        <Row className='d-flex justify-content-center align-items-center h-100'>
-          <Col md={10} lg={8} className='text-center'>
-            <h3 className='fw-semibold mb-4'>
+    <section id="survey" className="vh-100">
+      <Container className="position-relative h-100">
+        <Row className="d-flex justify-content-center align-items-center h-100">
+          <Col md={10} lg={8} className="text-center py-5">
+            <h3 className="text-center fw-semibold mb-5">
               Góp ý để chúng tôi phát triển tốt hơn
             </h3>
-            <Button
-              href="https://forms.gle/your-survey-link"
-              target="_blank"
-              size="lg"
-              className='survey-button'
-            >
-              Đóng góp ý kiến
-            </Button>
+            <div className="d-flex justify-content-center mt-4">
+              <Button
+                className="survey-button"
+                href="https://docs.google.com/forms/d/1V53GFF3DdVIzqYu5VTnO92oAObW_scVZ7hw0YPlSIWc/edit?hl=vi"
+                target="_blank"
+                type="submit"
+                size="lg"
+              >
+                Đóng góp ý kiến
+              </Button>
+            </div>
           </Col>
         </Row>
       </Container>
     </section>
   );
-}
+};

@@ -23,7 +23,7 @@ const ClassSection = () => {
             style={{
               width: "100%",
               height: "500px",
-              maxWidth: "900px",
+              maxWidth: "1318px",
               objectFit: "cover",
               borderRadius: "10px",
               boxShadow: "0 4px 8px rgba(0,0,0,0.1)",

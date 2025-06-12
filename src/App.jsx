@@ -1,5 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { Footer, Hero, Menu } from "./components";
+import { Footer, Hero, Menu, Survey, TeachingProcess } from "./components";
 import ClassSection from "./components/ClassSection/ClassSection";
 import Knls from "./components/Knls/Knls";
 import KnlsDetail from "./components/KnlsDetail/KnlsDetail";
@@ -7,7 +7,6 @@ import LessonDetail from "./components/LessonDetail/LessonDetail";
 import LessonPlan from "./components/LessonPlan/LessonPlan";
 import LessonPlanDetail from "./components/LessonPlanDetail/LessonPlanDetail";
 import ProcessDetail from "./components/ProcessDetail/ProcessDetail";
-import { TeachingProcess } from "./components/TeachingProcess/TeachingProcess";
 
 function App() {
   return (
@@ -24,8 +23,7 @@ function App() {
                 <TeachingProcess />
                 <ClassSection />
                 <LessonPlan />
-                {/* <Subscribe /> */}
-                {/* <Survey /> */}
+                <Survey />
               </main>
             }
           />
