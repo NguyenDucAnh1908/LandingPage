@@ -1,10 +1,7 @@
 import { Container } from "react-bootstrap";
 import { Link } from 'react-router-dom';
+import { DIGITAL_FRAMEWORK } from "../../data";
 import "./knls.css";
-
-const images = [
-  "https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/6112666.jpg?alt=media&token=71465b4a-aa75-48c8-95cb-e956cf93d8e7",
-];
 
 const Knls = () => {
   return (
@@ -15,21 +12,19 @@ const Knls = () => {
           Khung năng lực số
         </h4>
         <div className="position-relative mt-4">
-          {images.map((image, index) => (
-            <div className="slider-item" key={index}>
+            <div className="slider-item">
               <img
-                src={image}
-                alt={`slide-${index + 1}`}
+                src={DIGITAL_FRAMEWORK[0].thumbnailUrl}
+                alt={DIGITAL_FRAMEWORK[0].title}
                 className="knls-image"
               />
               <Link
                 to="/knls-detail"
                 className="detail-button"
               >
-                Next
+                Chi tiết
               </Link>
             </div>
-          ))}
         </div>
       </Container>
     </section>

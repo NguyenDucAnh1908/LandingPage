@@ -1,30 +1,11 @@
 import { Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { getLessonPlans } from "../../data";
 import "./LessonPlan.css";
-
-const LESSON_DATA = [
-  {
-    id: "3-1",
-    title: "Minh Họa Bài 1",
-    subtitle: "Bài 1",
-    backgroundColor: "#2c6fb2",
-  },
-  {
-    id: "3-2",
-    title: "Minh Họa Bài 2",
-    subtitle: "Bài 2",
-    backgroundColor: "#dc3545",
-  },
-  {
-    id: "3-3",
-    title: "Minh Họa Bài 3",
-    subtitle: "Bài 3",
-    backgroundColor: "#28a745",
-  },
-];
 
 const LessonPlan = () => {
   const navigate = useNavigate();
+  const lessonPlans = getLessonPlans();
 
   const handleLessonClick = (lessonId) => {
     navigate(`/lesson-plan/${lessonId}`);
@@ -43,7 +24,7 @@ const LessonPlan = () => {
         >
           <span className="text-white fs-4">Minh họa bài học</span>
           <div className="cards-container">
-            {LESSON_DATA.map((lesson) => (
+            {lessonPlans.map((lesson) => (
               <Card
                 key={lesson.id}
                 className="lesson-card"

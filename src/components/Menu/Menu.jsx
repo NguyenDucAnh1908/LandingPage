@@ -12,7 +12,6 @@ import "./Menu.css";
 import logoSvg from "/images/logo.svg";
 
 const INTRO_ITEMS = [
-  { name: "Giới thiệu chung", link: "#hero-introduction" },
   { name: "Video giới thiệu", link: "#hero" },
   { name: "Khung năng lực số", link: "#knls" },
   { name: "Quy trình dạy học", link: "#teaching-process" },
