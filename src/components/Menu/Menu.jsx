@@ -4,26 +4,16 @@ import {
   Container,
   Image,
   Nav,
-  Navbar,
-  NavDropdown,
+  Navbar
 } from "react-bootstrap";
+import { MENU } from "../../data";
 import { ArrowUpIcon } from "../icons";
 import "./Menu.css";
 import logoSvg from "/images/logo.svg";
 
-const INTRO_ITEMS = [
-  { name: "Video giới thiệu", link: "#hero" },
-  { name: "Khung năng lực số", link: "#knls" },
-  { name: "Quy trình dạy học", link: "#teaching-process" },
-  { name: "Lớp học", link: "#class-section" },
-  { name: "Giáo án", link: "#lesson-plan" },
-  { name: "Khảo sát", link: "#survey" },
-];
-
 export const Menu = () => {
-  // #region Scroll To Top
   const [scrolling, setScrolling] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("loggedIn") === "true");
 
   const handleScroll = () => {
     setScrolling(window.scrollY > 50);
@@ -34,18 +24,21 @@ export const Menu = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Để cập nhật trạng thái khi chuyển trang hoặc logout
+  useEffect(() => {
+    const onStorage = () => setLoggedIn(localStorage.getItem("loggedIn") === "true");
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("loggedIn");
+    setLoggedIn(false);
+    window.location.href = "/"; // hoặc reload lại trang
+  };
+
   const handleScrollToTopButton = () => window.scrollTo({ top: 0 });
 
-  const handleMenuClick = (e, link) => {
-    e.preventDefault();
-    setShowDropdown(false); // Đóng dropdown trước khi scroll
-    setTimeout(() => {
-      const id = link.replace("#", "");
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    }, 100);
-  };
-  // #endregion Scroll To Top
 
   return (
     <>
@@ -76,42 +69,34 @@ export const Menu = () => {
             className='justify-content-end font-open-sans mt-3'
           >
             <Nav className='gap-xl-5 gap-lg-4 gap-md-2'>
-              {/* Introduction Dropdown styled as Nav.Link */}
-              <NavDropdown
-                title={
-                  <span className='text-black fw-medium'>Giới thiệu</span>
-                }
-                id='basic-nav-dropdown'
-                show={showDropdown}
-                onMouseEnter={() => setShowDropdown(true)}
-                onMouseLeave={() => setShowDropdown(false)}
-                onToggle={setShowDropdown}
-                className='fw-medium'
-              >
-                {INTRO_ITEMS.map((item, index) => (
-                  <NavDropdown.Item
+              {/* Navbar Elements */}
+              {MENU &&
+                MENU.map((menu, index) => (
+                  <Nav.Link
+                    href={menu.link}
                     key={index}
-                    href={item.link}
-                    className='fw-medium'
-                    onClick={(e) => handleMenuClick(e, item.link)}
+                    className='text-black fw-medium'
                   >
-                    {item.name}
-                  </NavDropdown.Item>
+                    {menu.name}
+                  </Nav.Link>
                 ))}
-              </NavDropdown>
-
-              {/* Contact Link */}
-              <Nav.Link
-                href='#footer'
-                className='text-black fw-medium'
-                onClick={(e) => {
-                  e.preventDefault();
-                  const el = document.getElementById("footer");
-                  if (el) el.scrollIntoView({ behavior: "smooth" });
-                }}
+              {/* Login and Sign up Buttons */}
+            {!loggedIn ? (
+              <Button
+                variant='outline-dark fw-medium'
+                as="a"
+                href="/login"
               >
-                Liên hệ
-              </Nav.Link>
+                Login
+              </Button>
+            ) : (
+              <Button
+                variant='outline-dark fw-medium'
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
+            )}
             </Nav>
           </Navbar.Collapse>
         </Container>

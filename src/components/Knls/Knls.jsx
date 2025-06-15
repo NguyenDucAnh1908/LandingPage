@@ -1,9 +1,22 @@
+import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import { DIGITAL_FRAMEWORK } from "../../data";
+import { fetchKnlsImages } from "../../data";
 import "./knls.css";
 
 const Knls = () => {
+  const [thumbnail, setThumbnail] = useState(null);
+
+useEffect(() => {
+  fetchKnlsImages()
+   .then(data => {
+        const thumb = data.find(item => item.id === 1);
+        setThumbnail(thumb.imageUrl ? { imageUrl: thumb.imageUrl, title: thumb.title } : null);
+      })
+    .catch(err => {
+        setThumbnail("https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/6112666.jpg?alt=media&token=71465b4a-aa75-48c8-95cb-e956cf93d8e7");
+    });
+}, []);
   return (
     <section id="knls">
       <Container>
@@ -12,12 +25,14 @@ const Knls = () => {
           Khung năng lực số
         </h4>
         <div className="position-relative mt-4">
-            <div className="slider-item">
+        <div className="slider-item">
+            {thumbnail && (
               <img
-                src={DIGITAL_FRAMEWORK[0].thumbnailUrl}
-                alt={DIGITAL_FRAMEWORK[0].title}
+                src={thumbnail.imageUrl}
+                alt={thumbnail.title}
                 className="knls-image"
               />
+            )}
               <Link
                 to="/knls-detail"
                 className="detail-button"

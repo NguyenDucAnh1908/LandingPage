@@ -1,15 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { DIGITAL_FRAMEWORK } from "../../data";
+import { fetchKnlsImages } from "../../data";
 import "./KnlsDetail.css";
 
 const KnlsDetail = () => {
   const navigate = useNavigate();
-  const knlsData = DIGITAL_FRAMEWORK[0]; // Get the first (and only) item
+  const [gallery, setGallery] = useState([]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    fetchKnlsImages()
+      .then(data => {
+        setGallery(data.filter(item => item.id !== 1));
+      })
+      .catch(err => {
+        setGallery([]);
+      });
   }, []);
 
   const handleReturn = (e) => {
@@ -36,21 +43,19 @@ const KnlsDetail = () => {
               Quay lại
             </Link>
             <h2 className="font-volkhov fw-bold text-center">
-              {knlsData.title}
+              {gallery.title}
             </h2>
           </div>
         </div>
         <div className="content-wrapper">
           <div className="images-grid">
-            {knlsData.images.map(image => (
+           {gallery.map(item => (
               <div
-                key={image.id}
-                className="image-placeholder"
-                style={{ backgroundColor: image.backgroundColor }}
+              key={item.id}
               >
                 <img
-                  src={`${import.meta.env.BASE_URL}${image.url}`}
-                  alt={`${knlsData.title} - Hình ${image.id}`}
+                  src={item.imageUrl}
+                  alt={item.title}
                   className="detail-image"
                 />
               </div>

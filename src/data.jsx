@@ -39,171 +39,9 @@ export const COLOR_STEPS = [
 ];
 
 export const GRADES = [
-  {
-    id: 3,
-    name: "Lớp 3",
-    description: "Chương trình lớp 3",
-    lessons: [
-      {
-        id: "3-1",
-        order: 1,
-        title: "Giới thiệu về công nghệ",
-        description: "Bài 1: Giới thiệu về công nghệ",
-        images: [
-          {
-            id: 1,
-            url: "/lesson-images/3-1-1.jpg",
-            title: "Hình 1",
-            backgroundColor: "#2c6fb2"
-          },
-          {
-            id: 2,
-            url: "/lesson-images/3-1-2.jpg",
-            title: "Hình 2",
-            backgroundColor: "#dc3545"
-          }
-        ],
-        plan: {
-          title: "Minh Họa Bài 1",
-          subtitle: "Bài 1",
-          backgroundColor: "#2c6fb2",
-          pdfUrl: "https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/SDS%20Document.pdf?alt=media&token=2942c792-57eb-43e6-b441-8adaff091546"
-        }
-      },
-      {
-        id: "3-2",
-        order: 2,
-        title: "Công nghệ trong cuộc sống",
-        description: "Bài 2: Công nghệ trong cuộc sống",
-        images: [
-          {
-            id: 1,
-            url: "/lesson-images/3-2-1.jpg",
-            title: "Hình 1",
-            backgroundColor: "#20c997"
-          },
-          {
-            id: 2,
-            url: "/lesson-images/3-2-2.jpg",
-            title: "Hình 2",
-            backgroundColor: "#e83e8c"
-          },
-          {
-            id: 3,
-            url: "/lesson-images/3-2-3.jpg",
-            title: "Hình 3",
-            backgroundColor: "#fd7e14"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: 4,
-    name: "Lớp 4",
-    description: "Chương trình lớp 4",
-    lessons: [
-      {
-        id: "4-1",
-        order: 1,
-        title: "Khám phá công nghệ",
-        description: "Bài 1: Khám phá công nghệ",
-        images: [
-          {
-            id: 1,
-            url: "/lesson-images/4-1-1.jpg",
-            title: "Hình 1",
-            backgroundColor: "#6610f2"
-          },
-          {
-            id: 2,
-            url: "/lesson-images/4-1-2.jpg",
-            title: "Hình 2",
-            backgroundColor: "#6f42c1"
-          }
-        ]
-      },
-      {
-        id: "4-2",
-        order: 2,
-        title: "Công nghệ và môi trường",
-        description: "Bài 2: Công nghệ và môi trường",
-        images: [
-          {
-            id: 1,
-            url: "/lesson-images/4-2-1.jpg",
-            title: "Hình 1",
-            backgroundColor: "#20c997"
-          },
-          {
-            id: 2,
-            url: "/lesson-images/4-2-2.jpg",
-            title: "Hình 2",
-            backgroundColor: "#fd7e14"
-          },
-          {
-            id: 3,
-            url: "/lesson-images/4-2-3.jpg",
-            title: "Hình 3",
-            backgroundColor: "#dc3545"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: 5,
-    name: "Lớp 5",
-    description: "Chương trình lớp 5",
-    lessons: [
-      {
-        id: "5-1",
-        order: 1,
-        title: "Tìm hiểu về công nghệ thông tin",
-        description: "Bài 1: Tìm hiểu về công nghệ thông tin",
-        images: [
-          {
-            id: 1,
-            url: "/lesson-images/5-1-1.jpg",
-            title: "Hình 1",
-            backgroundColor: "#007bff"
-          },
-          {
-            id: 2,
-            url: "/lesson-images/5-1-2.jpg",
-            title: "Hình 2",
-            backgroundColor: "#6610f2"
-          }
-        ]
-      },
-      {
-        id: "5-2",
-        order: 2,
-        title: "Ứng dụng công nghệ trong cuộc sống",
-        description: "Bài 2: Ứng dụng công nghệ trong cuộc sống",
-        images: [
-          {
-            id: 1,
-            url: "/lesson-images/5-2-1.jpg",
-            title: "Hình 1",
-            backgroundColor: "#28a745"
-          },
-          {
-            id: 2,
-            url: "/lesson-images/5-2-2.jpg",
-            title: "Hình 2",
-            backgroundColor: "#fd7e14"
-          },
-          {
-            id: 3,
-            url: "/lesson-images/5-2-3.jpg",
-            title: "Hình 3",
-            backgroundColor: "#dc3545"
-          }
-        ]
-      }
-    ]
-  }
+  { id: 3, name: "Lớp 3", description: "Chương trình lớp 3" },
+  { id: 4, name: "Lớp 4", description: "Chương trình lớp 4" },
+  { id: 5, name: "Lớp 5", description: "Chương trình lớp 5" }
 ];
 
 export const LESSONS = [
@@ -226,12 +64,7 @@ export const LESSONS = [
         title: "Hình 2",
         backgroundColor: "#dc3545"
       }
-    ],
-    plan: {
-      title: "Minh Họa Bài 1",
-      subtitle: "Bài 1",
-      pdfUrl: "https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/SDS%20Document.pdf?alt=media&token=2942c792-57eb-43e6-b441-8adaff091546"
-    }
+    ]
   },
   {
     id: "3-2",
@@ -258,12 +91,7 @@ export const LESSONS = [
         title: "Hình 3",
         backgroundColor: "#fd7e14"
       }
-    ],
-        plan: {
-      title: "Minh Họa Bài 2",
-      subtitle: "Bài 2",
-      pdfUrl: "https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/SDS%20Document.pdf?alt=media&token=2942c792-57eb-43e6-b441-8adaff091546"
-    }
+    ]
   },
   {
     id: "4-1",
@@ -360,27 +188,30 @@ export const LESSONS = [
         backgroundColor: "#dc3545"
       }
     ]
-  }
-];
-
-export const DIGITAL_FRAMEWORK = [
+  },
   {
-    title: "Khung năng lực số",
-    thumbnailUrl: "https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/6112666.jpg?alt=media&token=71465b4a-aa75-48c8-95cb-e956cf93d8e7",
+    id: "5-3",
+    gradeId: 5,
+    order: 3,
+    title: "Khám phá công nghệ thông tin",
+    description: "Bài 3: Khám phá công nghệ thông tin",
     images: [
       {
         id: 1,
-        url: "/knls/1-1.jpg",
-        backgroundColor: "#2c6fb2"
+        url: "/lesson-images/5-3-1.jpg",
+        title: "Hình 1",
+        backgroundColor: "#007bff"
       },
       {
         id: 2,
-        url: "/knls/1-2.jpg",
-        backgroundColor: "#2c6fb2"
+        url: "/lesson-images/5-3-2.jpg",
+        title: "Hình 2",
+        backgroundColor: "#6610f2"
       }
     ]
   }
 ];
+
 
 // Helper function to get lessons by grade
 export const getLessonsByGrade = (gradeId) => {
@@ -392,21 +223,22 @@ export const getLessonById = (lessonId) => {
   return LESSONS.find(lesson => lesson.id === lessonId);
 };
 
-// Add helper functions for lesson plans
-export const getLessonPlan = (lessonId) => {
-  const lesson = LESSONS.find(lesson => lesson.id === lessonId);
-  return lesson?.plan;
-};
+export const ILLUSTRATIONS = [
+  {
+    id: "1",
+    title: "Minh Họa Bài 1",
+    pdfUrl: "https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/SDS%20Document.pdf?alt=media&token=2942c792-57eb-43e6-b441-8adaff091546"
+  },
+  {
+    id: "2",
+    title: "Minh Họa Bài 2",
+    pdfUrl: "https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/SDS%20Document.pdf?alt=media&token=2942c792-57eb-43e6-b441-8adaff091546"
+  },
+];
 
-export const getLessonPlans = () => {
-  return LESSONS.filter(lesson => lesson.plan)
-    .map(lesson => ({
-      id: lesson.id,
-      title: lesson.plan.title,
-      subtitle: lesson.plan.subtitle,
-      backgroundColor: lesson.plan.backgroundColor
-    }));
-};
+export const getLessonIllustrations = () => ILLUSTRATIONS;
+
+export const getIllustrationById = (id) => ILLUSTRATIONS.find(i => i.id === id);
 
 
 export const FOOTER = [
@@ -502,3 +334,48 @@ export const LOGOS = [
     logo: "images/logos/alitalia.png",
   },
 ];
+
+export const fetchVideoLink = async () => {
+  const response = await fetch('https://landingpagestudy.onrender.com/api/videos-link');
+  if (!response.ok) throw new Error('Failed to fetch video link');
+  return response.json();
+};
+
+export const MENU = [
+  { name: "Giới thiệu", link: "#hero" },
+  { name: "KNLS", link: "#knls" },
+  { name: "Quy trình dạy học", link: "#teaching-process" },
+  { name: "Lớp học", link: "#class-section" },
+  { name: "Giáo án", link: "#lesson-illustration" },
+  { name: "Khảo sát", link: "#survey" },
+  { name: "Liên hệ", link: "#footer" }
+];
+export const login = async (username, password) => {
+  const response = await fetch('https://landingpagestudy.onrender.com/api/auth/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ username, password })
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Login failed');
+  }
+  return response.json();
+};
+
+export const fetchKnlsImages = async () => {
+  const response = await fetch('https://landingpagestudy.onrender.com/api/digital-images', {
+    method: 'GET',
+    headers: {
+      'accept': '*/*'
+    }
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Failed to fetch KNLS images');
+  }
+  return response.json();
+};
+
