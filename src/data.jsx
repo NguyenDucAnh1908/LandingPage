@@ -219,3 +219,4 @@ export const fetchIllustration = async (id) => {
   }
   return response.json();
 };
+
