@@ -22,7 +22,7 @@ const ProcessDetail = () => {
   };
 
   return (
-    <section className="process-detail-section process-detail-compact">
+    <section id="process-detail" className="process-detail-section process-detail-compact">
       <Container>
         <div className="process-steps-bar">
           {DATA_PROCESSING.map((step, idx) => (
@@ -56,14 +56,14 @@ const ProcessDetail = () => {
             >
               {DATA_PROCESSING.map((step, idx) => (
                 <Carousel.Item key={step.id}>
-                  <div
+                  <Image
                     className="process-detail-content"
-                    style={{
-                      backgroundColor: COLOR_STEPS[idx]
-                    }}
-                  >
-                    {step.title}
-                  </div>
+                    src={`${step.imageUrl}`}
+                    alt={step.title}
+                  />
+                  <Carousel.Caption>
+                    <h3>{step.title}</h3>
+                  </Carousel.Caption>
                 </Carousel.Item>
               ))}
             </Carousel>

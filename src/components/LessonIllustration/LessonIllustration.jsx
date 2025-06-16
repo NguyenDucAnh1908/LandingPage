@@ -35,38 +35,56 @@ const LessonIllustration = () => {
           <div
             className="illustration-image"
             style={{
-              backgroundColor: "#2c6fb2",
+              backgroundImage: "url('https://cdn.s99.vn/ss2/prod/product/af88687ac7d7bf733909ba9ea3c120b1_1700131262.jpg?at=1701807943')", // đường dẫn ảnh của bạn
+              backgroundSize: "cover",
+              backgroundPosition: "center",
               height: "500px",
               width: "100%",
               borderRadius: "12px",
+              position: "relative",
+              overflow: "hidden",
+              color: "white"
             }}
           >
-            <span className="text-white fs-4">Minh họa bài học</span>
-            <div className="cards-container">
-              {loading && (
-                <div className="d-flex justify-content-center align-items-center w-100" style={{ minHeight: 120 }}>
-                  <Spinner animation="border" variant="light" />
-                </div>
-              )}
-              {error && (
-                <Alert variant="danger" className="w-100 text-center">
-                  {error}
-                </Alert>
-              )}
-              {!loading && !error && illustrations.map((illustration) => (
-                <Card
-                  key={illustration.id}
-                  className="lesson-card"
-                  onClick={() => handleLessonClick(illustration.id)}
-                >
-                  <Card.Body>
-                    <Card.Title>{illustration.title}</Card.Title>
-                  </Card.Body>
-                </Card>
-              ))}
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                backgroundColor: "rgba(0, 0, 0, 0.4)", // lớp phủ để chữ dễ nhìn
+                borderRadius: "12px",
+                padding: "2rem",
+              }}
+            >
+              <span className="fs-4">Minh họa bài học</span>
+              <div className="cards-container mt-3">
+                {loading && (
+                  <div className="d-flex justify-content-center align-items-center w-100" style={{ minHeight: 120 }}>
+                    <Spinner animation="border" variant="light" />
+                  </div>
+                )}
+                {error && (
+                  <Alert variant="danger" className="w-100 text-center">
+                    {error}
+                  </Alert>
+                )}
+                {!loading && !error && illustrations.map((illustration) => (
+                  <Card
+                    key={illustration.id}
+                    className="lesson-card"
+                    onClick={() => handleLessonClick(illustration.id)}
+                  >
+                    <Card.Body>
+                      <Card.Title>{illustration.title}</Card.Title>
+                    </Card.Body>
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+       </div>
       </Container>
     </section>
   );

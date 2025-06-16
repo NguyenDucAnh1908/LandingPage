@@ -3,31 +3,36 @@ export const DATA_PROCESSING = [
     id: 1,
     label: "Bước 1",
     title: "Xác định yêu cầu cần đạt của bài học",
-    iconUrl: "step1.svg"
+    iconUrl: "step1.svg",
+    imageUrl: "https://cdn.s99.vn/ss2/prod/product/af88687ac7d7bf733909ba9ea3c120b1_1700131262.jpg"
   },
   {
     id: 2,
     label: "Bước 2",
     title: "Xác định các hoạt động tích hợp có thể bồi dưỡng năng lực số",
-    iconUrl: "step2.svg"
+    iconUrl: "step2.svg",
+    imageUrl: "https://cdn.s99.vn/ss2/prod/product/af88687ac7d7bf733909ba9ea3c120b1_1700131262.jpg"
   },
   {
     id: 3,
     label: "Bước 3",
     title: "Xác định tài nguyên dạy học",
-    iconUrl: "step3.svg"
+    iconUrl: "step3.svg",
+    imageUrl: "https://cdn.s99.vn/ss2/prod/product/af88687ac7d7bf733909ba9ea3c120b1_1700131262.jpg"
   },
   {
     id: 4,
     label: "Bước 4",
     title: "Lựa chọn phương pháp và kỹ thuật dạy học",
-    iconUrl: "step4.svg"
+    iconUrl: "step4.svg",
+    imageUrl: "https://cdn.s99.vn/ss2/prod/product/af88687ac7d7bf733909ba9ea3c120b1_1700131262.jpg"
   },
   {
     id: 5,
     label: "Bước 5",
     title: "Thiết kế các hoạt động học tập trong bài học môn Công nghệ theo hướng phát triển năng lực số cho HS",
-    iconUrl: "step5.svg"
+    iconUrl: "step5.svg",
+    imageUrl: "https://cdn.s99.vn/ss2/prod/product/af88687ac7d7bf733909ba9ea3c120b1_1700131262.jpg"
   }
 ];
 export const COLOR_STEPS = [
@@ -233,3 +238,20 @@ export const deleteGrade = async (id) => {
   }
   return response.json();
 };
+
+
+export async function saveGrade(lessonData) {
+  const response = await fetch("https://landingpagestudy.onrender.com/api/lessons/save-or-update", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(lessonData),
+  });
+
+  if (!response.ok) {
+    throw new Error("Không thể lưu bài học");
+  }
+
+  return await response.json();
+}
