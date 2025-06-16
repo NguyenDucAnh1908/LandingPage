@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Accordion, Button, Container, Form, Image, Modal, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { fetchLessons } from "../../data";
+import { deleteGrade, fetchLessons } from "../../data";
 import "./ClassSection.css";
 
 const ClassSection = () => {
@@ -14,7 +14,7 @@ const ClassSection = () => {
   useEffect(() => {
     fetchLessons()
       .then((data) => setGrades(data))
-      .catch((err) => setGrades([]));
+      .catch(() => setGrades([]));
   }, []);
 
   // Handlers for edit modal
@@ -63,8 +63,15 @@ const ClassSection = () => {
       { id: newId, title: "", contents: [] }
     ]);
   };
-  const handleDeleteGrade = (gradeId) => {
-    if (window.confirm("Xóa lớp này?")) setEditData(editData.filter(g => g.id !== gradeId));
+  const handleDeleteGrade = async (gradeId) => {
+    if (window.confirm("Xóa lớp này?")) {
+      await deleteGrade(gradeId)
+        .then(() => {
+          setEditData(editData.filter(g => g.id !== gradeId));
+          setGrades(grades.filter(g => g.id !== gradeId));
+        })
+        .catch(() => alert("Xóa lớp không thành công"));
+    }
   };
   const handleAddLesson = (gradeId) => {
     setEditData(editData.map(g => g.id === gradeId ? {
@@ -123,7 +130,7 @@ const ClassSection = () => {
             className="section-image"
             style={{
               width: "100%",
-              height: "500px",
+              height: "100%",
               maxWidth: "1318px",
               objectFit: "cover",
               borderRadius: "10px",

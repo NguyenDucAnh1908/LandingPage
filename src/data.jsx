@@ -220,3 +220,16 @@ export const fetchIllustration = async (id) => {
   return response.json();
 };
 
+export const deleteGrade = async (id) => {
+  const response = await fetch(`https://landingpagestudy.onrender.com/api/lessons/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'accept': '*/*'
+    }
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Failed to delete lesson');
+  }
+  return response.json();
+};

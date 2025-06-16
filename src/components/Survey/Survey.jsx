@@ -2,7 +2,7 @@ import { Button, Col, Container, Row } from 'react-bootstrap';
 import './Survey.css';
 export const Survey = () => {
   return (
-    <section id="survey" className="vh-100">
+    <section id="survey">
       <Container className="position-relative h-100">
         <Row className="d-flex justify-content-center align-items-center h-100">
           <Col md={10} lg={8} className="text-center py-5">

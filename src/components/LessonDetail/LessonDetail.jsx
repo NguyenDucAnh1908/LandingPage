@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Container } from "react-bootstrap";
-import { Layout, Menu, theme } from "antd";
 import { BookOutlined, FileTextOutlined } from "@ant-design/icons";
+import { Image, Layout, Menu, theme } from "antd";
+import React, { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchLessons } from "../../data";
 import "./LessonDetail.css";
 
-const { Header, Content, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 const LessonDetail = () => {
   const { lessonId } = useParams();
@@ -101,21 +101,13 @@ const LessonDetail = () => {
                   {selectedLesson &&
                     selectedLesson.images &&
                     selectedLesson.images.map((image) => (
-                      <div
-                        key={image.id}
-                        className="lesson-image"
-                        // Nếu có backgroundColor thì dùng, không thì bỏ qua
-                        style={
-                          image.backgroundColor
-                            ? { backgroundColor: image.backgroundColor }
-                            : {}
-                        }
-                      >
-                        <img
+                        <Image
+                          key={image.id}
                           src={image.imageUrl}
                           alt={selectedLesson.contentText}
+                          className="lesson-image"
                         />
-                      </div>
+
                     ))}
                 </div>
               </div>

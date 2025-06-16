@@ -36,7 +36,8 @@ const LessonIllustration = () => {
             className="illustration-image"
             style={{
               backgroundColor: "#2c6fb2",
-              height: "400px",
+              height: "500px",
+              width: "100%",
               borderRadius: "12px",
             }}
           >

@@ -1,3 +1,7 @@
+#class-section {
+  height: fit-content;
+  padding: 2rem 0;
+}
 .class-card {
   transition: all 0.3s ease;
   border-radius: 6px;

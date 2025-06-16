@@ -2,7 +2,7 @@
   min-height: 400px;
   display: flex;
   align-items: center;
-
+  padding: 2rem 0;
   .container {
     background-color: rgba(223, 215, 249, 0.3);
     background-image: url("/public/images/rounded-spiral-right.svg"),
