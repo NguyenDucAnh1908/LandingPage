@@ -2,6 +2,7 @@
   padding-top: 100px;
   padding-bottom: 2rem;
   min-height: calc(100vh - 157px);
+  background: url('https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/Screenshot%202025-06-10%20141336.png?alt=media&token=819a0be1-9d9a-4462-a2cd-05c1bbf5f663') center center/cover no-repeat;
 }
 
 .lesson-title {
@@ -12,13 +13,15 @@
 }
 
 .pdf-container {
-  width: 100%;
-  height: calc(100vh - 300px);
-  min-height: 500px;
+  position: relative;
+  z-index: 1;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  width: 100%;
+  height: calc(100vh - 300px);
+  min-height: 500px;
 }
 
 .pdf-viewer {

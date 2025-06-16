@@ -6,6 +6,7 @@ import {
   Nav,
   Navbar
 } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 import { MENU } from "../../data";
 import { ArrowUpIcon } from "../icons";
 import "./Menu.css";
@@ -14,6 +15,7 @@ import logoSvg from "/images/logo.svg";
 export const Menu = () => {
   const [scrolling, setScrolling] = useState(false);
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem("loggedIn") === "true");
+  const location = useLocation();
 
   const handleScroll = () => {
     setScrolling(window.scrollY > 50);
@@ -70,7 +72,7 @@ export const Menu = () => {
           >
             <Nav className='gap-xl-5 gap-lg-4 gap-md-2'>
               {/* Navbar Elements */}
-              {MENU &&
+              {location.pathname === "/" && MENU &&
                 MENU.map((menu, index) => (
                   <Nav.Link
                     href={menu.link}
