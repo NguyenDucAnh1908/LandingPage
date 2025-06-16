@@ -38,209 +38,6 @@ export const COLOR_STEPS = [
   "#fd7e14"  // Step 5
 ];
 
-export const GRADES = [
-  { id: 3, name: "Lớp 3", description: "Chương trình lớp 3" },
-  { id: 4, name: "Lớp 4", description: "Chương trình lớp 4" },
-  { id: 5, name: "Lớp 5", description: "Chương trình lớp 5" }
-];
-
-export const LESSONS = [
-  {
-    id: "3-1",
-    gradeId: 3,
-    order: 1,
-    title: "Giới thiệu về công nghệ",
-    description: "Bài 1: Giới thiệu về công nghệ",
-    images: [
-      {
-        id: 1,
-        url: "/lesson-images/3-1-1.jpg",
-        title: "Hình 1",
-        backgroundColor: "#2c6fb2"
-      },
-      {
-        id: 2,
-        url: "/lesson-images/3-1-2.jpg",
-        title: "Hình 2",
-        backgroundColor: "#dc3545"
-      }
-    ]
-  },
-  {
-    id: "3-2",
-    gradeId: 3,
-    order: 2,
-    title: "Công nghệ trong cuộc sống",
-    description: "Bài 2: Công nghệ trong cuộc sống",
-    images: [
-      {
-        id: 1,
-        url: "/lesson-images/3-2-1.jpg",
-        title: "Hình 1",
-        backgroundColor: "#20c997"
-      },
-      {
-        id: 2,
-        url: "/lesson-images/3-2-2.jpg",
-        title: "Hình 2",
-        backgroundColor: "#e83e8c"
-      },
-      {
-        id: 3,
-        url: "/lesson-images/3-2-3.jpg",
-        title: "Hình 3",
-        backgroundColor: "#fd7e14"
-      }
-    ]
-  },
-  {
-    id: "4-1",
-    gradeId: 4,
-    order: 1,
-    title: "Khám phá công nghệ",
-    description: "Bài 1: Khám phá công nghệ",
-    images: [
-      {
-        id: 1,
-        url: "/lesson-images/4-1-1.jpg",
-        title: "Hình 1",
-        backgroundColor: "#6610f2"
-      },
-      {
-        id: 2,
-        url: "/lesson-images/4-1-2.jpg",
-        title: "Hình 2",
-        backgroundColor: "#6f42c1"
-      }
-    ]
-  },
-  {
-    id: "4-2",
-    gradeId: 4,
-    order: 2,
-    title: "Công nghệ và môi trường",
-    description: "Bài 2: Công nghệ và môi trường",
-    images: [
-      {
-        id: 1,
-        url: "/lesson-images/4-2-1.jpg",
-        title: "Hình 1",
-        backgroundColor: "#20c997"
-      },
-      {
-        id: 2,
-        url: "/lesson-images/4-2-2.jpg",
-        title: "Hình 2",
-        backgroundColor: "#fd7e14"
-      },
-      {
-        id: 3,
-        url: "/lesson-images/4-2-3.jpg",
-        title: "Hình 3",
-        backgroundColor: "#dc3545"
-      }
-    ]
-  },
-  {
-    id: "5-1",
-    gradeId: 5,
-    order: 1,
-    title: "Tìm hiểu về công nghệ thông tin",
-    description: "Bài 1: Tìm hiểu về công nghệ thông tin",
-    images: [
-      {
-        id: 1,
-        url: "/lesson-images/5-1-1.jpg",
-        title: "Hình 1",
-        backgroundColor: "#007bff"
-      },
-      {
-        id: 2,
-        url: "/lesson-images/5-1-2.jpg",
-        title: "Hình 2",
-        backgroundColor: "#6610f2"
-      }
-    ]
-  },
-  {
-    id: "5-2",
-    gradeId: 5,
-    order: 2,
-    title: "Ứng dụng công nghệ trong cuộc sống",
-    description: "Bài 2: Ứng dụng công nghệ trong cuộc sống",
-    images: [
-      {
-        id: 1,
-        url: "/lesson-images/5-2-1.jpg",
-        title: "Hình 1",
-        backgroundColor: "#28a745"
-      },
-      {
-        id: 2,
-        url: "/lesson-images/5-2-2.jpg",
-        title: "Hình 2",
-        backgroundColor: "#fd7e14"
-      },
-      {
-        id: 3,
-        url: "/lesson-images/5-2-3.jpg",
-        title: "Hình 3",
-        backgroundColor: "#dc3545"
-      }
-    ]
-  },
-  {
-    id: "5-3",
-    gradeId: 5,
-    order: 3,
-    title: "Khám phá công nghệ thông tin",
-    description: "Bài 3: Khám phá công nghệ thông tin",
-    images: [
-      {
-        id: 1,
-        url: "/lesson-images/5-3-1.jpg",
-        title: "Hình 1",
-        backgroundColor: "#007bff"
-      },
-      {
-        id: 2,
-        url: "/lesson-images/5-3-2.jpg",
-        title: "Hình 2",
-        backgroundColor: "#6610f2"
-      }
-    ]
-  }
-];
-
-
-// Helper function to get lessons by grade
-export const getLessonsByGrade = (gradeId) => {
-  return LESSONS.filter(lesson => lesson.gradeId === gradeId);
-};
-
-// Helper function to get lesson by id
-export const getLessonById = (lessonId) => {
-  return LESSONS.find(lesson => lesson.id === lessonId);
-};
-
-export const ILLUSTRATIONS = [
-  {
-    id: "1",
-    title: "Minh Họa Bài 1",
-    pdfUrl: "https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/SDS%20Document.pdf?alt=media&token=2942c792-57eb-43e6-b441-8adaff091546"
-  },
-  {
-    id: "2",
-    title: "Minh Họa Bài 2",
-    pdfUrl: "https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/SDS%20Document.pdf?alt=media&token=2942c792-57eb-43e6-b441-8adaff091546"
-  },
-];
-
-export const getLessonIllustrations = () => ILLUSTRATIONS;
-
-export const getIllustrationById = (id) => ILLUSTRATIONS.find(i => i.id === id);
-
-
 export const FOOTER = [
   {
     id: 1,
@@ -379,3 +176,46 @@ export const fetchKnlsImages = async () => {
   return response.json();
 };
 
+export const fetchLessons = async () => {
+  const response = await fetch('https://landingpagestudy.onrender.com/api/lessons', {
+    method: 'GET',
+    headers: {
+      'accept': '*/*'
+    }
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Failed to fetch lessons');
+  }
+  return response.json();
+};
+
+
+
+export const fetchIllustrations = async () => {
+  const response = await fetch('https://landingpagestudy.onrender.com/api/files', {
+    method: 'GET',
+    headers: {
+      'accept': '*/*'
+    }
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Failed to fetch illustration images');
+  }
+  return response.json();
+};
+
+export const fetchIllustration = async (id) => {
+  const response = await fetch(`https://landingpagestudy.onrender.com/api/files/${id}`, {
+    method: 'GET',
+    headers: {
+      'accept': '*/*'
+    }
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Failed to fetch illustration images');
+  }
+  return response.json();
+};

@@ -1,9 +1,18 @@
+import { useEffect, useState } from "react";
 import { Accordion, Container, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { GRADES, getLessonsByGrade } from "../../data";
+import { fetchLessons } from "../../data";
 import "./ClassSection.css";
 
 const ClassSection = () => {
+  const [grades, setGrades] = useState([]);
+
+  useEffect(() => {
+    fetchLessons()
+      .then((data) => setGrades(data))
+      .catch((err) => setGrades([]));
+  }, []);
+
   return (
     <section id="class-section">
       <Container>
@@ -34,19 +43,19 @@ const ClassSection = () => {
 
         <div className="class-accordion-container">
           <div className="horizontal-accordion-wrapper">
-            {GRADES.map((grade) => (
+            {grades.map((grade) => (
               <Accordion key={grade.id} className="class-item">
                 <Accordion.Item eventKey="0">
-                  <Accordion.Header>{grade.name}</Accordion.Header>
+                  <Accordion.Header>{grade.title}</Accordion.Header>
                   <Accordion.Body>
                     <ul className="list-unstyled mb-0">
-                      {getLessonsByGrade(grade.id).map((lesson) => (
+                      {grade.contents.map((lesson) => (
                         <Link
                           to={`/lesson/${lesson.id}`}
                           key={lesson.id}
                           className="lesson-link"
                         >
-                          <li className="lesson-item">{lesson.description}</li>
+                          <li className="lesson-item">{lesson.contentText}</li>
                         </Link>
                       ))}
                     </ul>
