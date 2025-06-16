@@ -54,7 +54,7 @@ const LessonIllustrationDetail = () => {
         <h2 className="lesson-title">{illustration.title}</h2>
         <div className="pdf-container">
           <iframe
-            src={illustration.pdfUrl}
+            src={illustration.fileUrl}
             title={illustration.title}
             className="pdf-viewer"
           />
