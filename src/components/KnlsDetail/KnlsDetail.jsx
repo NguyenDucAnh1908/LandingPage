@@ -12,22 +12,22 @@ const KnlsDetail = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-  setLoading(true);
-  setError(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setLoading(true);
+    setError(null);
 
-  fetchKnlsImages()
-    .then(data => {
-      setGallery(data.filter(item => item.id !== 1));
-    })
-    .catch(err => {
-      setError("Lỗi tải dữ liệu hình ảnh");
-      setGallery([]);
-    })
-    .finally(() => {
-      setLoading(false);
-    });
-}, []);
+    fetchKnlsImages()
+      .then((data) => {
+        setGallery(data.filter((item) => item.id !== 0));
+      })
+      .catch((err) => {
+        setError("Lỗi tải dữ liệu hình ảnh");
+        setGallery([]);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   const handleReturn = (e) => {
     e.preventDefault();
@@ -39,41 +39,41 @@ const KnlsDetail = () => {
       }
     }, 100);
   };
-
+  console.log("image", gallery);
   return (
-  <section className="knls-detail">
-    <Container>
-      <div className="header-section">
-        <div className="header-content">
-          <Link to="/" onClick={handleReturn} className="return-button">
-            Quay lại
-          </Link>
-          <h2 className="font-volkhov fw-bold text-center">
-            Khung năng lực số
-          </h2>
-        </div>
-      </div>
-
-      <div className="content-wrapper">
-        {loading && <p className="text-center">Đang tải dữ liệu...</p>}
-        {error && <p className="text-center text-danger">{error}</p>}
-        {!loading && !error && (
-          <div className="images-grid ant-grid">
-            {gallery.map(item => (
-              <div className="image-card" key={item.id}>
-                <Image
-                  src={item.imageUrl}
-                  alt={item.title}
-                  className="detail-image"
-                />
-              </div>
-            ))}
+    <section className="knls-detail">
+      <Container>
+        <div className="header-section">
+          <div className="header-content">
+            <Link to="/" onClick={handleReturn} className="return-button">
+              Quay lại
+            </Link>
+            <h2 className="font-volkhov fw-bold text-center">
+              Khung năng lực số
+            </h2>
           </div>
-        )}
-      </div>
-    </Container>
-  </section>
+        </div>
 
+        <div className="content-wrapper">
+          {loading && <p className="text-center">Đang tải dữ liệu...</p>}
+          {error && <p className="text-center text-danger">{error}</p>}
+          {!loading && !error && (
+            <div className="images-grid ant-grid">
+              {gallery.map((item) => (
+                <div className="image-card" key={item.id}>
+                  <Image
+                    width="500"
+                    src={item.imageUrl}
+                    alt={item.title}
+                    className="detail-image"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </Container>
+    </section>
   );
 };
 

@@ -3,6 +3,7 @@ import { Alert, Card, Container, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { fetchIllustrations } from "../../data";
 import "./LessonIllustration.css";
+import backgroundImage from "/images/image_web/3._Minh_hoa_ke_hoach_bai_day.png";
 
 const LessonIllustration = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const LessonIllustration = () => {
           <div
             className="illustration-image"
             style={{
-              backgroundImage: "url('https://cdn.s99.vn/ss2/prod/product/af88687ac7d7bf733909ba9ea3c120b1_1700131262.jpg?at=1701807943')", // đường dẫn ảnh của bạn
+              backgroundImage: `url(${backgroundImage})`, // đường dẫn ảnh của bạn  https://cdn.s99.vn/ss2/prod/product/af88687ac7d7bf733909ba9ea3c120b1_1700131262.jpg?at=1701807943
               backgroundSize: "cover",
               backgroundPosition: "center",
               height: "500px",
@@ -43,7 +44,7 @@ const LessonIllustration = () => {
               borderRadius: "12px",
               position: "relative",
               overflow: "hidden",
-              color: "white"
+              color: "white",
             }}
           >
             <div
@@ -61,7 +62,10 @@ const LessonIllustration = () => {
               <span className="fs-4">Minh họa bài học</span>
               <div className="cards-container mt-3">
                 {loading && (
-                  <div className="d-flex justify-content-center align-items-center w-100" style={{ minHeight: 120 }}>
+                  <div
+                    className="d-flex justify-content-center align-items-center w-100"
+                    style={{ minHeight: 120 }}
+                  >
                     <Spinner animation="border" variant="light" />
                   </div>
                 )}
@@ -70,21 +74,23 @@ const LessonIllustration = () => {
                     {error}
                   </Alert>
                 )}
-                {!loading && !error && illustrations.map((illustration) => (
-                  <Card
-                    key={illustration.id}
-                    className="lesson-card"
-                    onClick={() => handleLessonClick(illustration.id)}
-                  >
-                    <Card.Body>
-                      <Card.Title>{illustration.title}</Card.Title>
-                    </Card.Body>
-                  </Card>
-                ))}
+                {!loading &&
+                  !error &&
+                  illustrations.map((illustration) => (
+                    <Card
+                      key={illustration.id}
+                      className="lesson-card"
+                      onClick={() => handleLessonClick(illustration.id)}
+                    >
+                      <Card.Body>
+                        <Card.Title>{illustration.title}</Card.Title>
+                      </Card.Body>
+                    </Card>
+                  ))}
               </div>
             </div>
           </div>
-       </div>
+        </div>
       </Container>
     </section>
   );
