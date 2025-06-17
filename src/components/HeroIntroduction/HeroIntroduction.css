@@ -58,6 +58,7 @@
   height: 40px !important;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.2) !important;
+  -webkit-backdrop-filter: blur(0px);
   backdrop-filter: blur(0px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
@@ -69,7 +70,6 @@
 .hero-introduction-section .slick-next:before {
   font-size: 24px;
   content: "→" !important;
-  font-family: "Arial", sans-serif;
   color: #333;
 }
 
@@ -81,6 +81,7 @@
 .hero-introduction-section .slick-prev:hover,
 .hero-introduction-section .slick-next:hover {
   background: rgba(255, 255, 255, 0.9) !important;
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   transform: scale(1.1);
 }

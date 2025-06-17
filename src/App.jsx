@@ -1,4 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import "./App.css";
 import { Footer, Hero, Menu, Survey, TeachingProcess } from "./components";
 import ClassSection from "./components/ClassSection/ClassSection";
 import Dashboard from "./components/Dashboard/Dashboard";

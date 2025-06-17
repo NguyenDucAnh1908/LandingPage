@@ -1,9 +1,9 @@
+import { Image } from "antd";
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { fetchKnlsImages } from "../../data";
 import "./knls.css";
-import { Image } from "antd";
 
 const Knls = () => {
   const [thumbnail, setThumbnail] = useState(null);
@@ -27,8 +27,7 @@ const Knls = () => {
   return (
     <section id="knls">
       <Container>
-        {/* <h3 className="fw-semibold font-poppins">Khung năng lực số</h3> */}
-        <h4 className="font-volkhov fw-bold text-capitalize text-center">
+        <h4 className="fw-bold text-capitalize text-center">
           Khung năng lực số
         </h4>
         <div className="position-relative mt-4">

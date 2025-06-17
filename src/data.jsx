@@ -334,3 +334,40 @@ export async function saveSurveyLink(surveyData) {
 
   return await response.json();
 }
+
+
+export async function saveIllustrations(illustrationData) {
+  const response = await fetch(
+    "https://landingpagestudy.onrender.com/api/files",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(illustrationData),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Không thể lưu minh họa");
+  }
+
+  return await response.json();
+}
+
+export const deleteIllustration = async (illustrationId) => {
+  const response = await fetch(
+    `https://landingpagestudy.onrender.com/api/files/${illustrationId}`,
+    {
+      method: "DELETE",
+      headers: {
+        accept: "*/*",
+      },
+    }
+  );
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || "Failed to delete illustration");
+  }
+  return response.json();
+};

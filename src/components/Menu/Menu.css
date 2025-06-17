@@ -10,7 +10,6 @@
       /* Navbar Elements */
       .nav-link,
       button:not(.btn-outline-dark) {
-        font-family: "Open Sans", sans-serif;
         color: var(--dark);
 
         &:hover {

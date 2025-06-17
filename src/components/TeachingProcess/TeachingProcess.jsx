@@ -15,7 +15,7 @@ export const TeachingProcess = () => {
   return (
     <section id="teaching-process">
       <Container>
-        <h4 className="font-volkhov fw-bold text-capitalize text-center mb-5">
+        <h4 className="fw-bold text-capitalize text-center mb-5">
           Đề xuất quy trình xây dựng các hoạt động học tập phát triển năng
           lực số cho học sinh thông qua môn Công nghệ ở tiểu học
         </h4>

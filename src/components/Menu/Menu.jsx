@@ -66,7 +66,7 @@ export const Menu = () => {
           />
           <Navbar.Collapse
             id="responsive-navbar-nav"
-            className="justify-content-end font-open-sans mt-3"
+            className="justify-content-end mt-3"
           >
             <Nav className="gap-xl-5 gap-lg-4 gap-md-2">
               {/* Navbar Elements */}
