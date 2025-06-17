@@ -1,4 +1,8 @@
 #knls {
+  padding: 4rem 0; /* đảm bảo có khoảng cách trên/dưới */
+  margin: 0;
+  position: relative;
+  z-index: 1;
   h3 {
     color: var(--dark);
     font-size: 1.125rem;

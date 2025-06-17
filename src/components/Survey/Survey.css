@@ -180,6 +180,7 @@
 #survey {
   background-image: url("/images/image_web/4_Phieu_khao_sat_main.png");
   background-size: cover;
+  height: 900px;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 500px;

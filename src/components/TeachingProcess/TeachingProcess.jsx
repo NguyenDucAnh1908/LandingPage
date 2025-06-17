@@ -14,16 +14,13 @@ export const TeachingProcess = () => {
 
   return (
     <section id="teaching-process">
-      <Container>
-        <h4 className="fw-bold text-capitalize text-center mb-5">
-          Đề xuất quy trình xây dựng các hoạt động học tập phát triển năng
-          lực số cho học sinh thông qua môn Công nghệ ở tiểu học
-        </h4>
+      <Container style={{ marginTop: "2.5rem" }}>
         <ListGroup variant="flush">
           {DATA_PROCESSING.map((step, idx) => (
             <ListGroup.Item
               key={step.id}
               className="process-step"
+              style={{ backgroundColor: "rgba(255, 255, 255, 0.4)" }}
               onClick={() => navigate(`/process/${step.id}`)}
             >
               <Row className="align-items-center">

@@ -11,10 +11,10 @@ import {
 import { Link } from "react-router-dom";
 import {
   deleteGrade,
-  fetchLessons,
-  saveGrade,
   deleteLessonContent,
   deleteLessonImage,
+  fetchLessons,
+  saveGrade,
 } from "../../data";
 import "./ClassSection.css";
 

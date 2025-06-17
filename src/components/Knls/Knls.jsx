@@ -42,6 +42,8 @@ const Knls = () => {
               <Image
                 // width={1000}
                 width="100%"
+                preview={false}
+                alt={thumbnail.title}
                 height={600}
                 src="images/image_web/1.1.Khung_nang_luc_so_Home.png"
               />
