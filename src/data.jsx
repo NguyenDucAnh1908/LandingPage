@@ -52,63 +52,63 @@ export const COLOR_STEPS = [
 export const FOOTER = [
   {
     id: 1,
-    name: "Company",
+    name: "Về chúng tôi",
     children: [
       {
         id: 11,
-        name: "About",
+        name: "Giới thiệu",
         link: "#",
       },
       {
         id: 12,
-        name: "Careers",
+        name: "Tuyển dụng",
         link: "#",
       },
       {
         id: 13,
-        name: "Mobile",
+        name: "Ứng dụng di động",
         link: "#",
       },
     ],
   },
   {
     id: 2,
-    name: "Contact",
+    name: "Hỗ trợ",
     children: [
       {
         id: 21,
-        name: "Help/FAQ",
+        name: "Help/Liên hệ",
         link: "#",
       },
       {
         id: 22,
-        name: "Press",
+        name: "Câu hỏi thường gặp (FAQ)",
         link: "#",
       },
       {
         id: 23,
-        name: "Affilates",
+        name: "Hướng dẫn sử dụng",
         link: "#",
       },
     ],
   },
   {
     id: 3,
-    name: "More",
+    name: "Tài nguyên",
     children: [
       {
         id: 31,
-        name: "Airlinefees",
+        name: "Blog học tập",
         link: "#",
       },
       {
         id: 32,
-        name: "Airline",
+        name: "AirTài liệu miễn phíline",
         link: "#",
       },
       {
         id: 33,
-        name: "Low fare tips",
+        name: "Mẹo học hiệu quả",
         link: "#",
       },
     ],

@@ -65,12 +65,13 @@ export const Survey = () => {
   return (
     <section id="survey">
       <Container className="position-relative h-100">
-        <Row className="d-flex justify-content-center align-items-center h-100">
-          <Col md={10} lg={8} className="text-center py-5">
-            <h3 className="text-center fw-semibold mb-5">
-              Góp ý để chúng tôi phát triển tốt hơn
-            </h3>
-            <div className="d-flex justify-content-center mt-4">
+        <Row className="h-100">
+          <Col
+            md={10}
+            lg={8}
+            className="mx-auto d-flex flex-column justify-content-end pb-5"
+          >
+            <div className="text-center">
               <Button
                 className="survey-button"
                 href={surveyLink}
@@ -83,7 +84,7 @@ export const Survey = () => {
             </div>
 
             {loggedIn && (
-              <div className="mt-4">
+              <div className="mt-4 text-center">
                 {!isEditing ? (
                   <Button
                     variant="secondary"
