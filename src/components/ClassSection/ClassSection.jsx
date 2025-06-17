@@ -362,7 +362,7 @@ const ClassSection = () => {
 
         <div className="text-center mb-5">
           <Image
-            src="public\images\image_web\2._Back_sổ_tay.png"
+            src="public\images\image_web\Back_so_tay.png"
             // src="https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/Screenshot%202025-06-10%20141336.png?alt=media&token=819a0be1-9d9a-4462-a2cd-05c1bbf5f663"
             alt="Class Section Image"
             fluid

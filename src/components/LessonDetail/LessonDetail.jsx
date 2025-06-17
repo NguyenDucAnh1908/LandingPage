@@ -77,10 +77,23 @@ const LessonDetail = () => {
     <section className="lesson-detail">
       <Container>
         <Layout>
-          <Sider width={300} style={{ background: colorBgContainer }}>
+          <Sider
+            width={300}
+            style={{
+              background: colorBgContainer,
+              position: "sticky",
+              top: 0,
+              height: "100vh",
+              overflow: "auto",
+            }}
+          >
             <Menu
               mode="inline"
-              style={{ height: "100%", borderRight: 0 }}
+              style={{
+                height: "100%",
+                borderRight: 0,
+                paddingTop: "100px", // Add padding to account for any fixed headers
+              }}
               items={menuItems}
               defaultOpenKeys={[`grade-${grades[0]?.id}`]}
               selectedKeys={[`lesson-${selectedLesson?.id}`]}
@@ -101,13 +114,12 @@ const LessonDetail = () => {
                   {selectedLesson &&
                     selectedLesson.images &&
                     selectedLesson.images.map((image) => (
-                        <Image
-                          key={image.id}
-                          src={image.imageUrl}
-                          alt={selectedLesson.contentText}
-                          className="lesson-image"
-                        />
-
+                      <Image
+                        key={image.id}
+                        src={image.imageUrl}
+                        alt={selectedLesson.contentText}
+                        className="lesson-image"
+                      />
                     ))}
                 </div>
               </div>
