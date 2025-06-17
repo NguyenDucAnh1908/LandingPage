@@ -44,7 +44,7 @@ const Knls = () => {
                 // width={1000}
                 width="100%"
                 height={600}
-                src="public\images\image_web\1.1.Khung_nang_luc_so_Home.png"
+                src="images/image_web/1.1.Khung_nang_luc_so_Home.png"
               />
             )}
             <Link to="/knls-detail" className="detail-button">

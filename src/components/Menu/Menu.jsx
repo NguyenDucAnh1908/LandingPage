@@ -52,7 +52,7 @@ export const Menu = () => {
           {/* Logo */}
           <Navbar.Brand href="/">
             <Image
-              src="public/images/image_web/Logo_Trường-192.png"
+              src="images/image_web/Logo_Trường-192.png"
               className="d-inline-block align-top"
               alt="Jadoo Logo"
               width="50" // Add width
