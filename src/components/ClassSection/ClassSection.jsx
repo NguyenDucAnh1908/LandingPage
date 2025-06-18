@@ -354,7 +354,8 @@ const ClassSection = () => {
     <section id="class-section">
       <Container>
         <div className="text-center mb-4 mt-5">
-          <h2>Sổ tay</h2>
+          {/* <h2>Sổ tay</h2> */}
+          <h4 className="fw-bold text-capitalize text-center">Sổ tay</h4>
           {/* <h3>
             Bồi dưỡng năng lực số cho học sinh tiểu học thông qua môn Công nghệ
           </h3> */}

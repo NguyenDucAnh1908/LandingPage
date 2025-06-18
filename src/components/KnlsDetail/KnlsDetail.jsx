@@ -48,9 +48,7 @@ const KnlsDetail = () => {
             <Link to="/" onClick={handleReturn} className="return-button">
               Quay lại
             </Link>
-            <h2 className="fw-bold text-center">
-              Khung năng lực số
-            </h2>
+            <h2 className="fw-bold text-center">Khung năng lực số</h2>
           </div>
         </div>
 
