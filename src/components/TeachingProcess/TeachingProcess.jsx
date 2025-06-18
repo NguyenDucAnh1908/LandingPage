@@ -12,7 +12,7 @@ export const TeachingProcess = () => {
         <ListGroup variant="flush">
           <h4 className="fw-bold text-capitalize text-center">
             Quy trình xây dựng các hoạt động học tập phát triển năng lực số cho học sinh
-            thông qa các môn Công nghệ ở tiểu học
+            thông qua các môn Công nghệ ở tiểu học
           </h4>
           {DATA_PROCESSING.map((step, idx) => (
             <ListGroup.Item
