@@ -1,10 +1,4 @@
-import {
-  Col,
-  Container,
-  Image,
-  ListGroup,
-  Row,
-} from "react-bootstrap";
+import { Col, Container, Image, ListGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { COLOR_STEPS, DATA_PROCESSING } from "../../data";
 import "./TeachingProcess.css";
@@ -31,17 +25,23 @@ export const TeachingProcess = () => {
                       style={{ backgroundColor: COLOR_STEPS[idx] }}
                     >
                       <Image
-                        src={`${import.meta.env.BASE_URL}process-icons/${step.iconUrl}`}
+                        src={`${import.meta.env.BASE_URL}process-icons/${
+                          step.iconUrl
+                        }`}
                         alt={`Step ${step.id}`}
                         width={24}
                         height={24}
                       />
                     </div>
-                    <span className="step-number">{step.label}</span>
+                    <span className="step-number" style={{ color: "#000000" }}>
+                      {step.label}
+                    </span>
                   </div>
                 </Col>
                 <Col xs={11}>
-                  <h5 className="step-title">{step.title}</h5>
+                  <h5 className="step-title" style={{ color: "#000000" }}>
+                    {step.title}
+                  </h5>
                 </Col>
               </Row>
             </ListGroup.Item>

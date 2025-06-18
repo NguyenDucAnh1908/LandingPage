@@ -103,7 +103,7 @@ export const FOOTER = [
       },
       {
         id: 32,
-        name: "AirTài liệu miễn phíline",
+        name: "Tài liệu miễn phí",
         link: "#",
       },
       {
@@ -334,7 +334,6 @@ export async function saveSurveyLink(surveyData) {
 
   return await response.json();
 }
-
 
 export async function saveIllustrations(illustrationData) {
   const response = await fetch(
