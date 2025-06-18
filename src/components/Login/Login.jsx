@@ -16,7 +16,7 @@ const Login = () => {
       await login(username, password);
       // Đánh dấu đã đăng nhập
       localStorage.setItem("loggedIn", "true");
-      window.location.href = "/dashboard";
+      window.location.href = "/";
     } catch (err) {
       setError(err.message || "Đăng nhập thất bại");
     }
