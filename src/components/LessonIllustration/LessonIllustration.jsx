@@ -135,7 +135,6 @@ const handleSaveIllustration = async (item) => {
                   left: 0,
                   width: "100%",
                   height: "100%",
-                  backgroundColor: "rgba(0, 0, 0, 0.4)", // lớp phủ để chữ dễ nhìn
                   borderRadius: "12px",
                   padding: "2rem",
                 }}
