@@ -1,5 +1,9 @@
-import { BookOutlined, FileTextOutlined } from "@ant-design/icons";
-import { Image, Layout, Menu, theme } from "antd";
+import {
+  ArrowLeftOutlined,
+  BookOutlined,
+  FileTextOutlined,
+} from "@ant-design/icons";
+import { Button, Image, Layout, Menu, theme } from "antd";
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
@@ -73,9 +77,22 @@ const LessonDetail = () => {
     })),
   }));
 
+  const handleReturn = (e) => {
+    e.preventDefault();
+    navigate("/");
+    setTimeout(() => {
+      const element = document.getElementById("class-section");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+  };
+
   return (
     <section className="lesson-detail">
       <Container>
+        {/* Nút quay lại */}
+
         <Layout>
           <Sider
             width={300}
@@ -84,15 +101,31 @@ const LessonDetail = () => {
               position: "sticky",
               top: 0,
               height: "100vh",
-              overflow: "auto",
+              // overflow: "auto",
             }}
           >
+            {/* Nút Back */}
+            <div
+              style={{
+                padding: "24px 16px 0 16px",
+                background: colorBgContainer,
+              }}
+            >
+              <Button
+                type="link"
+                icon={<ArrowLeftOutlined />}
+                onClick={handleReturn}
+                style={{ padding: 0, fontWeight: 500 }}
+              >
+                Quay lại
+              </Button>
+            </div>
             <Menu
               mode="inline"
               style={{
                 height: "100%",
                 borderRight: 0,
-                paddingTop: "100px", // Add padding to account for any fixed headers
+                paddingTop: "24px", // Giảm padding vì đã có nút back
               }}
               items={menuItems}
               defaultOpenKeys={[`grade-${grades[0]?.id}`]}

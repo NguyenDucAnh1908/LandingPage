@@ -1,14 +1,17 @@
-import { useEffect, useState } from 'react';
-import { Alert, Container, Spinner } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
-import { fetchIllustration } from '../../data';
-import './LessonIllustrationDetail.css';
+import { useEffect, useState } from "react";
+import { Alert, Container, Spinner } from "react-bootstrap";
+import { useParams, useNavigate } from "react-router-dom";
+import { fetchIllustration } from "../../data";
+import "./LessonIllustrationDetail.css";
+import { Button } from "antd";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 
 const LessonIllustrationDetail = () => {
   const { illustrationId } = useParams();
   const [illustration, setIllustration] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -28,10 +31,32 @@ const LessonIllustrationDetail = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
+  const handleReturn = (e) => {
+    e?.preventDefault?.();
+    navigate("/");
+    setTimeout(() => {
+      const element = document.getElementById("lesson-illustration");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100);
+  };
+
   if (loading) {
     return (
       <section className="lesson-illustration-detail">
-        <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: 200 }}>
+        <Container
+          className="d-flex justify-content-center align-items-center"
+          style={{ minHeight: 200 }}
+        >
+          <Button
+            type="link"
+            icon={<ArrowLeftOutlined />}
+            onClick={handleReturn}
+            style={{ padding: 0, fontWeight: 500, marginBottom: 16 }}
+          >
+            Quay lại
+          </Button>
           <Spinner animation="border" variant="primary" />
         </Container>
       </section>
@@ -42,7 +67,17 @@ const LessonIllustrationDetail = () => {
     return (
       <section className="lesson-illustration-detail">
         <Container>
-          <Alert variant="danger" className="text-center">{error || "Illustration not found"}</Alert>
+          <Button
+            type="link"
+            icon={<ArrowLeftOutlined />}
+            onClick={handleReturn}
+            style={{ padding: 0, fontWeight: 500, marginBottom: 16 }}
+          >
+            Quay lại
+          </Button>
+          <Alert variant="danger" className="text-center">
+            {error || "Illustration not found"}
+          </Alert>
         </Container>
       </section>
     );
@@ -51,6 +86,14 @@ const LessonIllustrationDetail = () => {
   return (
     <section className="lesson-illustration-detail">
       <Container>
+        <Button
+          type="link"
+          icon={<ArrowLeftOutlined />}
+          onClick={handleReturn}
+          style={{ padding: 0, fontWeight: 500, marginBottom: 16 }}
+        >
+          Quay lại
+        </Button>
         <h2 className="lesson-title">{illustration.title}</h2>
         <div className="pdf-container">
           <iframe

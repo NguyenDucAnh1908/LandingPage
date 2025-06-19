@@ -39,7 +39,7 @@ const KnlsDetail = () => {
       }
     }, 100);
   };
-  console.log("image", gallery);
+  // console.log("image", gallery);
   return (
     <section className="knls-detail">
       <Container>
