@@ -60,7 +60,6 @@ const KnlsDetail = () => {
               {gallery.map((item) => (
                 <div className="image-card" key={item.id}>
                   <Image
-                    width="500"
                     src={item.imageUrl}
                     alt={item.title}
                     className="detail-image"
