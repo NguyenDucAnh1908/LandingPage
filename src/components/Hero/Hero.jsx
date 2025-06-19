@@ -9,7 +9,7 @@ export const Hero = () => {
     <section id="hero">
       <Container className="video-container">
         <ReactPlayer
-          url="https://www.youtube.com/watch?v=HZN-lthHJN4&list=RDHZN-lthHJN4&start_radio=1"
+          url="https://www.youtube.com/watch?v=u20ACw45_N8&feature=youtu.be"
           controls
           width="100%"
           height="100%"
