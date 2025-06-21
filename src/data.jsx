@@ -1,52 +1,26 @@
-export const DATA_PROCESSING = [
-  {
-    id: 1,
-    label: "Bước 1",
-    title: "Xác định yêu cầu cần đạt của bài học",
-    iconUrl: "step1.svg",
-    imageUrl:
-      "https://cdn.s99.vn/ss2/prod/product/af88687ac7d7bf733909ba9ea3c120b1_1700131262.jpg",
-  },
-  {
-    id: 2,
-    label: "Bước 2",
-    title: "Xác định các hoạt động tích hợp có thể bồi dưỡng năng lực số",
-    iconUrl: "step2.svg",
-    imageUrl:
-      "https://cdn.s99.vn/ss2/prod/product/af88687ac7d7bf733909ba9ea3c120b1_1700131262.jpg",
-  },
-  {
-    id: 3,
-    label: "Bước 3",
-    title: "Xác định tài nguyên dạy học",
-    iconUrl: "step3.svg",
-    imageUrl:
-      "https://cdn.s99.vn/ss2/prod/product/af88687ac7d7bf733909ba9ea3c120b1_1700131262.jpg",
-  },
-  {
-    id: 4,
-    label: "Bước 4",
-    title: "Lựa chọn phương pháp và kỹ thuật dạy học",
-    iconUrl: "step4.svg",
-    imageUrl:
-      "https://cdn.s99.vn/ss2/prod/product/af88687ac7d7bf733909ba9ea3c120b1_1700131262.jpg",
-  },
-  {
-    id: 5,
-    label: "Bước 5",
-    title:
-      "Thiết kế các hoạt động học tập trong bài học môn Công nghệ theo hướng phát triển năng lực số cho HS",
-    iconUrl: "step5.svg",
-    imageUrl:
-      "https://cdn.s99.vn/ss2/prod/product/af88687ac7d7bf733909ba9ea3c120b1_1700131262.jpg",
-  },
-];
+
 export const COLOR_STEPS = [
-  "#20c997", // Step 1
-  "#2c6fb2", // Step 2
-  "#f6c23e", // Step 3
-  "#28a745", // Step 4
-  "#fd7e14", // Step 5
+  {
+    iconUrl: "step1.svg",
+    backgroundColor: "#20c997"
+  },
+  {
+    iconUrl: "step2.svg",
+    backgroundColor: "#2c6fb2"
+  },
+  {
+    iconUrl: "step3.svg",
+    backgroundColor: "#f6c23e"
+  },
+  {
+    iconUrl: "step4.svg",
+    backgroundColor:   "#28a745"
+
+  },
+  {
+    iconUrl: "step5.svg",
+    backgroundColor:  "#fd7e14"
+  }
 ];
 
 export const FOOTER = [
@@ -246,6 +220,23 @@ export const fetchIllustration = async (id) => {
   return response.json();
 };
 
+export const fetchSteps = async (id) => {
+  const response = await fetch(
+    `https://landingpagestudy.onrender.com/api/lesson-step-contents`,
+    {
+      method: "GET",
+      headers: {
+        accept: "*/*",
+      },
+    }
+  );
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || "Failed to fetch contents steps");
+  }
+  return response.json();
+};
+
 export const deleteGrade = async (id) => {
   const response = await fetch(
     `https://landingpagestudy.onrender.com/api/lessons/${id}`,
@@ -369,4 +360,40 @@ export const deleteIllustration = async (illustrationId) => {
     throw new Error(error.message || "Failed to delete illustration");
   }
   return response.json();
+};
+
+
+export const createStep = async (step) => {
+  const res = await fetch("https://landingpagestudy.onrender.com/api/lesson-step-contents", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "*/*",
+    },
+    body: JSON.stringify(step),
+  });
+  if (!res.ok) throw new Error("Không thể tạo bước mới");
+  return res.json();
+};
+
+export const updateStep = async (id, step) => {
+  const res = await fetch(`https://landingpagestudy.onrender.com/api/lesson-step-contents/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "*/*",
+    },
+    body: JSON.stringify(step),
+  });
+  if (!res.ok) throw new Error("Không thể cập nhật bước");
+  return res.json();
+};
+
+// DELETE bước theo id
+export const deleteStep = async (id) => {
+  const res = await fetch(`https://landingpagestudy.onrender.com/api/lesson-step-contents/${id}`, {
+    method: "DELETE",
+    headers: { accept: "*/*" },
+  });
+  if (!res.ok) throw new Error("Không thể xóa bước");
 };

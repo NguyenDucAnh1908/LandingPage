@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 import { MENU } from "../../data";
 import { ArrowUpIcon } from "../icons";
 import "./Menu.css";
-import logoSvg from "/images/logo.svg";
 
 export const Menu = () => {
   const [scrolling, setScrolling] = useState(false);
@@ -52,7 +51,7 @@ export const Menu = () => {
           {/* Logo */}
           <Navbar.Brand href="/">
             <Image
-              src="images/image_web/Logo_Trường-192.png"
+              src="/images/image_web/Logo_Trường-192.png"
               className="d-inline-block align-top"
               alt="Jadoo Logo"
               width="50" // Add width

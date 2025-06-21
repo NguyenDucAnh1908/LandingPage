@@ -1,5 +1,9 @@
 #process-detail {
   height: fit-content;
+  background: url('/images/process.png') no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: #000;
 }
 .step-btn {
   cursor: pointer;

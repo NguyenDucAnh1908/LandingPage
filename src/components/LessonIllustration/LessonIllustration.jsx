@@ -139,14 +139,14 @@ const handleSaveIllustration = async (item) => {
                   padding: "2rem",
                 }}
               >
-              <div className="d-flex justify-content-between align-items-start">
+              <div className="text-end mb-2">
                   {loggedIn && (
-                    <button
-                      className="btn btn-outline-light btn-sm"
+                    <Button
+                      variant="outline-dark" size="sm"
                       onClick={() => setShowEditModal(true)}
                     >
-                      ✏️ Chỉnh sửa
-                    </button>
+                      Chỉnh sửa
+                    </Button>
                   )}
                 </div>
 
