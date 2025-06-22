@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Image, Nav, Navbar } from "react-bootstrap";
+import { Button, Container, Nav, Navbar } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { MENU } from "../../data";
 import { ArrowUpIcon } from "../icons";
@@ -50,13 +50,7 @@ export const Menu = () => {
         <Container>
           {/* Logo */}
           <Navbar.Brand href="/">
-            <Image
-              src="/images/image_web/Logo_Trường-192.png"
-              className="d-inline-block align-top"
-              alt="Jadoo Logo"
-              width="50" // Add width
-              height="50" // Add height
-            />
+            <span className="fw-bold fs-4 text-dark">Home</span>
           </Navbar.Brand>
           {/* Navbar Toggler for Responsive */}
           <Navbar.Toggle
