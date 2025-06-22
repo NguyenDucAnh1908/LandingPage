@@ -1,26 +1,24 @@
-
 export const COLOR_STEPS = [
   {
     iconUrl: "step1.svg",
-    backgroundColor: "#20c997"
+    backgroundColor: "#20c997",
   },
   {
     iconUrl: "step2.svg",
-    backgroundColor: "#2c6fb2"
+    backgroundColor: "#2c6fb2",
   },
   {
     iconUrl: "step3.svg",
-    backgroundColor: "#f6c23e"
+    backgroundColor: "#f6c23e",
   },
   {
     iconUrl: "step4.svg",
-    backgroundColor:   "#28a745"
-
+    backgroundColor: "#28a745",
   },
   {
     iconUrl: "step5.svg",
-    backgroundColor:  "#fd7e14"
-  }
+    backgroundColor: "#fd7e14",
+  },
 ];
 
 export const FOOTER = [
@@ -127,7 +125,7 @@ export const fetchVideoLink = async () => {
 
 export const MENU = [
   { name: "Giới thiệu", link: "#hero" },
-  { name: "KNLS", link: "#knls" },
+  { name: "Khung NLS", link: "#knls" },
   { name: "Quy trình dạy học", link: "#teaching-process" },
   { name: "Lớp học", link: "#class-section" },
   { name: "Giáo án", link: "#lesson-illustration" },
@@ -362,38 +360,46 @@ export const deleteIllustration = async (illustrationId) => {
   return response.json();
 };
 
-
 export const createStep = async (step) => {
-  const res = await fetch("https://landingpagestudy.onrender.com/api/lesson-step-contents", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      accept: "*/*",
-    },
-    body: JSON.stringify(step),
-  });
+  const res = await fetch(
+    "https://landingpagestudy.onrender.com/api/lesson-step-contents",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+      body: JSON.stringify(step),
+    }
+  );
   if (!res.ok) throw new Error("Không thể tạo bước mới");
   return res.json();
 };
 
 export const updateStep = async (id, step) => {
-  const res = await fetch(`https://landingpagestudy.onrender.com/api/lesson-step-contents/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      accept: "*/*",
-    },
-    body: JSON.stringify(step),
-  });
+  const res = await fetch(
+    `https://landingpagestudy.onrender.com/api/lesson-step-contents/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+      body: JSON.stringify(step),
+    }
+  );
   if (!res.ok) throw new Error("Không thể cập nhật bước");
   return res.json();
 };
 
 // DELETE bước theo id
 export const deleteStep = async (id) => {
-  const res = await fetch(`https://landingpagestudy.onrender.com/api/lesson-step-contents/${id}`, {
-    method: "DELETE",
-    headers: { accept: "*/*" },
-  });
+  const res = await fetch(
+    `https://landingpagestudy.onrender.com/api/lesson-step-contents/${id}`,
+    {
+      method: "DELETE",
+      headers: { accept: "*/*" },
+    }
+  );
   if (!res.ok) throw new Error("Không thể xóa bước");
 };
