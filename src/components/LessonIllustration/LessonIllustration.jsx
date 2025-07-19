@@ -1,4 +1,4 @@
-  import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Alert,
   Button,
@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import { deleteIllustration, fetchIllustrations, saveIllustrations } from "../../data";
 import "./LessonIllustration.css";
 import backgroundImage from "/images/image_web/3._Minh_hoa_ke_hoach_bai_day.png";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { app } from "../../firebase"; // file cấu hình firebase của bạn
 
   const ITEMS_PER_PAGE = 5;
 
@@ -103,6 +105,24 @@ const handleSaveIllustration = async (item) => {
   }
 };
 
+const handleFileUpload = async (e, itemId) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const storage = getStorage(app);
+  const storageRef = ref(storage, `illustrations/${Date.now()}_${file.name}`);
+  try {
+    await uploadBytes(storageRef, file);
+    const url = await getDownloadURL(storageRef);
+    setEditIllustrations((prev) =>
+      prev.map((item) =>
+        item.id === itemId ? { ...item, fileUrl: url } : item
+      )
+    );
+    alert("Upload thành công!");
+  } catch (err) {
+    alert("Upload thất bại: " + err.message);
+  }
+};
 
     const totalPages = Math.ceil(illustrations.length / ITEMS_PER_PAGE);
     const paginatedData = illustrations.slice(
@@ -224,6 +244,15 @@ const handleSaveIllustration = async (item) => {
                     value={item.fileUrl || ""}
                     onChange={(e) => handleChangeField(item.id, "fileUrl", e.target.value)}
                     placeholder="https://..."
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-2">
+                  <Form.Label className="fw-bold">Tải lên tài liệu minh họa</Form.Label>
+                  <Form.Control
+                    type="file"
+                    accept=".pdf,image/*"
+                    onChange={(e) => handleFileUpload(e, item.id)}
                   />
                 </Form.Group>
 
