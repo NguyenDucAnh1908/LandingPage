@@ -86,6 +86,7 @@ const KnlsDetail = () => {
     return await getDownloadURL(storageRef);
   };
 
+  // Modify handleSubmit function
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!loggedIn) {
@@ -96,7 +97,6 @@ const KnlsDetail = () => {
     try {
       let imageUrl = formData.imageUrl;
 
-      // Upload image if file is selected
       if (formData.imageFile) {
         imageUrl = await uploadImage(formData.imageFile);
       }
@@ -107,7 +107,6 @@ const KnlsDetail = () => {
           title: formData.title,
           imageUrl: imageUrl,
         });
-
         const updatedGallery = gallery.map((item) =>
           item.id === editItem.id
             ? { ...item, title: formData.title, imageUrl: imageUrl }
@@ -116,11 +115,12 @@ const KnlsDetail = () => {
         setGallery(updatedGallery);
       } else {
         // Create
-        const newItem = await createKnls({
+        await createKnls({
           title: formData.title,
           imageUrl: imageUrl,
         });
-        setGallery([...gallery, newItem]);
+        // Reload page after creating new item
+        window.location.reload();
       }
       handleCloseModal();
     } catch (error) {
@@ -131,6 +131,7 @@ const KnlsDetail = () => {
     }
   };
 
+  // Modify handleDelete function
   const handleDelete = async (id) => {
     if (!loggedIn) {
       alert("Bạn cần đăng nhập để thực hiện chức năng này");
@@ -139,7 +140,8 @@ const KnlsDetail = () => {
     if (window.confirm("Bạn có chắc muốn xóa hình ảnh này?")) {
       try {
         await deleteKnls(id);
-        setGallery(gallery.filter((item) => item.id !== id));
+        // Reload page after deleting item
+        window.location.reload();
       } catch (error) {
         console.error("Error deleting item:", error);
         alert("Có lỗi xảy ra khi xóa");
