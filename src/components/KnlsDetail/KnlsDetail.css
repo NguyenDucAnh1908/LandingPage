@@ -31,6 +31,13 @@
   align-items: center;
   justify-content: center;
   min-height: 50px;
+  padding: 1rem 0;
+}
+
+.header-content h2 {
+  margin: 0;
+  flex: 1;
+  text-align: center;
 }
 
 .return-button {
@@ -47,6 +54,7 @@
   text-decoration: none;
   transition: all 0.3s ease;
   z-index: 2;
+  min-width: 100px;
 }
 
 .return-button:hover {
@@ -63,8 +71,49 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+.single-image-container {
+  width: 100%;
+  max-width: 1200px; /* Increased from 800px */
+  margin: 0 auto;
+  position: relative;
+  padding: 20px;
+}
+
+.navigation-buttons {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  z-index: 1;
+  pointer-events: none; /* This allows clicking through the container */
+}
+
+.navigation-buttons .ant-btn {
+  pointer-events: auto; /* Re-enable clicking for buttons */
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #d9d9d9;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+}
+
+.navigation-buttons .ant-btn:first-child {
+  margin-left: -20px;
+}
+
+.navigation-buttons .ant-btn:last-child {
+  margin-right: -20px;
+}
+
 .detail-image {
-  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+  max-height: 80vh; /* Make image height responsive to viewport */
   object-fit: contain;
 }
 
@@ -75,28 +124,26 @@
   padding: 1rem;
 }
 
-.image-placeholder {
+.image-card {
   width: 100%;
-  min-height: 80vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 600;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-  cursor: pointer;
+  gap: 1rem;
 }
 
-.knls-detail .d-flex {
-  margin-top: 10px;
-}
-
-h2 {
-  margin: 0;
-  padding: 0 60px; /* Make space for the button */
-  width: 100%;
-  text-align: center;
+.image-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 4px;
+  border-radius: 4px;
 }
 
 /* Responsive adjustments */
@@ -119,5 +166,14 @@ h2 {
     gap: 1rem;
     text-align: center;
     padding: 1rem;
+  }
+
+  .single-image-container {
+    padding: 10px;
+  }
+
+  .navigation-buttons .ant-btn {
+    width: 32px;
+    height: 32px;
   }
 }

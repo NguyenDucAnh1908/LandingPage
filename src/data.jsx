@@ -403,3 +403,49 @@ export const deleteStep = async (id) => {
   );
   if (!res.ok) throw new Error("Không thể xóa bước");
 };
+
+// create knls
+export const createKnls = async (step) => {
+  const res = await fetch(
+    "https://landingpagestudy.onrender.com/api/digital-images",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+      body: JSON.stringify(step),
+    }
+  );
+  if (!res.ok) throw new Error("Không thể tạo khung năng lực số mới");
+  return res.json();
+};
+
+//Update knls
+export const updateKnls = async (id, step) => {
+  const res = await fetch(
+    `https://landingpagestudy.onrender.com/api/digital-images/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "*/*",
+      },
+      body: JSON.stringify(step),
+    }
+  );
+  if (!res.ok) throw new Error("Không thể cập nhật khung năng lực số");
+  return res.json();
+};
+
+// DELETE bước theo id
+export const deleteKnls = async (id) => {
+  const res = await fetch(
+    `https://landingpagestudy.onrender.com/api/digital-images/${id}`,
+    {
+      method: "DELETE",
+      headers: { accept: "*/*" },
+    }
+  );
+  if (!res.ok) throw new Error("Không thể xóa khung năng lực số");
+};
