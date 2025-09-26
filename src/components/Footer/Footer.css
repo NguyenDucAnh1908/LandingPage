@@ -81,4 +81,11 @@ section#footer {
 .list-group-item.list-group-item-action:focus {
   background-color: transparent !important;
   color: inherit !important;
+  --bs-list-group-active-border-color: #d8dde314;
+  border-color: transparent !important;
+}
+
+.list-group-item.active {
+  --bs-list-group-active-border-color: #d8dde314;
+  border-color: transparent !important;
 }
