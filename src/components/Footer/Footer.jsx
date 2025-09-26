@@ -31,7 +31,7 @@ export const Footer = () => {
                         key={child.id}
                         action
                         href={child.link}
-                        className="border-bottom-0 p-0 my-1 fw-medium"
+                        className="border-bottom-0 p-0 my-1 fw-medium list-group-item-action"
                       >
                         {child.name}
                       </ListGroup.Item>
