@@ -31,6 +31,13 @@
   width: 280px;
 }
 
+.scrollable-cards {
+  max-height: 240px; /* Height for 3 cards */
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-bottom: 100px;
+}
+
 .lesson-card {
   background: rgba(255, 255, 255, 0.25);
   -webkit-backdrop-filter: blur(10px);
@@ -40,6 +47,8 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
+  height: 70px; /* Fixed height for each card */
+  margin-bottom: 15px;
 }
 
 .lesson-card:hover {
@@ -61,6 +70,24 @@
   font-size: 0.85rem;
 }
 
+.scrollable-cards::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollable-cards::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.scrollable-cards::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.scrollable-cards::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
 @media (max-width: 768px) {
   .cards-container {
     position: static;
@@ -73,5 +100,3 @@
     font-size: 1.5rem;
   }
 }
-
-
