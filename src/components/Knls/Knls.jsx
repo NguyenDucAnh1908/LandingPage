@@ -19,39 +19,34 @@ const Knls = () => {
         );
       })
       .catch((err) => {
-        setThumbnail(
-          "https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/6112666.jpg?alt=media&token=71465b4a-aa75-48c8-95cb-e956cf93d8e7"
-        );
+        setThumbnail({
+          imageUrl: "images/image_web/1.1.Khung_nang_luc_so_Home.png",
+          title: "Khung năng lực số"
+        });
       });
   }, []);
+
   return (
     <section id="knls">
-      <Container>
-        <h4 className="fw-bold text-capitalize text-center">
-          Khung năng lực số
-        </h4>
-        <div className="position-relative mt-4">
-          <div className="slider-item">
-            {thumbnail && (
-              // <img
-              //   // src={thumbnail.imageUrl}
-              //   src="public\images\image_web\1.1. Khung_nang_luc_so_Home.png"
-              //   alt={thumbnail.title}
-              //   className="knls-image"
-              // />
-              <Image
-                // width={1000}
-                width="100%"
-                preview={false}
-                alt={thumbnail.title}
-                height={600}
-                src="images/image_web/1.1.Khung_nang_luc_so_Home.png"
-              />
-            )}
-            <Link to="/knls-detail" className="detail-button">
-              Chi tiết
-            </Link>
+      <Container className="knls-container">
+        <div className="section-header">
+          <h3>Khung Năng Lực Số</h3>
+          <h4>Khung Năng Lực Số Dành Cho Học Sinh Tiểu Học</h4>
+          <p>Tìm hiểu các nhóm năng lực số cốt lõi giúp các em tự tin hội nhập thời đại công nghệ.</p>
+        </div>
+        
+        <div className="knls-card">
+          <div className="knls-image-wrapper">
+            <Image
+              width="100%"
+              preview={false}
+              alt={thumbnail?.title || "Khung năng lực số"}
+              src="images/image_web/1.1.Khung_nang_luc_so_Home.png"
+            />
           </div>
+          <Link to="/knls-detail" className="detail-floating-btn">
+            Xem chi tiết khung ➔
+          </Link>
         </div>
       </Container>
     </section>

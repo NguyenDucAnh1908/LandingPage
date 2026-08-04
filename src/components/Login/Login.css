@@ -1,19 +1,72 @@
-.btn-warning,
-.btn-warning:active,
-.btn-warning:focus {
-  background: linear-gradient(90deg, #ff946d 60%, #ff7e5f 100%);
-  border: none;
-  color: #fff;
-  font-weight: 600;
-  font-size: 1.1rem;
-  box-shadow: 0 4px 16px rgba(255, 148, 109, 0.15);
-  transition: all 0.3s cubic-bezier(.4,2,.3,1);
-  letter-spacing: 0.5px;
+.login-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-page);
+  padding: 2rem;
 }
 
-.btn-warning:hover {
-  background: linear-gradient(90deg, #ff7e5f 60%, #ff946d 100%);
-  color: #fff;
-  transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 8px 24px rgba(255, 148, 109, 0.22);
+.login-card-wrapper {
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 3rem 2.5rem;
+}
+
+.login-title-header {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
+}
+
+.login-section .form-label {
+  font-weight: 700;
+  color: var(--color-primary-light);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.login-section .form-control {
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-border);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-quicksand);
+  transition: var(--transition-smooth);
+}
+
+.login-section .form-control:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(var(--color-accent-rgb), 0.15);
+  outline: none;
+}
+
+.btn-login-submit {
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+  padding: 0.85rem !important;
+  width: 100% !important;
+  background-color: var(--color-accent) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: var(--radius-sm) !important;
+  transition: var(--transition-smooth) !important;
+  box-shadow: 0 4px 12px rgba(var(--color-accent-rgb), 0.2) !important;
+  margin-top: 1rem;
+}
+
+.btn-login-submit:hover {
+  background-color: var(--color-accent-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(var(--color-accent-rgb), 0.35) !important;
+}
+
+.btn-login-submit:active {
+  transform: translateY(0);
 }

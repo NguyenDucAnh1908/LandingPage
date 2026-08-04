@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import {
   Button,
-  Col,
   Container,
   Form,
   Image,
-  ListGroup,
   Modal,
-  Row,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { COLOR_STEPS, createStep, deleteStep, fetchSteps, updateStep } from "../../data";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../../firebase";
 import "./TeachingProcess.css";
 
 export const TeachingProcess = () => {
@@ -50,9 +49,9 @@ export const TeachingProcess = () => {
   const handleSaveStep = async (step) => {
     try {
       if (!step.id && steps.length >= 5) {
-  alert("Không thể thêm quá 5 bước.");
-  return;
-}
+        alert("Không thể thêm quá 5 bước.");
+        return;
+      }
       if (step.id) {
         await updateStep(step.id, step);
       } else {
@@ -81,7 +80,6 @@ export const TeachingProcess = () => {
     setEditSteps((prev) => [...prev, newStep]);
   };
 
-
   const handleDeleteStep = async (id, index) => {
     if (!window.confirm("Bạn có chắc chắn muốn xóa bước này?")) return;
 
@@ -102,64 +100,60 @@ export const TeachingProcess = () => {
 
   return (
     <section id="teaching-process">
-      <Container style={{ marginTop: "2.5rem" }}>
-        <ListGroup variant="flush">
-          <h4 className="fw-bold text-capitalize text-center mb-3">
-            Quy trình xây dựng các hoạt động học tập phát triển năng lực số cho học sinh
-            thông qua các môn Công nghệ ở tiểu học
-          </h4>
+      <Container>
+        <div className="section-header">
+          <h3>Quy Trình Hoạt Động</h3>
+          <h4>Quy trình xây dựng hoạt động phát triển năng lực số thông qua môn Công nghệ tiểu học</h4>
+          <p>
+            Các bước hệ thống hóa kiến thức và kỹ năng số cốt lõi cho học sinh.
+          </p>
+        </div>
 
-          {loggedIn && (
-            <div className="text-end mb-2">
-              <Button variant="outline-dark" size="sm" onClick={handleOpenEdit}>
-                ✏️ Chỉnh sửa
-              </Button>
-            </div>
-          )}
+        {loggedIn && (
+          <div className="text-center mb-4">
+            <Button className="btn-edit-trigger" onClick={handleOpenEdit}>
+              ✏️ Quản lý các bước quy trình
+            </Button>
+          </div>
+        )}
 
+        <div className="process-timeline">
           {steps.map((step, idx) => (
-            <ListGroup.Item
+            <div
               key={step.id || idx}
-              className="process-step"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.4)" }}
+              className="process-step-card"
               onClick={() => navigate(`/process/${step.id}`)}
             >
-              <Row className="align-items-center">
-                <Col xs={1}>
-                  <div className="step-icon-wrapper">
-                    <div
-                      className="icon-box"
-                      style={{
-                        backgroundColor: COLOR_STEPS[idx % COLOR_STEPS.length]?.backgroundColor || "#ccc",
-                      }}
-                    >
-                    <Image
-                      src={`${import.meta.env.BASE_URL}process-icons/${COLOR_STEPS[idx % COLOR_STEPS.length]?.iconUrl}`}
-                      alt={`Step ${step.id}`}
-                      width={24}
-                      height={24}
-                    />
-                    </div>
-                    <span className="step-number" style={{ color: "#000000" }}>
-                      Bước {step.stepNumber}
-                    </span>
-                  </div>
-                </Col>
-                <Col xs={11}>
-                  <h5 className="step-title" style={{ color: "#000000" }}>
-                    {step.title}
-                  </h5>
-                </Col>
-              </Row>
-            </ListGroup.Item>
+              <div className="step-badge-wrapper">
+                <div
+                  className="step-icon-box"
+                  style={{
+                    backgroundColor: COLOR_STEPS[idx % COLOR_STEPS.length]?.backgroundColor || "#ccc",
+                  }}
+                >
+                  <Image
+                    src={`${import.meta.env.BASE_URL}process-icons/${COLOR_STEPS[idx % COLOR_STEPS.length]?.iconUrl}`}
+                    alt={`Step ${step.id}`}
+                    width={26}
+                    height={26}
+                  />
+                </div>
+                <div className="step-meta">
+                  <span className="step-number-lbl">Bước {step.stepNumber}</span>
+                </div>
+              </div>
+              <h5 className="step-title-txt">
+                {step.title}
+              </h5>
+            </div>
           ))}
-        </ListGroup>
+        </div>
       </Container>
 
       {/* Modal chỉnh sửa */}
       <Modal show={showEdit} onHide={handleCloseEdit} size="lg" scrollable>
         <Modal.Header closeButton>
-          <Modal.Title>Chỉnh sửa quy trình</Modal.Title>
+          <Modal.Title>Chỉnh sửa quy trình dạy học</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {editSteps.map((step, idx) => (
@@ -178,7 +172,7 @@ export const TeachingProcess = () => {
                 />
               </Form.Group>
               <Form.Group className="mb-2">
-                <Form.Label className="fw-bold">Nhãn bước (label)</Form.Label>
+                <Form.Label className="fw-bold">Nhãn bước (stepNumber)</Form.Label>
                 <Form.Control
                   type="text"
                   value={step.stepNumber || ""}
@@ -187,20 +181,67 @@ export const TeachingProcess = () => {
                   }
                 />
               </Form.Group>
-              <Form.Group className="mb-2">
-                <Form.Label className="fw-bold">Link ảnh (imageUrl)</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={step.imageUrl || ""}
-                  onChange={(e) =>
-                    handleChangeField(step.id, "imageUrl", e.target.value)
-                  }
-                />
+              <Form.Group className="mb-3">
+                <Form.Label className="fw-bold">Ảnh minh họa quy trình</Form.Label>
+                <div className="d-flex align-items-center gap-3 p-2 border rounded bg-white">
+                  {step.imageUrl ? (
+                    <img
+                      src={step.imageUrl}
+                      alt={step.title}
+                      style={{
+                        width: "120px",
+                        height: "90px",
+                        objectFit: "cover",
+                        borderRadius: "8px",
+                        border: "1px solid #e2e8f0"
+                      }}
+                    />
+                  ) : (
+                    <div style={{
+                      width: "120px",
+                      height: "90px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      backgroundColor: "#f1f5f9",
+                      borderRadius: "8px",
+                      border: "1px dashed #cbd5e1",
+                      color: "#94a3b8",
+                      fontSize: "12px"
+                    }}>Trống</div>
+                  )}
+                  <div className="d-flex flex-column gap-2 flex-grow-1">
+                    <Form.Control
+                      type="file"
+                      accept="image/*"
+                      size="sm"
+                      onChange={async (e) => {
+                        const file = e.target.files[0];
+                        if (!file) return;
+                        try {
+                          const storageRef = ref(storage, `process/${Date.now()}_${file.name}`);
+                          await uploadBytes(storageRef, file);
+                          const url = await getDownloadURL(storageRef);
+                          handleChangeField(step.id, "imageUrl", url);
+                        } catch (err) {
+                          alert("Tải lên ảnh thất bại: " + err.message);
+                        }
+                      }}
+                    />
+                    <Form.Control
+                      type="text"
+                      value={step.imageUrl || ""}
+                      onChange={(e) => handleChangeField(step.id, "imageUrl", e.target.value)}
+                      placeholder="Hoặc dán URL hình ảnh..."
+                      size="sm"
+                    />
+                  </div>
+                </div>
               </Form.Group>
 
-              <div className="text-end">
+              <div className="text-end mt-3">
                 <Button
-                  variant="danger"
+                  variant="outline-danger"
                   size="sm"
                   className="me-2"
                   onClick={() => handleDeleteStep(step.id, idx)}
@@ -208,26 +249,25 @@ export const TeachingProcess = () => {
                   🗑 Xóa
                 </Button>
                 <Button
-                  variant="primary"
+                  variant="success"
                   size="sm"
                   onClick={() => handleSaveStep(step)}
                 >
-                  💾 Lưu
+                  💾 Lưu thay đổi
                 </Button>
               </div>
             </div>
           ))}
 
           <div className="text-center mt-3">
-          <Button
-            variant="success"
-            size="sm"
-            onClick={handleAddStep}
-            disabled={editSteps.length >= 5}
-          >
-            + Thêm bước
-          </Button>
-
+            <Button
+              variant="outline-success"
+              size="sm"
+              onClick={handleAddStep}
+              disabled={editSteps.length >= 5}
+            >
+              + Thêm bước mới
+            </Button>
           </div>
         </Modal.Body>
         <Modal.Footer>

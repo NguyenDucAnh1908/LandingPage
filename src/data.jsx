@@ -115,14 +115,6 @@ export const LOGOS = [
   },
 ];
 
-export const fetchVideoLink = async () => {
-  const response = await fetch(
-    "https://landingpagestudy.onrender.com/api/videos-link"
-  );
-  if (!response.ok) throw new Error("Failed to fetch video link");
-  return response.json();
-};
-
 export const MENU = [
   { name: "Giới thiệu", link: "#hero" },
   { name: "Khung NLS", link: "#knls" },
@@ -132,17 +124,24 @@ export const MENU = [
   { name: "Khảo sát", link: "#survey" },
   { name: "Liên hệ", link: "#footer" },
 ];
+
+/* Centralized API Configuration */
+const API_BASE_URL = "http://localhost:8080/api";
+
+export const fetchVideoLink = async () => {
+  const response = await fetch(`${API_BASE_URL}/videos-link`);
+  if (!response.ok) throw new Error("Failed to fetch video link");
+  return response.json();
+};
+
 export const login = async (username, password) => {
-  const response = await fetch(
-    "https://landingpagestudy.onrender.com/api/auth/login",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    }
-  );
+  const response = await fetch(`${API_BASE_URL}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, password }),
+  });
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.message || "Login failed");
@@ -151,15 +150,13 @@ export const login = async (username, password) => {
 };
 
 export const fetchKnlsImages = async () => {
-  const response = await fetch(
-    "https://landingpagestudy.onrender.com/api/digital-images",
-    {
-      method: "GET",
-      headers: {
-        accept: "*/*",
-      },
-    }
-  );
+  const response = await fetch(`${API_BASE_URL}/digital-images`, {
+    method: "GET",
+    headers: {
+      accept: "*/*",
+    },
+  });
+
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.message || "Failed to fetch KNLS images");
@@ -168,15 +165,12 @@ export const fetchKnlsImages = async () => {
 };
 
 export const fetchLessons = async () => {
-  const response = await fetch(
-    "https://landingpagestudy.onrender.com/api/lessons",
-    {
-      method: "GET",
-      headers: {
-        accept: "*/*",
-      },
-    }
-  );
+  const response = await fetch(`${API_BASE_URL}/lessons`, {
+    method: "GET",
+    headers: {
+      accept: "*/*",
+    },
+  });
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.message || "Failed to fetch lessons");
@@ -185,15 +179,12 @@ export const fetchLessons = async () => {
 };
 
 export const fetchIllustrations = async () => {
-  const response = await fetch(
-    "https://landingpagestudy.onrender.com/api/files",
-    {
-      method: "GET",
-      headers: {
-        accept: "*/*",
-      },
-    }
-  );
+  const response = await fetch(`${API_BASE_URL}/files`, {
+    method: "GET",
+    headers: {
+      accept: "*/*",
+    },
+  });
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.message || "Failed to fetch illustration images");
@@ -202,15 +193,12 @@ export const fetchIllustrations = async () => {
 };
 
 export const fetchIllustration = async (id) => {
-  const response = await fetch(
-    `https://landingpagestudy.onrender.com/api/files/${id}`,
-    {
-      method: "GET",
-      headers: {
-        accept: "*/*",
-      },
-    }
-  );
+  const response = await fetch(`${API_BASE_URL}/files/${id}`, {
+    method: "GET",
+    headers: {
+      accept: "*/*",
+    },
+  });
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.message || "Failed to fetch illustration images");
@@ -218,16 +206,13 @@ export const fetchIllustration = async (id) => {
   return response.json();
 };
 
-export const fetchSteps = async (id) => {
-  const response = await fetch(
-    `https://landingpagestudy.onrender.com/api/lesson-step-contents`,
-    {
-      method: "GET",
-      headers: {
-        accept: "*/*",
-      },
-    }
-  );
+export const fetchSteps = async () => {
+  const response = await fetch(`${API_BASE_URL}/lesson-step-contents`, {
+    method: "GET",
+    headers: {
+      accept: "*/*",
+    },
+  });
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.message || "Failed to fetch contents steps");
@@ -236,15 +221,12 @@ export const fetchSteps = async (id) => {
 };
 
 export const deleteGrade = async (id) => {
-  const response = await fetch(
-    `https://landingpagestudy.onrender.com/api/lessons/${id}`,
-    {
-      method: "DELETE",
-      headers: {
-        accept: "*/*",
-      },
-    }
-  );
+  const response = await fetch(`${API_BASE_URL}/lessons/${id}`, {
+    method: "DELETE",
+    headers: {
+      accept: "*/*",
+    },
+  });
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.message || "Failed to delete lesson");
@@ -253,15 +235,12 @@ export const deleteGrade = async (id) => {
 };
 
 export const deleteLessonContent = async (id) => {
-  const response = await fetch(
-    `https://landingpagestudy.onrender.com/api/lessons/content/${id}`,
-    {
-      method: "DELETE",
-      headers: {
-        accept: "*/*",
-      },
-    }
-  );
+  const response = await fetch(`${API_BASE_URL}/lessons/content/${id}`, {
+    method: "DELETE",
+    headers: {
+      accept: "*/*",
+    },
+  });
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.message || "Failed to delete lesson content");
@@ -270,15 +249,12 @@ export const deleteLessonContent = async (id) => {
 };
 
 export const deleteLessonImage = async (id) => {
-  const response = await fetch(
-    `https://landingpagestudy.onrender.com/api/lessons/image/${id}`,
-    {
-      method: "DELETE",
-      headers: {
-        accept: "*/*",
-      },
-    }
-  );
+  const response = await fetch(`${API_BASE_URL}/lessons/image/${id}`, {
+    method: "DELETE",
+    headers: {
+      accept: "*/*",
+    },
+  });
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.message || "Failed to delete lesson image");
@@ -287,16 +263,13 @@ export const deleteLessonImage = async (id) => {
 };
 
 export async function saveGrade(lessonData) {
-  const response = await fetch(
-    "https://landingpagestudy.onrender.com/api/lessons/save-or-update",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(lessonData),
-    }
-  );
+  const response = await fetch(`${API_BASE_URL}/lessons/save-or-update`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(lessonData),
+  });
 
   if (!response.ok) {
     throw new Error("Không thể lưu bài học");
@@ -305,17 +278,20 @@ export async function saveGrade(lessonData) {
   return await response.json();
 }
 
+export const fetchSurveyLink = async () => {
+  const response = await fetch(`${API_BASE_URL}/survey-links/1`);
+  if (!response.ok) throw new Error("Không thể lấy đường dẫn khảo sát");
+  return response.json();
+};
+
 export async function saveSurveyLink(surveyData) {
-  const response = await fetch(
-    "https://landingpagestudy.onrender.com/api/survey-links",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(surveyData),
-    }
-  );
+  const response = await fetch(`${API_BASE_URL}/survey-links`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(surveyData),
+  });
 
   if (!response.ok) {
     throw new Error("Không thể lưu đường dẫn khảo sát");
@@ -325,16 +301,13 @@ export async function saveSurveyLink(surveyData) {
 }
 
 export async function saveIllustrations(illustrationData) {
-  const response = await fetch(
-    "https://landingpagestudy.onrender.com/api/files",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(illustrationData),
-    }
-  );
+  const response = await fetch(`${API_BASE_URL}/files`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(illustrationData),
+  });
 
   if (!response.ok) {
     throw new Error("Không thể lưu minh họa");
@@ -344,15 +317,12 @@ export async function saveIllustrations(illustrationData) {
 }
 
 export const deleteIllustration = async (illustrationId) => {
-  const response = await fetch(
-    `https://landingpagestudy.onrender.com/api/files/${illustrationId}`,
-    {
-      method: "DELETE",
-      headers: {
-        accept: "*/*",
-      },
-    }
-  );
+  const response = await fetch(`${API_BASE_URL}/files/${illustrationId}`, {
+    method: "DELETE",
+    headers: {
+      accept: "*/*",
+    },
+  });
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.message || "Failed to delete illustration");
@@ -361,91 +331,69 @@ export const deleteIllustration = async (illustrationId) => {
 };
 
 export const createStep = async (step) => {
-  const res = await fetch(
-    "https://landingpagestudy.onrender.com/api/lesson-step-contents",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        accept: "*/*",
-      },
-      body: JSON.stringify(step),
-    }
-  );
+  const res = await fetch(`${API_BASE_URL}/lesson-step-contents`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "*/*",
+    },
+    body: JSON.stringify(step),
+  });
   if (!res.ok) throw new Error("Không thể tạo bước mới");
   return res.json();
 };
 
 export const updateStep = async (id, step) => {
-  const res = await fetch(
-    `https://landingpagestudy.onrender.com/api/lesson-step-contents/${id}`,
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        accept: "*/*",
-      },
-      body: JSON.stringify(step),
-    }
-  );
+  const res = await fetch(`${API_BASE_URL}/lesson-step-contents/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "*/*",
+    },
+    body: JSON.stringify(step),
+  });
   if (!res.ok) throw new Error("Không thể cập nhật bước");
   return res.json();
 };
 
-// DELETE bước theo id
 export const deleteStep = async (id) => {
-  const res = await fetch(
-    `https://landingpagestudy.onrender.com/api/lesson-step-contents/${id}`,
-    {
-      method: "DELETE",
-      headers: { accept: "*/*" },
-    }
-  );
+  const res = await fetch(`${API_BASE_URL}/lesson-step-contents/${id}`, {
+    method: "DELETE",
+    headers: { accept: "*/*" },
+  });
   if (!res.ok) throw new Error("Không thể xóa bước");
 };
 
-// create knls
 export const createKnls = async (step) => {
-  const res = await fetch(
-    "https://landingpagestudy.onrender.com/api/digital-images",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        accept: "*/*",
-      },
-      body: JSON.stringify(step),
-    }
-  );
+  const res = await fetch(`${API_BASE_URL}/digital-images`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "*/*",
+    },
+    body: JSON.stringify(step),
+  });
   if (!res.ok) throw new Error("Không thể tạo khung năng lực số mới");
   return res.json();
 };
 
-//Update knls
 export const updateKnls = async (id, step) => {
-  const res = await fetch(
-    `https://landingpagestudy.onrender.com/api/digital-images/${id}`,
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        accept: "*/*",
-      },
-      body: JSON.stringify(step),
-    }
-  );
+  const res = await fetch(`${API_BASE_URL}/digital-images/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "*/*",
+    },
+    body: JSON.stringify(step),
+  });
   if (!res.ok) throw new Error("Không thể cập nhật khung năng lực số");
   return res.json();
 };
 
-// DELETE bước theo id
 export const deleteKnls = async (id) => {
-  const res = await fetch(
-    `https://landingpagestudy.onrender.com/api/digital-images/${id}`,
-    {
-      method: "DELETE",
-      headers: { accept: "*/*" },
-    }
-  );
+  const res = await fetch(`${API_BASE_URL}/digital-images/${id}`, {
+    method: "DELETE",
+    headers: { accept: "*/*" },
+  });
   if (!res.ok) throw new Error("Không thể xóa khung năng lực số");
 };

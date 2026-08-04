@@ -1,140 +1,147 @@
-#process-detail {
-  height: fit-content;
-  background: url('/images/process.png') no-repeat;
-  background-position: center;
-  background-size: cover;
-  color: #000;
-}
-.step-btn {
-  cursor: pointer;
-  outline: none;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
-.step-btn.active,
-.step-btn:hover {
-  background: #1b6ca8 !important;
-  color: #fff !important;
-}
-
-.process-detail-compact {
-  min-height: 70vh;
-  padding-top: 48px;
-  padding-bottom: 48px;
-  background: #f6fbff;
-  display: flex;
-  align-items: center;
-}
-
 .process-detail-section {
-  padding-top: 97px;
-  min-height: calc(100vh - 157px);
+  background-color: var(--color-bg-page);
+  padding: 4rem 0 6rem 0;
+  margin-top: 80px;
+  min-height: calc(100vh - 80px);
+}
+
+/* Custom back button */
+.process-detail-section .return-button {
+  padding: 0.5rem 1.25rem;
+  background-color: transparent;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-primary-light);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.process-detail-section .return-button:hover {
+  background-color: rgba(15, 23, 42, 0.03);
+  border-color: var(--color-primary-light);
+  transform: translateY(-1px);
+}
+
+.process-detail-section .return-button:active {
+  transform: translateY(0);
+}
+
+.process-detail-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 2.5rem;
 }
 
 .process-steps-bar {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  align-items: center;
+  gap: 1.5rem;
   margin-bottom: 3rem;
+  position: relative;
 }
 
 .process-step-bar-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .process-step-circle {
-  width: 64px;  /* Tăng kích thước để chứa icon */
-  height: 64px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: #fff;
-  margin: 0 auto;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-  border: 3px solid #fff;
-  transition: all 0.2s;
+  box-shadow: var(--shadow-sm);
+  border: 3px solid #ffffff;
+  transition: var(--transition-smooth);
   cursor: pointer;
-  position: relative;
-  z-index: 1;
-  padding: 12px; /* Thêm padding cho icon */
+  z-index: 2;
+  padding: 12px;
 }
 
 .process-step-circle.active {
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: scale(1.15);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-accent);
 }
 
-.step-icon {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: brightness(0) invert(1); /* Chuyển icon thành màu trắng */
-  transition: filter 0.2s;
+.process-step-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-primary-light);
+  opacity: 0.8;
+  margin-top: 0.5rem;
 }
 
-.process-step-circle.active .step-icon {
-  filter: none; /* Hiện màu gốc của icon khi active */
+.process-step-circle.active + .process-step-label {
+  color: var(--color-accent);
+  opacity: 1;
+}
+
+.process-carousel-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
 }
 
 .process-detail-content {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 28px;
-  font-weight: 600;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  padding: 2rem;
+  height: auto;
+  max-height: 60vh;
+  object-fit: contain;
+  background-color: #f8fafc;
+  display: block;
+}
+
+.carousel-caption-custom {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 1.25rem 2rem;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
   text-align: center;
 }
 
-.process-step-label {
-  font-size: 14px;
-  color: #666;
-  text-align: center;
-  margin-top: 8px;
-}
-
-.process-step-label-under {
-  text-align: center;
-  margin-top: 12px;
-}
-
-.process-step-title {
-  text-align: center;
-  font-size: 1.05rem;
-  color: #333;
-  min-height: 40px;
-  margin-bottom: 0;
-}
-
-.process-step-title-under {
-  font-size: 1.05rem;
-  color: #333;
-  min-height: 40px;
-  margin-bottom: 0;
+.carousel-caption-custom h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 @media (max-width: 768px) {
-  .process-detail-compact {
-    padding-top: 24px;
-    padding-bottom: 24px;
+  .process-detail-section {
+    padding: 2rem 0;
+  }
+  .process-detail-card {
+    padding: 1.5rem;
   }
   .process-steps-bar {
-    gap: 12px;
-    margin-bottom: 18px;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
   }
   .process-step-circle {
-    width: 48px;
-    height: 48px;
+    width: 46px;
+    height: 46px;
     padding: 8px;
+  }
+  .process-step-label {
+    font-size: 0.7rem;
   }
 }

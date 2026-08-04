@@ -1,281 +1,95 @@
 #knls {
-  padding: 4rem 0; /* đảm bảo có khoảng cách trên/dưới */
-  margin: 0;
+  background-color: var(--color-bg-page);
+  padding: 6rem 0;
   position: relative;
-  z-index: 1;
-  h3 {
-    color: var(--dark);
-    font-size: 1.125rem;
-  }
-
-  h4 {
-    font-size: 2.188rem;
-  }
-
-  /* List Items */
-  .list-group {
-    .list-group-item {
-      & .icon-box {
-        width: 48px;
-        height: 48px;
-      }
-
-      & h5,
-      p {
-        font-size: 1rem;
-        color: var(--gray);
-      }
-    }
-  }
-
-  /* Card */
-  .card {
-    width: 355px;
-    box-shadow: 109px -101px 144px -105px rgba(89, 178, 230, 0.8),
-      0 10px 8px -2px rgba(0, 0, 0, 0.1);
-
-    .card-body {
-      .card-title {
-        font-size: 1.125rem;
-      }
-
-      .card-text {
-        color: var(--dark-gray);
-        font-size: 0.938rem;
-      }
-
-      .icons {
-        > div {
-          width: 36px;
-          height: 36px;
-          background-color: var(--light);
-          cursor: pointer;
-
-          &:hover {
-            box-shadow: var(--shadow);
-            transition: all 0.5s;
-            transform: var(--hover);
-          }
-        }
-      }
-    }
-
-    .card-footer {
-      color: var(--dark-gray);
-      font-size: 0.938rem;
-
-      .heart-icon {
-        cursor: pointer;
-      }
-    }
-  }
 }
 
-/* Trip to - Popover */
-.popover {
-  width: 260px;
-
-  .popover-arrow {
-    display: none;
-  }
-
-  .popover-body {
-    & h5 {
-      font-size: 1.125rem;
-    }
-
-    & span {
-      color: var(--dark-gray);
-    }
-
-    & p {
-      > span {
-        color: var(--purple);
-      }
-    }
-
-    .progress {
-      height: 6px;
-      background-color: var(--light);
-
-      .progress-bar {
-        background-color: var(--purple);
-        border-radius: 10px;
-      }
-    }
-  }
+.knls-container {
+  max-width: 960px;
+  margin: 0 auto;
 }
 
-/* Transition */
-.slide-transition {
-  transition: all 0.3s ease-in-out;
-}
-
-/* Button */
-.btn-light {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-light:hover {
-  background-color: #f8f9fa;
-  transform: scale(1.1);
-}
-
-.btn-primary:hover {
-  background-color: #0056b3 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
-}
-
-/* Topic Card */
-.topic-card {
-  background: #98fb98;
-  border-radius: 25px;
-  padding: 15px 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.topic-title {
-  color: #2f4f4f;
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.topic-item {
-  background: linear-gradient(to right, #FFE4B5, #fff1da) !important;
-  border-radius: 25px !important;
-  padding: 15px 20px !important;
-  margin-bottom: 12px !important;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: linear-gradient(to right, #F4A460, #f6d4cd) !important;
-    transform: translateX(5px);
-  }
-}
-
-/* Knls Section - Prev/Next Button */
-.knls-section .slick-prev,
-.knls-section .slick-next {
-  /* Style riêng cho nút prev/next của Knls */
-  z-index: 1;
-  width: 80px !important;
-  height: 35px !important;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.2) !important;
-  -webkit-backdrop-filter: blur(0px);
-  backdrop-filter: blur(0px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  transform: scale(0.9);
-}
-
-.knls-section .slick-prev:hover,
-.knls-section .slick-next:hover {
-  background: rgba(255, 255, 255, 0.9) !important;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  transform: scale(1.1);
-}
-
-/* Slider Item */
-.slider-item {
+.knls-card {
   position: relative;
-  border-radius: 12px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: var(--transition-smooth);
 }
 
-.knls-image {
+.knls-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(var(--color-accent-rgb), 0.25);
+}
+
+.knls-image-wrapper {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  display: block;
 }
 
-.detail-button {
+.knls-image-wrapper .ant-image {
+  display: block;
+  width: 100%;
+}
+
+.knls-image-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: var(--transition-smooth);
+}
+
+.knls-card:hover .knls-image-wrapper img {
+  transform: scale(1.015);
+}
+
+/* Redesigned Floating detail button */
+.detail-floating-btn {
   position: absolute;
-  bottom: 30px;
-  left: 90%;
-  transform: translateX(-50%);
-  background: linear-gradient(90deg, #ff946d 60%, #ff7e5f 100%);
-  color: #fff;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-weight: 600;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: var(--color-accent);
+  color: #ffffff !important;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(.4,2,.3,1);
-  border: none;
-  box-shadow: 0 4px 16px rgba(255, 148, 109, 0.15);
-  letter-spacing: 0.5px;
-  font-size: 1.1rem;
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(var(--color-accent-rgb), 0.3);
+  transition: var(--transition-smooth);
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.detail-button:hover,
-.detail-button:focus {
-  background: linear-gradient(90deg, #ff7e5f 60%, #ff946d 100%);
-  color: #fff;
-  transform: translateX(-50%) translateY(-2px) scale(1.04);
-  box-shadow: 0 8px 24px rgba(255, 148, 109, 0.22);
-  outline: none;
+.detail-floating-btn:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(var(--color-accent-rgb), 0.45);
 }
 
-.slider-item:hover .knls-image {
-  transform: scale(1.02);
+.detail-floating-btn:active {
+  transform: translateY(0);
 }
 
-/* Responsive - Media Queries
-***************************************************************************************************/
-@media (max-width: 576px) {
-  #book-a-trip {
-    .list-group {
-      .list-group-item {
-        & .icon-box {
-          width: 35px;
-          height: 35px;
-        }
-
-        & h6,
-        p {
-          font-size: 0.875rem;
-        }
-      }
-    }
-
-    .card {
-      > img {
-        height: 150px;
-      }
-
-      .card-body {
-        .card-title {
-          font-size: 1rem;
-        }
-
-        .card-text {
-          font-size: 0.875rem;
-        }
-      }
-
-      .card-footer {
-        font-size: 0.813rem;
-      }
-    }
+@media (max-width: 768px) {
+  #knls {
+    padding: 4rem 0;
   }
-
-  .popover {
-    .popover-body {
-      & h5 {
-        font-size: 1rem;
-      }
-    }
+  .detail-floating-btn {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin: 1.5rem;
+    display: flex;
+    justify-content: center;
+    width: calc(100% - 3rem);
   }
 }

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Alert, Button, Container, Form } from "react-bootstrap";
 import { login } from "../../data";
+import "./Login.css";
 
 const Login = () => {
-  const [username, setUsername] = useState(""); // đổi từ email sang username
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,8 +26,8 @@ const Login = () => {
 
   return (
     <section className="login-section">
-      <Container style={{ maxWidth: 400, marginTop: 100 }}>
-        <h2 className="mb-4 text-center">Đăng nhập Admin</h2>
+      <div className="login-card-wrapper">
+        <h2 className="login-title-header">Đăng nhập Admin</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="adminUsername">
             <Form.Label>Tên đăng nhập</Form.Label>
@@ -48,17 +49,18 @@ const Login = () => {
               required
             />
           </Form.Group>
+          
           {error && <Alert variant="danger">{error}</Alert>}
+          
           <Button
             type="submit"
-            variant="warning"
-            style={{ background: "#ff946d", border: "none", width: "100%" }}
+            className="btn-login-submit"
             disabled={loading}
           >
             {loading ? "Đang đăng nhập..." : "Đăng nhập"}
           </Button>
         </Form>
-      </Container>
+      </div>
     </section>
   );
 };

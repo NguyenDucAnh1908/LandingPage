@@ -9,6 +9,8 @@ import {
   Spinner,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../../firebase";
 import {
   deleteGrade,
   deleteLessonContent,
@@ -16,13 +18,28 @@ import {
   fetchLessons,
   saveGrade,
 } from "../../data";
+import LessonCard from "./components/LessonCard";
+import ConfirmDeleteModal from "./components/ConfirmDeleteModal";
 import "./ClassSection.css";
 
 const ClassSection = () => {
   const [grades, setGrades] = useState([]);
   const [showEdit, setShowEdit] = useState(false);
   const [editLoading, setEditLoading] = useState(false);
+  const [saveLoading, setSaveLoading] = useState(null); // gradeId currently saving
   const [editData, setEditData] = useState([]);
+  const [isDirty, setIsDirty] = useState(false);
+  
+  // Custom states for visual lightbox and confirms
+  const [lightboxShow, setLightboxShow] = useState(false);
+  const [lightboxUrl, setLightboxUrl] = useState("");
+  const [deleteConfirm, setDeleteConfirm] = useState({
+    show: false,
+    onConfirm: null,
+    itemName: "",
+    itemType: "",
+  });
+
   const loggedIn = localStorage.getItem("loggedIn") === "true";
 
   useEffect(() => {
@@ -35,6 +52,7 @@ const ClassSection = () => {
   const openEdit = () => {
     setShowEdit(true);
     setEditLoading(true);
+    setIsDirty(false);
     fetchLessons()
       .then((data) =>
         setEditData(
@@ -56,55 +74,101 @@ const ClassSection = () => {
       )
       .finally(() => setEditLoading(false));
   };
-  const closeEdit = () => setShowEdit(false);
+  const closeEdit = () => {
+    if (isDirty) {
+      if (!window.confirm("Bạn có các thay đổi chưa lưu. Bạn vẫn muốn đóng?")) return;
+    }
+    setShowEdit(false);
+  };
 
-  // Xử lý thay đổi input
-  const handleGradeTitleChange = async (gradeId, value) => {
+  const uploadImageFile = async (file) => {
+    if (!file) return null;
+    const storageRef = ref(storage, `lessons/${Date.now()}_${file.name}`);
+    await uploadBytes(storageRef, file);
+    return await getDownloadURL(storageRef);
+  };
+
+  // State update helpers
+  const handleGradeTitleChange = (gradeId, value) => {
     setEditData(
       editData.map((g) => (g.id === gradeId ? { ...g, title: value } : g))
     );
-    // Cập nhật tiêu đề lớp học
-  };
-  const handleLessonTextChange = (gradeId, lessonId, value) => {
-    setEditData(
-      editData.map((g) =>
-        g.id === gradeId
-          ? {
-              ...g,
-              contents: g.contents.map((l) =>
-                l.id === lessonId ? { ...l, contentText: value } : l
-              ),
-            }
-          : g
-      )
-    );
-  };
-  const handleImageUrlChange = (gradeId, lessonId, imageId, value) => {
-    setEditData(
-      editData.map((g) =>
-        g.id === gradeId
-          ? {
-              ...g,
-              contents: g.contents.map((l) =>
-                l.id === lessonId
-                  ? {
-                      ...l,
-                      images: l.images.map((img) =>
-                        img.id === imageId ? { ...img, imageUrl: value } : img
-                      ),
-                    }
-                  : l
-              ),
-            }
-          : g
-      )
-    );
+    setIsDirty(true);
   };
 
-  // Dummy handlers for actions
+  const handleLessonTextChange = (gradeId, lessonIndex, value) => {
+    setEditData(
+      editData.map((g) =>
+        g.id === gradeId
+          ? {
+              ...g,
+              contents: g.contents.map((l, idx) =>
+                idx === lessonIndex ? { ...l, contentText: value } : l
+              ),
+            }
+          : g
+      )
+    );
+    setIsDirty(true);
+  };
+
+  const handleAddUploadedImage = async (gradeId, lessonIndex, file) => {
+    try {
+      const url = await uploadImageFile(file);
+      if (!url) return;
+      setEditData((prev) =>
+        prev.map((g) => {
+          if (g.id !== gradeId) return g;
+          return {
+            ...g,
+            contents: g.contents.map((l, lIdx) => {
+              if (lIdx !== lessonIndex) return l;
+              return {
+                ...l,
+                images: [...(l.images || []), { imageUrl: url }],
+              };
+            }),
+          };
+        })
+      );
+      setIsDirty(true);
+    } catch (err) {
+      alert("Tải lên hình ảnh thất bại: " + err.message);
+    }
+  };
+
+  const handleReplaceUploadedImage = async (gradeId, lessonIndex, imgIndex, imageId, file) => {
+    try {
+      const url = await uploadImageFile(file);
+      if (!url) return;
+      setEditData((prev) =>
+        prev.map((g) => {
+          if (g.id !== gradeId) return g;
+          return {
+            ...g,
+            contents: g.contents.map((l, lIdx) => {
+              if (lIdx !== lessonIndex) return l;
+              return {
+                ...l,
+                images: l.images.map((img, iIdx) => {
+                  if (iIdx !== imgIndex) return img;
+                  return { ...img, imageUrl: url };
+                }),
+              };
+            }),
+          };
+        })
+      );
+      setIsDirty(true);
+    } catch (err) {
+      alert("Tải lên hình ảnh thất bại: " + err.message);
+    }
+  };
+
   const handleAddGrade = () => {
     const newGrade = { title: "", contents: [] };
     setEditData((prev) => [...prev, newGrade]);
+    setIsDirty(true);
 
     setTimeout(() => {
       const modalBody = document.querySelector(".modal-body");
@@ -123,185 +187,153 @@ const ClassSection = () => {
           : g
       )
     );
+    setIsDirty(true);
   };
 
-  const handleDeleteGrade = async (gradeId) => {
-    if (!window.confirm("Xóa lớp này?")) return;
-
-    // Nếu là lớp chưa có ID (tức chưa lưu vào DB)
-    if (!gradeId) {
-      setEditData(editData.filter((g) => g.id !== gradeId));
-      return;
-    }
-
-    try {
-      await deleteGrade(gradeId);
-      setEditData(editData.filter((g) => g.id !== gradeId));
-      setGrades(grades.filter((g) => g.id !== gradeId));
-    } catch (err) {
-      alert("Xóa lớp không thành công");
-    }
+  // Styled Confirmation triggers
+  const triggerDeleteGrade = (gradeId, gradeTitle) => {
+    setDeleteConfirm({
+      show: true,
+      itemType: "khối lớp",
+      itemName: gradeTitle || "Lớp mới chưa đặt tên",
+      onConfirm: async () => {
+        if (!gradeId) {
+          setEditData(editData.filter((g) => g.id !== gradeId));
+          setDeleteConfirm({ show: false, onConfirm: null, itemName: "", itemType: "" });
+          return;
+        }
+        try {
+          await deleteGrade(gradeId);
+          setEditData(editData.filter((g) => g.id !== gradeId));
+          setGrades(grades.filter((g) => g.id !== gradeId));
+          setDeleteConfirm({ show: false, onConfirm: null, itemName: "", itemType: "" });
+        } catch (err) {
+          alert("Xóa lớp thất bại");
+        }
+      },
+    });
   };
 
-  // const handleDeleteLesson = (gradeId, lessonId) => {
-  //   if (window.confirm("Xóa bài học này?")) return;
-  //   setEditData(
-  //     editData.map((g) =>
-  //       g.id === gradeId
-  //         ? {
-  //             ...g,
-  //             contents: g.contents.filter((l) => l.id !== lessonId),
-  //           }
-  //         : g
-  //     )
-  //   );
-  // };
-
-  const handleDeleteLesson = async (gradeId, lessonId) => {
-    if (!window.confirm("Xóa bài học này?")) return;
-
-    // Nếu là bài học chưa có ID
-    if (!lessonId) {
-      setEditData(
-        editData.map((g) =>
-          g.id === gradeId
-            ? {
-                ...g,
-                contents: g.contents.filter((l) => l.id !== lessonId),
-              }
-            : g
-        )
-      );
-      return;
-    }
-
-    try {
-      await deleteLessonContent(lessonId);
-      setEditData(
-        editData.map((g) =>
-          g.id === gradeId
-            ? {
-                ...g,
-                contents: g.contents.filter((l) => l.id !== lessonId),
-              }
-            : g
-        )
-      );
-      setGrades(
-        grades.map((g) =>
-          g.id === gradeId
-            ? {
-                ...g,
-                contents: g.contents.filter((l) => l.id !== lessonId),
-              }
-            : g
-        )
-      );
-    } catch (err) {
-      alert("Xóa bài học không thành công");
-    }
+  const triggerDeleteLesson = (gradeId, lessonId, lessonIndex) => {
+    setDeleteConfirm({
+      show: true,
+      itemType: "bài học",
+      itemName: `Bài học số ${lessonIndex + 1}`,
+      onConfirm: async () => {
+        if (!lessonId) {
+          setEditData(
+            editData.map((g) =>
+              g.id === gradeId
+                ? {
+                    ...g,
+                    contents: g.contents.filter((_, idx) => idx !== lessonIndex),
+                  }
+                : g
+            )
+          );
+          setDeleteConfirm({ show: false, onConfirm: null, itemName: "", itemType: "" });
+          return;
+        }
+        try {
+          await deleteLessonContent(lessonId);
+          setEditData(
+            editData.map((g) =>
+              g.id === gradeId
+                ? {
+                    ...g,
+                    contents: g.contents.filter((_, idx) => idx !== lessonIndex),
+                  }
+                : g
+            )
+          );
+          setGrades(
+            grades.map((g) =>
+              g.id === gradeId
+                ? {
+                    ...g,
+                    contents: g.contents.filter((_, idx) => idx !== lessonIndex),
+                  }
+                : g
+            )
+          );
+          setDeleteConfirm({ show: false, onConfirm: null, itemName: "", itemType: "" });
+        } catch (err) {
+          alert("Xóa bài học thất bại");
+        }
+      },
+    });
   };
 
-  // const handleDeleteImage = (gradeId, lessonId, imageId) => {
-  //   if (window.confirm("Xóa ảnh này?")) setEditData(editData.map(g => g.id === gradeId ? {
-  //     ...g,
-  //     contents: g.contents.map(l => l.id === lessonId ? {
-  //       ...l,
-  //       images: l.images.filter(img => img.id !== imageId)
-  //     } : l)
-  //   } : g));
-  // };
-
-  const handleDeleteImage = async (gradeId, lessonId, imageId) => {
-    if (!window.confirm("Xóa ảnh này?")) return;
-
-    // Nếu là ảnh chưa có ID
-    if (!imageId) {
-      setEditData(
-        editData.map((g) =>
-          g.id === gradeId
-            ? {
+  const triggerDeleteImage = (gradeId, lessonIndex, imgIndex, imageId) => {
+    setDeleteConfirm({
+      show: true,
+      itemType: "hình ảnh",
+      itemName: `Ảnh minh họa #${imgIndex + 1}`,
+      onConfirm: async () => {
+        if (!imageId) {
+          setEditData((prev) =>
+            prev.map((g) => {
+              if (g.id !== gradeId) return g;
+              return {
                 ...g,
-                contents: g.contents.map((l) =>
-                  l.id === lessonId
-                    ? {
-                        ...l,
-                        images: l.images.filter((img) => img.id !== imageId),
-                      }
-                    : l
-                ),
-              }
-            : g
-        )
-      );
-      return;
-    }
-
-    try {
-      await deleteLessonImage(imageId);
-      setEditData(
-        editData.map((g) =>
-          g.id === gradeId
-            ? {
+                contents: g.contents.map((l, lIdx) => {
+                  if (lIdx !== lessonIndex) return l;
+                  return {
+                    ...l,
+                    images: l.images.filter((_, idx) => idx !== imgIndex),
+                  };
+                }),
+              };
+            })
+          );
+          setDeleteConfirm({ show: false, onConfirm: null, itemName: "", itemType: "" });
+          return;
+        }
+        try {
+          await deleteLessonImage(imageId);
+          setEditData((prev) =>
+            prev.map((g) => {
+              if (g.id !== gradeId) return g;
+              return {
                 ...g,
-                contents: g.contents.map((l) =>
-                  l.id === lessonId
-                    ? {
-                        ...l,
-                        images: l.images.filter((img) => img.id !== imageId),
-                      }
-                    : l
-                ),
-              }
-            : g
-        )
-      );
-      setGrades(
-        grades.map((g) =>
-          g.id === gradeId
-            ? {
+                contents: g.contents.map((l, lIdx) => {
+                  if (lIdx !== lessonIndex) return l;
+                  return {
+                    ...l,
+                    images: l.images.filter((_, idx) => idx !== imgIndex),
+                  };
+                }),
+              };
+            })
+          );
+          setGrades((prev) =>
+            prev.map((g) => {
+              if (g.id !== gradeId) return g;
+              return {
                 ...g,
-                contents: g.contents.map((l) =>
-                  l.id === lessonId
-                    ? {
-                        ...l,
-                        images: l.images.filter((img) => img.id !== imageId),
-                      }
-                    : l
-                ),
-              }
-            : g
-        )
-      );
-    } catch (err) {
-      alert("Xóa ảnh không thành công");
-    }
-  };
-
-  const handleAddImage = (gradeId, lessonId) => {
-    setEditData(
-      editData.map((g) =>
-        g.id === gradeId
-          ? {
-              ...g,
-              contents: g.contents.map((l) =>
-                l.id === lessonId
-                  ? {
-                      ...l,
-                      images: [...(l.images || []), { imageUrl: "" }],
-                    }
-                  : l
-              ),
-            }
-          : g
-      )
-    );
+                contents: g.contents.map((l, lIdx) => {
+                  if (lIdx !== lessonIndex) return l;
+                  return {
+                    ...l,
+                    images: l.images.filter((_, idx) => idx !== imgIndex),
+                  };
+                }),
+              };
+            })
+          );
+          setDeleteConfirm({ show: false, onConfirm: null, itemName: "", itemType: "" });
+        } catch (err) {
+          alert("Xóa ảnh thất bại");
+        }
+      },
+    });
   };
 
   const handleSaveGrade = async (gradeId) => {
     const grade = editData.find((g) => g.id === gradeId);
     if (!grade) return;
 
+    setSaveLoading(gradeId);
     const payload = {
       ...(grade.id ? { id: grade.id } : {}),
       title: grade.title || "",
@@ -323,11 +355,11 @@ const ClassSection = () => {
 
     try {
       await saveGrade(payload);
-      alert("Lưu lớp thành công");
+      alert("Lưu thay đổi thành công!");
+      setIsDirty(false);
 
-      // ✅ Load lại dữ liệu mới nhất
       const freshData = await fetchLessons();
-      setGrades(freshData); // cập nhật bên ngoài
+      setGrades(freshData);
       setEditData(
         freshData.map((g) => ({
           ...g,
@@ -343,50 +375,45 @@ const ClassSection = () => {
               : [],
           })),
         }))
-      ); // cập nhật trong modal
+      );
     } catch (err) {
-      console.error("Lỗi khi lưu:", err);
       alert("Lỗi khi lưu: " + (err.message || "Không rõ lỗi"));
+    } finally {
+      setSaveLoading(null);
     }
+  };
+
+  const triggerLightbox = (url) => {
+    setLightboxUrl(url);
+    setLightboxShow(true);
   };
 
   return (
     <section id="class-section">
       <Container>
-        <div className="text-center mb-4 mt-5">
-          {/* <h2>Sổ tay</h2> */}
-          {/* <h4 className="fw-bold text-capitalize text-center">Sổ tay</h4> */}
-          {/* <h3>
-            Bồi dưỡng năng lực số cho học sinh tiểu học thông qua môn Công nghệ
-          </h3> */}
+        <div className="section-header">
+          <h3>Sổ Tay Bài Học</h3>
+          <h4>Sổ tay bồi dưỡng năng lực số cho học sinh tiểu học thông qua môn Công nghệ</h4>
+          <p>
+            Chọn khối lớp tương ứng để khám phá giáo án, bài học tương tác và hình ảnh minh họa chi tiết.
+          </p>
         </div>
 
-        <div className="text-center mb-5">
+        <div className="class-section-banner">
           <Image
             src="images/image_web/Back_so_tay.png"
-            // src="https://firebasestorage.googleapis.com/v0/b/traveldb-64f9c.appspot.com/o/Screenshot%202025-06-10%20141336.png?alt=media&token=819a0be1-9d9a-4462-a2cd-05c1bbf5f663"
-            alt="Class Section Image"
+            alt="Sổ tay học tập"
             fluid
-            className="section-image"
-            style={{
-              width: "100%",
-              height: "100%",
-              maxWidth: "1318px",
-              objectFit: "cover",
-              borderRadius: "10px",
-              boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
-              margin: "0 auto",
-            }}
           />
         </div>
 
-        <div className="mb-3 text-end">
-          {loggedIn && (
-            <Button variant="outline-primary" onClick={openEdit}>
-              Chỉnh sửa
+        {loggedIn && (
+          <div className="text-center mb-4">
+            <Button variant="outline-primary" className="px-4" onClick={openEdit}>
+              ✏️ Quản lý sổ tay bài học
             </Button>
-          )}
-        </div>
+          </div>
+        )}
 
         <div className="class-accordion-container">
           <div className="horizontal-accordion-wrapper">
@@ -394,7 +421,7 @@ const ClassSection = () => {
               <Accordion key={grade.id} className="class-item">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header>{grade.title}</Accordion.Header>
-                  <Accordion.Body>
+                  <Accordion.Body className="custom-scroll">
                     <ul className="list-unstyled mb-0">
                       {grade.contents.map((lesson) => (
                         <Link
@@ -413,160 +440,140 @@ const ClassSection = () => {
           </div>
         </div>
 
-        {/* Edit Modal */}
-        <Modal show={showEdit} onHide={closeEdit} size="lg" scrollable>
+        {/* Core CRUD Modal */}
+        <Modal
+          show={showEdit}
+          onHide={closeEdit}
+          className="class-crud-modal"
+          scrollable
+          centered
+        >
           <Modal.Header closeButton>
-            <Modal.Title>Quản lý lớp, bài học, ảnh</Modal.Title>
+            <Modal.Title>Quản lý Khối lớp & Bài học</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="custom-scroll">
             {editLoading ? (
               <div className="text-center py-5">
-                <Spinner />
+                <Spinner animation="border" variant="primary" />
+                <p className="text-muted mt-2 small">Đang lấy dữ liệu sổ tay...</p>
+              </div>
+            ) : editData.length === 0 ? (
+              <div className="text-center py-5">
+                <h6 className="text-muted">Chưa có thông tin khối lớp nào. Hãy thêm lớp mới!</h6>
               </div>
             ) : (
               <>
                 {editData.map((grade, gradeIndex) => (
                   <div
                     key={grade.id || gradeIndex}
-                    className="mb-4 p-3 border rounded shadow-sm bg-light"
+                    className="mb-5 p-4 border rounded shadow-sm bg-light"
                   >
-                    <div className="d-flex justify-content-between align-items-center mb-2">
-                      <Form.Control
-                        type="text"
-                        value={grade.title}
-                        onChange={(e) =>
-                          handleGradeTitleChange(grade.id, e.target.value)
-                        }
-                        placeholder="Tên lớp"
-                        className="me-2 fw-bold"
-                        style={{ maxWidth: 300 }}
-                      />
+                    <div className="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
+                      <div className="d-flex align-items-center gap-2 flex-grow-1" style={{ maxWidth: 360 }}>
+                        <Form.Label className="form-label-small mb-0">Tên Lớp:</Form.Label>
+                        <Form.Control
+                          type="text"
+                          value={grade.title}
+                          onChange={(e) =>
+                            handleGradeTitleChange(grade.id, e.target.value)
+                          }
+                          placeholder="ví dụ: Khối Lớp 3"
+                          className="premium-input-field fw-bold flex-grow-1"
+                        />
+                      </div>
                       <Button
                         variant="outline-danger"
                         size="sm"
-                        onClick={() => handleDeleteGrade(grade.id)}
+                        onClick={() => triggerDeleteGrade(grade.id, grade.title)}
+                        className="d-flex align-items-center gap-1"
                       >
                         🗑 Xóa lớp
                       </Button>
                     </div>
 
-                    <ul className="list-unstyled">
-                      {grade.contents.map((lesson, lessonIndex) => (
-                        <li
-                          key={lesson.id || lessonIndex}
-                          className="mb-3 bg-white p-2 rounded shadow-sm border"
-                        >
-                          <div className="row">
-                            {/* Tên bài học + nút xóa */}
-                            <div className="col-md-6 d-flex align-items-start flex-column gap-2">
-                              <Form.Control
-                                type="text"
-                                value={lesson.contentText}
-                                onChange={(e) =>
-                                  handleLessonTextChange(
-                                    grade.id,
-                                    lesson.id,
-                                    e.target.value
-                                  )
-                                }
-                                placeholder="Tên bài học"
-                                className="w-100"
-                              />
-                              <Button
-                                variant="outline-danger"
-                                size="sm"
-                                onClick={() =>
-                                  handleDeleteLesson(grade.id, lesson.id)
-                                }
-                              >
-                                ❌ Xóa bài học
-                              </Button>
-                            </div>
+                    <div className="lessons-list-wrapper">
+                      {grade.contents.length === 0 ? (
+                        <p className="text-muted small text-center my-4">Chưa có bài học nào trong khối lớp này.</p>
+                      ) : (
+                        grade.contents.map((lesson, lessonIndex) => (
+                          <LessonCard
+                            key={lesson.id || lessonIndex}
+                            lesson={lesson}
+                            lessonIndex={lessonIndex}
+                            onTextChange={(val) => handleLessonTextChange(grade.id, lessonIndex, val)}
+                            onDeleteLesson={() => triggerDeleteLesson(grade.id, lesson.id, lessonIndex)}
+                            onAddImage={(file) => handleAddUploadedImage(grade.id, lessonIndex, file)}
+                            onReplaceImage={(imgIdx, imgId, file) => handleReplaceUploadedImage(grade.id, lessonIndex, imgIdx, imgId, file)}
+                            onDeleteImage={(imgIdx, imgId) => triggerDeleteImage(grade.id, lessonIndex, imgIdx, imgId)}
+                            onViewLarge={triggerLightbox}
+                          />
+                        ))
+                      )}
+                    </div>
 
-                            {/* Danh sách ảnh */}
-                            <div className="col-md-6">
-                              <div className="d-flex flex-column gap-2">
-                                {(lesson.images || []).map((img, imgIndex) => (
-                                  <div
-                                    key={img.id || imgIndex}
-                                    className="d-flex align-items-start gap-2"
-                                  >
-                                    <Form.Control
-                                      type="text"
-                                      value={img.imageUrl}
-                                      onChange={(e) =>
-                                        handleImageUrlChange(
-                                          grade.id,
-                                          lesson.id,
-                                          img.id,
-                                          e.target.value
-                                        )
-                                      }
-                                      placeholder="Link ảnh"
-                                      className="flex-grow-1"
-                                    />
-                                    <Button
-                                      variant="outline-danger"
-                                      size="sm"
-                                      className="px-1 py-0"
-                                      onClick={() =>
-                                        handleDeleteImage(
-                                          grade.id,
-                                          lesson.id,
-                                          img.id
-                                        )
-                                      }
-                                      style={{ fontSize: 12 }}
-                                    >
-                                      ✕
-                                    </Button>
-                                  </div>
-                                ))}
-
-                                <Button
-                                  variant="outline-success"
-                                  size="sm"
-                                  onClick={() =>
-                                    handleAddImage(grade.id, lesson.id)
-                                  }
-                                >
-                                  + Thêm ảnh
-                                </Button>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="text-end">
+                    <div className="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
                       <Button
-                        variant="primary"
+                        variant="outline-primary"
                         size="sm"
                         onClick={() => handleAddLesson(grade.id)}
                       >
-                        + Thêm bài học
+                        + Thêm bài học mới
                       </Button>
                       <Button
                         variant="success"
                         size="sm"
-                        className="ms-2"
                         onClick={() => handleSaveGrade(grade.id)}
+                        disabled={saveLoading === grade.id || !isDirty}
                       >
-                        💾 Lưu
+                        {saveLoading === grade.id ? (
+                          <>
+                            <Spinner animation="border" size="sm" className="me-1" />
+                            Đang lưu...
+                          </>
+                        ) : (
+                          "💾 Lưu thay đổi lớp"
+                        )}
                       </Button>
                     </div>
                   </div>
                 ))}
 
                 <div className="text-center mt-4">
-                  <Button variant="success" onClick={handleAddGrade}>
-                    + Thêm lớp
+                  <Button variant="success" className="px-4" onClick={handleAddGrade}>
+                    + Thêm Lớp Mới
                   </Button>
                 </div>
               </>
             )}
           </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={closeEdit}>
+              Đóng quản lý
+            </Button>
+          </Modal.Footer>
         </Modal>
+
+        {/* Global Lightbox Modal */}
+        <Modal
+          show={lightboxShow}
+          onHide={() => setLightboxShow(false)}
+          className="lightbox-modal"
+          centered
+          size="lg"
+        >
+          <Modal.Body className="p-0 text-center" onClick={() => setLightboxShow(false)}>
+            <img src={lightboxUrl} alt="Visual Lightbox" className="lightbox-image" />
+          </Modal.Body>
+        </Modal>
+
+        {/* Global Confirm Delete Modal */}
+        <ConfirmDeleteModal
+          show={deleteConfirm.show}
+          onHide={() => setDeleteConfirm({ show: false, onConfirm: null, itemName: "", itemType: "" })}
+          onConfirm={deleteConfirm.onConfirm}
+          itemName={deleteConfirm.itemName}
+          itemType={deleteConfirm.itemType}
+        />
       </Container>
     </section>
   );

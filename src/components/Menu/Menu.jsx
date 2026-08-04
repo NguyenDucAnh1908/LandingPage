@@ -13,7 +13,7 @@ export const Menu = () => {
   const location = useLocation();
 
   const handleScroll = () => {
-    setScrolling(window.scrollY > 50);
+    setScrolling(window.scrollY > 20);
   };
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export const Menu = () => {
     window.location.href = "/"; // hoặc reload lại trang
   };
 
-  const handleScrollToTopButton = () => window.scrollTo({ top: 0 });
+  const handleScrollToTopButton = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <>
@@ -43,14 +43,12 @@ export const Menu = () => {
         fixed="top"
         collapseOnSelect
         expand="lg"
-        className={`${
-          scrolling ? "bg-white shadow-sm" : "bg-transparent"
-        } pb-4`}
+        className={scrolling ? "navbar-scrolled" : "bg-transparent"}
       >
         <Container>
           {/* Logo */}
           <Navbar.Brand href="/">
-            <span className="fw-bold fs-4 text-dark">Home</span>
+            <span className="fw-bold fs-4">Năng Lực Số</span>
           </Navbar.Brand>
           {/* Navbar Toggler for Responsive */}
           <Navbar.Toggle
@@ -59,9 +57,9 @@ export const Menu = () => {
           />
           <Navbar.Collapse
             id="responsive-navbar-nav"
-            className="justify-content-end mt-3"
+            className="justify-content-end"
           >
-            <Nav className="gap-xl-5 gap-lg-4 gap-md-2">
+            <Nav className="gap-xl-4 gap-lg-3 gap-md-2 align-items-center">
               {/* Navbar Elements */}
               {location.pathname === "/" &&
                 MENU &&
@@ -69,19 +67,18 @@ export const Menu = () => {
                   <Nav.Link
                     href={menu.link}
                     key={index}
-                    className="text-black fw-medium"
                   >
                     {menu.name}
                   </Nav.Link>
                 ))}
               {/* Login and Sign up Buttons */}
               {!loggedIn ? (
-                <Button variant="outline-dark fw-medium" as="a" href="/login">
-                  Login
+                <Button className="btn-nav" as="a" href="/login">
+                  Đăng Nhập
                 </Button>
               ) : (
-                <Button variant="outline-dark fw-medium" onClick={handleLogout}>
-                  Logout
+                <Button className="btn-nav" onClick={handleLogout}>
+                  Đăng Xuất
                 </Button>
               )}
             </Nav>
@@ -93,7 +90,7 @@ export const Menu = () => {
       {scrolling && (
         <Button
           variant="light"
-          className="scroll-to-top position-fixed end-0 bottom-0 border-0 p-2 m-3 rounded-circle z-1 d-flex justify-content-center align-items-center"
+          className="scroll-to-top"
           onClick={handleScrollToTopButton}
         >
           <ArrowUpIcon />

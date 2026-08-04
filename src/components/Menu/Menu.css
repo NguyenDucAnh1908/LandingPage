@@ -1,119 +1,142 @@
+/* Floating Header Navigation Styles */
 .navbar {
-  .navbar-toggler {
-    &:focus {
-      box-shadow: none;
-    }
-  }
-
-  .navbar-collapse {
-    .navbar-nav {
-      /* Navbar Elements */
-      .nav-link,
-      button:not(.btn-outline-dark) {
-        color: var(--dark);
-
-        &:hover {
-          color: var(--orange) !important;
-        }
-      }
-
-      /* Sign up - Button */
-      .btn-outline-dark {
-        font-size: 0.938rem;
-        &:hover {
-          background-color: var(--orange);
-          border-color: var(--orange);
-        }
-      }
-
-      /* Languages - Dropdown */
-      .dropdown {
-        .dropdown-menu {
-          box-shadow: var(--shadow);
-          border: none;
-
-          .dropdown-item {
-            color: var(--dark);
-            font-size: 0.938rem;
-
-            &:hover {
-              background-color: var(--light);
-            }
-          }
-        }
-      }
-    }
-  }
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  z-index: 1000;
 }
 
-/* Scroll To Top Button */
+/* Scroll state */
+.navbar-scrolled {
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: var(--shadow-sm);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-quicksand);
+  transition: var(--transition-smooth);
+}
+
+.navbar-brand span {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--color-primary) !important;
+}
+
+.navbar-brand:hover {
+  opacity: 0.85;
+}
+
+.nav-link {
+  color: var(--color-primary-light) !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem !important;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-smooth) !important;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--color-accent) !important;
+  background-color: rgba(var(--color-accent-rgb), 0.05);
+}
+
+/* Nav button (Login / Logout) */
+.btn-nav {
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  padding: 0.5rem 1.5rem !important;
+  border-radius: 9999px !important;
+  border: 1.5px solid var(--color-accent) !important;
+  color: var(--color-accent) !important;
+  background: transparent !important;
+  transition: var(--transition-smooth) !important;
+}
+
+.btn-nav:hover {
+  background: var(--color-accent) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(var(--color-accent-rgb), 0.2);
+  transform: translateY(-1px);
+}
+
+.btn-nav:active {
+  transform: translateY(0);
+}
+
+/* Hamburger icon customization */
+.navbar-toggler {
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-smooth);
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 3px rgba(var(--color-accent-rgb), 0.2) !important;
+}
+
+/* Scroll To Top Widget */
 .scroll-to-top {
-  background-image: linear-gradient(
-    to bottom,
-    var(--light-orange),
-    var(--dark-orange)
-  );
-  width: 50px;
-  height: 50px;
-
-  &:hover {
-    background-image: linear-gradient(
-      to bottom,
-      var(--dark-orange),
-      var(--light-orange)
-    );
-  }
-}
-
-/* Menu - Fixed Position */
-.menu {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  background: rgba(255, 255, 255, 0.95);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  transform: translateZ(0);
-  will-change: transform;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  right: 2rem;
+  bottom: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50% !important;
+  background: var(--color-accent) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: var(--shadow-md) !important;
+  transition: var(--transition-smooth) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
 }
 
-/* Responsive - Media Queries
-***************************************************************************************************/
-@media (max-width: 1200px) {
-  .navbar {
-    .navbar-nav {
-      .nav-link,
-      button {
-        font-size: 0.938rem;
-      }
-    }
+.scroll-to-top:hover {
+  background: var(--color-accent-hover) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(var(--color-accent-rgb), 0.3) !important;
+}
+
+.scroll-to-top:active {
+  transform: translateY(-1px);
+}
+
+/* Responsive collapser styling */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: 1.5rem;
+    margin-top: 1rem;
   }
 
-  @media (max-width: 990px) {
-    .navbar {
-      .navbar-collapse {
-        background-color: var(--white);
-        border-radius: 15px;
-        box-shadow: var(--shadow);
+  .nav-link {
+    padding: 0.75rem 1rem !important;
+    border-bottom: 1px solid #f1f5f9;
+  }
 
-        .navbar-nav {
-          padding: 20px 30px;
+  .nav-link:last-child {
+    border-bottom: none;
+  }
 
-          .nav-link {
-            font-size: 0.875rem;
-            border-bottom: 1px solid var(--light);
-          }
-
-          & button {
-            font-size: 0.875rem;
-            width: 50%;
-            margin: 0 auto;
-          }
-        }
-      }
-    }
+  .btn-nav {
+    width: 100%;
+    margin-top: 1rem;
+    text-align: center;
+    border-radius: var(--radius-sm) !important;
   }
 }

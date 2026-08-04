@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
+import { fetchSurveyLink, saveSurveyLink } from "../../data";
 import "./Survey.css";
 
 export const Survey = () => {
@@ -9,50 +10,27 @@ export const Survey = () => {
   const loggedIn = localStorage.getItem("loggedIn") === "true";
 
   useEffect(() => {
-    // Fetch initial survey link
-    const fetchSurveyLink = async () => {
+    const loadSurveyLink = async () => {
       try {
-        const response = await fetch(
-          "https://landingpagestudy.onrender.com/api/survey-links/1"
-        );
-        if (!response.ok) {
-          throw new Error("Không thể lấy đường dẫn khảo sát");
-        }
-        const data = await response.json();
-        console.log("Survey Link Data:", data);
-        setSurveyLink(data.url); // Changed from data.link to data.url
+        const data = await fetchSurveyLink();
+        setSurveyLink(data.url);
       } catch (error) {
         console.error("Error fetching survey link:", error);
       }
     };
 
-    fetchSurveyLink();
+    loadSurveyLink();
   }, []);
 
   const handleUpdateLink = async () => {
     try {
-      const response = await fetch(
-        "https://landingpagestudy.onrender.com/api/survey-links",
-        {
-          method: "POST", // Changed to PUT for update
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: 1,
-            title: "Link khảo sát - update",
-            url: newLink,
-            orderIndex: 0,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      setSurveyLink(data.url); // Changed from data.link to data.url
+      const data = await saveSurveyLink({
+        id: 1,
+        title: "Link khảo sát - update",
+        url: newLink,
+        orderIndex: 0,
+      });
+      setSurveyLink(data.url);
       setNewLink("");
       setIsEditing(false);
       alert("Cập nhật đường dẫn thành công!");
@@ -64,53 +42,63 @@ export const Survey = () => {
 
   return (
     <section id="survey">
-      <Container className="position-relative h-100">
-        <Row className="h-100">
-          <Col
-            md={10}
-            lg={8}
-            className="mx-auto d-flex flex-column justify-content-end pb-5"
-          >
-            <div className="text-center">
-              <Button
-                className="survey-button"
-                href={surveyLink}
-                target="_blank"
-                type="submit"
-                size="lg"
-              >
-                Đóng góp ý kiến
-              </Button>
-            </div>
+      <Container>
+        <div className="section-header">
+          <h3>Ý Kiến Khảo Sát</h3>
+          <h4>Đóng Góp Ý Kiến & Khảo Sát Chuyên Môn</h4>
+          <p>
+            Ý kiến phản hồi quý báu của quý thầy cô giúp hoàn thiện sổ tay và nâng cao chất lượng dạy học.
+          </p>
+        </div>
 
+        <div className="survey-grid">
+          {/* Left panel text contents */}
+          <div className="survey-content-panel">
+            <h5 className="fw-bold mb-3">Phiếu Khảo Sát & Đóng Góp Ý Kiến</h5>
+            <p className="survey-desc">
+              Nhằm đánh giá và cải tiến phương pháp giáo dục kỹ năng số cho học sinh tiểu học, chúng tôi rất mong nhận được các ý kiến phản hồi về tính thực tế và hiệu quả của các giáo án được đề xuất.
+            </p>
+            <Button
+              className="survey-button-link"
+              href={surveyLink}
+              target="_blank"
+            >
+              Đóng góp ý kiến của bạn ➔
+            </Button>
+
+            {/* Admin section */}
             {loggedIn && (
-              <div className="mt-4 text-center">
+              <div className="survey-admin-box">
+                <h6 className="fw-bold text-muted mb-2">Cấu hình link khảo sát</h6>
                 {!isEditing ? (
                   <Button
-                    variant="secondary"
+                    variant="outline-dark"
+                    size="sm"
                     onClick={() => setIsEditing(true)}
                   >
-                    <i className="fas fa-edit"></i> Chỉnh sửa đường dẫn
+                    ✏️ Chỉnh sửa đường dẫn
                   </Button>
                 ) : (
                   <div>
                     <input
                       type="text"
                       className="form-control mb-2"
-                      placeholder="Nhập đường dẫn khảo sát mới"
+                      placeholder="Dán link khảo sát Google Form mới..."
                       value={newLink}
                       onChange={(e) => setNewLink(e.target.value)}
                     />
-                    <div className="d-flex gap-2 justify-content-center">
+                    <div className="d-flex gap-2">
                       <Button
                         variant="primary"
+                        size="sm"
                         onClick={handleUpdateLink}
                         disabled={!newLink}
                       >
-                        Lưu
+                        Lưu lại
                       </Button>
                       <Button
                         variant="secondary"
+                        size="sm"
                         onClick={() => {
                           setIsEditing(false);
                           setNewLink("");
@@ -123,9 +111,16 @@ export const Survey = () => {
                 )}
               </div>
             )}
-          </Col>
-        </Row>
+          </div>
+
+          {/* Right panel graphic */}
+          <div className="survey-image-card">
+            <img src="images/image_web/4_Phieu_khao_sat_main.png" alt="Phiếu khảo sát" />
+          </div>
+        </div>
       </Container>
     </section>
   );
 };
+
+export default Survey;

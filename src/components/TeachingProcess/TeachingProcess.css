@@ -1,197 +1,137 @@
 #teaching-process {
-  background: url('/images/process.png') no-repeat;
+  background: linear-gradient(rgba(248, 250, 252, 0.95), rgba(248, 250, 252, 0.95)), url('/images/process.png') no-repeat;
   background-position: center;
   background-size: cover;
-  height: 900px;
-  padding: 3rem 0;
-  color: #000;
-  h4 {
-    font-size: 2.188rem;
-  }
-
-  /* List Items */
-  .list-group {
-    .list-group-item {
-      & .icon-box {
-        width: 48px;
-        height: 48px;
-      }
-
-      & h5,
-      p {
-        font-size: 1rem;
-        color: var(--gray);
-      }
-    }
-  }
-
-  /* Card */
-  .card {
-    width: 355px;
-    box-shadow: 109px -101px 144px -105px rgba(89, 178, 230, 0.8),
-      0 10px 8px -2px rgba(0, 0, 0, 0.1);
-
-    .card-body {
-      .card-title {
-        font-size: 1.125rem;
-      }
-
-      .card-text {
-        color: var(--dark-gray);
-        font-size: 0.938rem;
-      }
-
-      .icons {
-        > div {
-          width: 36px;
-          height: 36px;
-          background-color: var(--light);
-          cursor: pointer;
-
-          &:hover {
-            box-shadow: var(--shadow);
-            transition: all 0.5s;
-            transform: var(--hover);
-          }
-        }
-      }
-    }
-
-    .card-footer {
-      color: var(--dark-gray);
-      font-size: 0.938rem;
-
-      .heart-icon {
-        cursor: pointer;
-      }
-    }
-  }
+  padding: 6rem 0;
+  height: auto;
+  position: relative;
 }
 
-/* Trip to - Popover */
-.popover {
-  width: 260px;
-
-  .popover-arrow {
-    display: none;
-  }
-
-  .popover-body {
-    & h5 {
-      font-size: 1.125rem;
-    }
-
-    & span {
-      color: var(--dark-gray);
-    }
-
-    & p {
-      > span {
-        color: var(--purple);
-      }
-    }
-
-    .progress {
-      height: 6px;
-      background-color: var(--light);
-
-      .progress-bar {
-        background-color: var(--purple);
-        border-radius: 10px;
-      }
-    }
-  }
+.process-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 2.5rem auto 0 auto;
 }
 
-/* Step Number */
-.step-number {
-  font-size: 14px;
-  color: #6c757d;
-  font-weight: 500;
-  text-align: center;
+.process-step-card {
+  background: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 1.5rem 2rem !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: var(--transition-smooth) !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
 }
 
-/* Icon Box */
-.icon-box {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 8px;
-  border-radius: 8px;
+.process-step-card:hover {
+  transform: translateX(8px);
+  box-shadow: var(--shadow-md) !important;
+  border-color: rgba(var(--color-accent-rgb), 0.2) !important;
+}
+
+/* Timeline vertical line */
+.process-step-card::before {
+  content: "";
+  position: absolute;
+  left: 3rem;
+  top: 100%;
+  width: 2px;
+  height: 1.5rem;
+  background-color: var(--color-border);
+  z-index: 1;
+}
+
+.process-step-card:last-child::before {
+  display: none;
+}
+
+.step-badge-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.step-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: var(--shadow-sm);
 }
 
-.icon-box img {
+.step-icon-box img {
   filter: brightness(0) invert(1);
 }
 
-.process-step {
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  cursor: pointer;
-  border: none;
-  transition: all 0.3s ease;
-
-}
-
-.process-step:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* mờ hơn khi hover */
-  transform: scale(1.01);
-}
-
-.step-icon-wrapper {
+.step-meta {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
 }
 
-/* Responsive - Media Queries
-***************************************************************************************************/
-@media (max-width: 576px) {
-  #book-a-trip {
-    .list-group {
-      .list-group-item {
-        & .icon-box {
-          width: 35px;
-          height: 35px;
-        }
+.step-number-lbl {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
 
-        & h6,
-        p {
-          font-size: 0.875rem;
-        }
-      }
-    }
+.step-title-txt {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0;
+  line-height: 1.4;
+}
 
-    .card {
-      > img {
-        height: 150px;
-      }
+/* Edit action trigger */
+.btn-edit-trigger {
+  font-weight: 600 !important;
+  padding: 0.5rem 1.25rem !important;
+  border-radius: var(--radius-sm) !important;
+  border: 1.5px solid var(--color-border) !important;
+  background: var(--color-bg-card) !important;
+  color: var(--color-primary) !important;
+  transition: var(--transition-smooth) !important;
+}
 
-      .card-body {
-        .card-title {
-          font-size: 1rem;
-        }
+.btn-edit-trigger:hover {
+  background: #f8fafc !important;
+  border-color: var(--color-primary-light) !important;
+}
 
-        .card-text {
-          font-size: 0.875rem;
-        }
-      }
-
-      .card-footer {
-        font-size: 0.813rem;
-      }
-    }
+@media (max-width: 768px) {
+  #teaching-process {
+    padding: 4rem 0;
   }
-
-  .popover {
-    .popover-body {
-      & h5 {
-        font-size: 1rem;
-      }
-    }
+  
+  .process-step-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem !important;
+  }
+  
+  .process-step-card::before {
+    display: none; /* Hide vertical connectors on mobile stack */
+  }
+  
+  .step-badge-wrapper {
+    width: 100%;
+  }
+  
+  .step-title-txt {
+    font-size: 1.05rem;
   }
 }

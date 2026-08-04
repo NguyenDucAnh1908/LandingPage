@@ -1,5 +1,4 @@
 import { Col, Container, Image, ListGroup, Row, Stack } from "react-bootstrap";
-
 import { FOOTER } from "../../data";
 import { FacebookIcon, InstagramIcon, TwitterIcon } from "../icons";
 import "./Footer.css";
@@ -7,74 +6,76 @@ import "./Footer.css";
 export const Footer = () => {
   return (
     <footer>
-      <section id="footer">
-        <Container>
-          <Row className="py-3 g-3" lg={5} md={4} sm={3} xs={2}>
-            <Col>
-              <h2>HỌC</h2>
-              <small className="fw-medium">
-                trong phút chốc, làm chủ kiến thức cả đời.
-              </small>
-            </Col>
+      <Container>
+        <Row className="g-4 py-2" lg={5} md={3} sm={2} xs={1}>
+          {/* Brand Panel */}
+          <Col lg={3} md={12} sm={12} className="pe-lg-4">
+            <h2 className="footer-brand-title">Năng Lực Số</h2>
+            <p className="footer-brand-desc">
+              Kiến tạo kiến thức số vững chắc và làm chủ các kỹ năng tương lai cho học sinh tiểu học.
+            </p>
+          </Col>
 
-            {FOOTER &&
-              FOOTER.map((item) => (
-                <Col key={item.id}>
-                  {/* Footer List Titles */}
-                  <strong className="footer-title text-dark mb-0 mb-sm-3">
-                    {item.name}
-                  </strong>
-                  <ListGroup variant="flush">
-                    {/* Footer List Items */}
-                    {item.children.map((child) => (
-                      <ListGroup.Item
-                        key={child.id}
-                        action
-                        href={child.link}
-                        className="border-bottom-0 p-0 my-1 fw-medium list-group-item-action"
-                      >
-                        {child.name}
-                      </ListGroup.Item>
-                    ))}
-                  </ListGroup>
-                </Col>
-              ))}
+          {/* Footer Navigation Columns */}
+          {FOOTER &&
+            FOOTER.map((item) => (
+              <Col key={item.id} lg={2} md={3} sm={4}>
+                <strong className="footer-title">
+                  {item.name}
+                </strong>
+                <ListGroup variant="flush" className="bg-transparent">
+                  {item.children.map((child) => (
+                    <ListGroup.Item
+                      key={child.id}
+                      action
+                      href={child.link}
+                      className="footer-link-item bg-transparent"
+                    >
+                      {child.name}
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+              </Col>
+            ))}
 
-            <Col>
-              {/* Social Icons */}
-              <div className="social-icon d-flex flex-row gap-4">
-                <div className="rounded-circle border-0 d-flex justify-content-center align-items-center">
-                  <FacebookIcon />
-                </div>
-                <div className="rounded-circle border-0 d-flex justify-content-center align-items-center">
-                  <InstagramIcon />
-                </div>
-                <div className="rounded-circle border-0 d-flex justify-content-center align-items-center">
-                  <TwitterIcon />
-                </div>
+          {/* Socials & Apps Block */}
+          <Col lg={3} md={3} sm={12}>
+            <strong className="footer-title">Kết nối với chúng tôi</strong>
+            <div className="footer-socials">
+              <div className="footer-social-icon facebook">
+                <FacebookIcon />
               </div>
-              {/* Apps */}
-              <p className="my-3">Khám phá ứng dụng của chúng tôi</p>
-              <Stack direction="horizontal" gap={2}>
-                <Image
-                  src={`/images/google-play.svg`}
-                  className="object-fit-cover"
-                  alt="Google Play"
-                />
-                <Image
-                  src={`/images/play-store.svg`}
-                  className="object-fit-cover"
-                  alt="Play Store"
-                />
-              </Stack>
-            </Col>
-          </Row>
+              <div className="footer-social-icon instagram">
+                <InstagramIcon />
+              </div>
+              <div className="footer-social-icon twitter">
+                <TwitterIcon />
+              </div>
+            </div>
+            
+            <p className="footer-apps-lbl">Tải ứng dụng học tập</p>
+            <Stack direction="horizontal" gap={2}>
+              <Image
+                src={`/images/google-play.svg`}
+                className="footer-app-badge"
+                alt="Google Play Store"
+              />
+              <Image
+                src={`/images/play-store.svg`}
+                className="footer-app-badge"
+                alt="Apple App Store"
+              />
+            </Stack>
+          </Col>
+        </Row>
 
-          <Row className="text-center py-5">
-            <small className="fw-medium">All rights NDA&DXP</small>
-          </Row>
-        </Container>
-      </section>
+        {/* Copyright Line */}
+        <Row className="footer-copyright">
+          <Col>
+            <small>Bản quyền thuộc về NDA và DXP © 2026</small>
+          </Col>
+        </Row>
+      </Container>
     </footer>
   );
 };

@@ -3,8 +3,6 @@ import { Alert, Container, Spinner } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchIllustration } from "../../data";
 import "./LessonIllustrationDetail.css";
-import { Button } from "antd";
-import { ArrowLeftOutlined } from "@ant-design/icons";
 
 const LessonIllustrationDetail = () => {
   const { illustrationId } = useParams();
@@ -45,19 +43,9 @@ const LessonIllustrationDetail = () => {
   if (loading) {
     return (
       <section className="lesson-illustration-detail">
-        <Container
-          className="d-flex justify-content-center align-items-center"
-          style={{ minHeight: 200 }}
-        >
-          <Button
-            type="link"
-            icon={<ArrowLeftOutlined />}
-            onClick={handleReturn}
-            style={{ padding: 0, fontWeight: 500, marginBottom: 16 }}
-          >
-            Quay lại
-          </Button>
+        <Container className="d-flex flex-column align-items-center justify-content-center py-5">
           <Spinner animation="border" variant="primary" />
+          <span className="mt-3 text-muted">Đang tải giáo án minh họa...</span>
         </Container>
       </section>
     );
@@ -67,16 +55,11 @@ const LessonIllustrationDetail = () => {
     return (
       <section className="lesson-illustration-detail">
         <Container>
-          <Button
-            type="link"
-            icon={<ArrowLeftOutlined />}
-            onClick={handleReturn}
-            style={{ padding: 0, fontWeight: 500, marginBottom: 16 }}
-          >
-            Quay lại
-          </Button>
-          <Alert variant="danger" className="text-center">
-            {error || "Illustration not found"}
+          <a href="/" onClick={handleReturn} className="return-button">
+            ➔ Quay lại
+          </a>
+          <Alert variant="danger" className="text-center mt-3">
+            {error || "Không tìm thấy giáo án minh họa tương ứng."}
           </Alert>
         </Container>
       </section>
@@ -86,14 +69,10 @@ const LessonIllustrationDetail = () => {
   return (
     <section className="lesson-illustration-detail">
       <Container>
-        <Button
-          type="link"
-          icon={<ArrowLeftOutlined />}
-          onClick={handleReturn}
-          style={{ padding: 0, fontWeight: 500, marginBottom: 16 }}
-        >
-          Quay lại
-        </Button>
+        <a href="/" onClick={handleReturn} className="return-button">
+          ➔ Quay lại
+        </a>
+        
         <h2 className="lesson-title">{illustration.title}</h2>
         <div className="pdf-container">
           <iframe

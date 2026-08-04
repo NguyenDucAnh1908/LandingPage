@@ -3,7 +3,7 @@ import {
   BookOutlined,
   FileTextOutlined,
 } from "@ant-design/icons";
-import { Button, Image, Layout, Menu, theme } from "antd";
+import { Button, Image, Layout, Menu } from "antd";
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
@@ -18,9 +18,7 @@ const LessonDetail = () => {
   const [grades, setGrades] = useState([]);
   const [expandedGrade, setExpandedGrade] = useState(null);
   const [selectedLesson, setSelectedLesson] = useState(null);
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
@@ -91,58 +89,34 @@ const LessonDetail = () => {
   return (
     <section className="lesson-detail">
       <Container>
-        {/* Nút quay lại */}
-
         <Layout>
-          <Sider
-            width={300}
-            style={{
-              background: colorBgContainer,
-              position: "sticky",
-              top: 0,
-              height: "100vh",
-              // overflow: "auto",
-            }}
-          >
-            {/* Nút Back */}
-            <div
-              style={{
-                padding: "24px 16px 0 16px",
-                background: colorBgContainer,
-              }}
-            >
+          {/* Sider Navigation */}
+          <Sider width={300} breakpoint="lg" collapsedWidth="0">
+            <div className="p-3 border-bottom">
               <Button
                 type="link"
                 icon={<ArrowLeftOutlined />}
                 onClick={handleReturn}
-                style={{ padding: 0, fontWeight: 500 }}
+                style={{ padding: 0 }}
               >
                 Quay lại
               </Button>
             </div>
             <Menu
               mode="inline"
-              style={{
-                height: "100%",
-                borderRight: 0,
-                paddingTop: "24px", // Giảm padding vì đã có nút back
-              }}
               items={menuItems}
               defaultOpenKeys={[`grade-${grades[0]?.id}`]}
               selectedKeys={[`lesson-${selectedLesson?.id}`]}
             />
           </Sider>
-          <Layout style={{ padding: "0 24px 24px" }}>
-            <Content
-              style={{
-                padding: 24,
-                margin: 0,
-                minHeight: 280,
-                background: colorBgContainer,
-                borderRadius: borderRadiusLG,
-              }}
-            >
-              <div className="lesson-container">
+
+          {/* Core Content Area */}
+          <Layout>
+            <Content>
+              <div className="lesson-container-inner">
+                {selectedLesson && (
+                  <h4 className="mb-4 fw-bold">{selectedLesson.contentText}</h4>
+                )}
                 <div className="lesson-images-grid">
                   {selectedLesson &&
                     selectedLesson.images &&
@@ -152,6 +126,11 @@ const LessonDetail = () => {
                         src={image.imageUrl}
                         alt={selectedLesson.contentText}
                         className="lesson-image"
+                        placeholder={
+                          <div className="d-flex justify-content-center align-items-center bg-light w-100 h-100 py-5">
+                            <span>Đang tải hình ảnh...</span>
+                          </div>
+                        }
                       />
                     ))}
                 </div>

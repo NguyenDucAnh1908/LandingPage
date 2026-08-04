@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import {
   Alert,
   Button,
-  Card,
   Container,
   Form,
   Modal,
-  Pagination,
   Spinner,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -18,9 +16,7 @@ import {
 import "./LessonIllustration.css";
 import backgroundImage from "/images/image_web/3._Minh_hoa_ke_hoach_bai_day.png";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { app } from "../../firebase"; // file cấu hình firebase của bạn
-
-const ITEMS_PER_PAGE = 5;
+import { app } from "../../firebase";
 
 const LessonIllustration = () => {
   const navigate = useNavigate();
@@ -29,7 +25,6 @@ const LessonIllustration = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [showEditModal, setShowEditModal] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
 
   const loggedIn = localStorage.getItem("loggedIn") === "true";
 
@@ -92,7 +87,6 @@ const LessonIllustration = () => {
       fileUrl: item.fileUrl,
     };
 
-    // Nếu có id thật (số hoặc chuỗi UUID từ backend) thì thêm id vào payload
     if (item.id && !item.id.toString().startsWith("temp-")) {
       payload.id = item.id;
     }
@@ -128,89 +122,66 @@ const LessonIllustration = () => {
     }
   };
 
-  const totalPages = Math.ceil(illustrations.length / ITEMS_PER_PAGE);
-  const paginatedData = illustrations.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
-  );
-
   return (
     <section id="lesson-illustration">
       <Container>
-        <div className="full-image-container">
-          <div
-            className="illustration-image"
-            style={{
-              backgroundImage: `url(${backgroundImage})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              height: "900px",
-              width: "100%",
-              borderRadius: "12px",
-              position: "relative",
-              overflow: "hidden",
-              color: "white",
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                borderRadius: "12px",
-                padding: "2rem",
-              }}
-            >
-              <div className="text-end mb-2">
-                {loggedIn && (
-                  <Button
-                    variant="outline-dark"
-                    size="sm"
-                    onClick={() => setShowEditModal(true)}
-                  >
-                    Chỉnh sửa
-                  </Button>
-                )}
-              </div>
+        <div className="section-header">
+          <h3>Kế Hoạch Bài Dạy</h3>
+          <h4>Minh Họa Kế Hoạch Bài Dạy Phát Triển Năng Lực Số</h4>
+          <p>
+            Danh sách giáo án và kế hoạch giảng dạy trực quan hỗ trợ giáo viên tổ chức lớp học hiệu quả.
+          </p>
+        </div>
 
-              <div className="cards-container mt-3">
-                {loading && (
-                  <div
-                    className="d-flex justify-content-center align-items-center w-100"
-                    style={{ minHeight: 120 }}
-                  >
-                    <Spinner animation="border" variant="light" />
-                  </div>
-                )}
-                {error && (
-                  <Alert variant="danger" className="w-100 text-center">
-                    {error}
-                  </Alert>
-                )}
-                <div className="scrollable-cards">
-                  {!loading &&
-                    !error &&
-                    illustrations.map((illustration, index) => (
-                      <Card
-                        key={illustration.id || `temp-${index}`}
-                        className="lesson-card"
-                        style={{ backgroundColor: `rgb(255, 255, 255, 0.25)` }}
-                        onClick={() => handleLessonClick(illustration.id)}
-                      >
-                        <Card.Body>
-                          <Card.Title>{illustration.title}</Card.Title>
-                        </Card.Body>
-                      </Card>
-                    ))}
+        <div className="illustration-grid">
+          {/* Left panel banner */}
+          <div className="illustration-banner-card">
+            <img src={backgroundImage} alt="Minh họa kế hoạch bài dạy" />
+          </div>
+
+          {/* Right panel items */}
+          <div className="illustration-content-card">
+            <div className="d-flex justify-content-between align-items-center border-bottom pb-2">
+              <h5 className="fw-bold mb-0 text-muted">Danh Sách Giáo Án</h5>
+              {loggedIn && (
+                <Button
+                  variant="outline-primary"
+                  size="sm"
+                  onClick={() => setShowEditModal(true)}
+                >
+                  ✏️ Quản lý giáo án
+                </Button>
+              )}
+            </div>
+
+            <div className="illustration-scroll-area custom-scroll">
+              {loading && (
+                <div className="d-flex justify-content-center align-items-center py-5">
+                  <Spinner animation="border" variant="primary" />
                 </div>
-              </div>
+              )}
+              {error && <Alert variant="danger">{error}</Alert>}
+              
+              {!loading && !error && (
+                <div>
+                  {illustrations.map((illustration, index) => (
+                    <div
+                      key={illustration.id || `temp-${index}`}
+                      className="illustration-item-card"
+                      onClick={() => handleLessonClick(illustration.id)}
+                    >
+                      <span className="illustration-card-title">{illustration.title}</span>
+                      <span className="illustration-card-icon">➔</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
       </Container>
 
+      {/* Admin modal */}
       <Modal
         show={showEditModal}
         onHide={() => setShowEditModal(false)}
@@ -233,7 +204,7 @@ const LessonIllustration = () => {
                   onChange={(e) =>
                     handleChangeField(item.id, "title", e.target.value)
                   }
-                  placeholder="Tên minh họa"
+                  placeholder="Nhập tên giáo án minh họa"
                 />
               </Form.Group>
 
@@ -253,7 +224,7 @@ const LessonIllustration = () => {
 
               <Form.Group className="mb-2">
                 <Form.Label className="fw-bold">
-                  Tải lên tài liệu minh họa
+                  Tải lên tài liệu minh họa (PDF/Ảnh)
                 </Form.Label>
                 <Form.Control
                   type="file"
@@ -262,37 +233,38 @@ const LessonIllustration = () => {
                 />
               </Form.Group>
 
-              <div className="text-end">
+              <div className="text-end mt-3">
                 <Button
                   variant="outline-danger"
                   size="sm"
+                  className="me-2"
                   onClick={() => handleDeleteIllustration(item.id)}
                 >
                   🗑 Xóa
-                </Button>{" "}
+                </Button>
                 <Button
-                  variant="primary"
+                  variant="success"
                   size="sm"
                   onClick={() => handleSaveIllustration(item)}
                 >
-                  💾 Lưu
+                  💾 Lưu thay đổi
                 </Button>
               </div>
             </div>
           ))}
-          <div className="text-center">
+          <div className="text-center mt-3">
             <Button
               variant="outline-success"
               size="sm"
               onClick={handleAddIllustration}
             >
-              + Thêm minh họa
+              + Thêm minh họa mới
             </Button>
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowEditModal(false)}>
-            Hủy
+            Đóng
           </Button>
         </Modal.Footer>
       </Modal>
